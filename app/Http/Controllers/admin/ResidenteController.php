@@ -20,17 +20,11 @@ class ResidenteController extends Controller
     return view('admin/Residente/index');
   }
 
-  public function create()
-  {
-    //
-  }
-
   public function store(ResidenteRequest $request)
   {
     $request->validate([
       'foto' => 'required|',
     ]);
-
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       /* cargar imagenes con plugin para redimencionar imagenes */
       /* al nombre original del archivo le agrego 10 caracteres random */
@@ -47,7 +41,6 @@ class ResidenteController extends Controller
         $residente->fotoResidente = '/storage/imagenes/' . $nombre; //guardo la url en la bd
         $residente->localidad = $request->localidad;
         $residente->telefonoResidente = $request->telefonoResidente;
-        $residente->estadoResidente = $request->estadoResidente;
         $residente->sexoResidente = $request->sexoResidente;
         $residente->fechaNacimientoResidente = $request->fechaNacimientoResidente;
         $residente->save();
@@ -62,11 +55,6 @@ class ResidenteController extends Controller
     } else {
       return back();
     }
-  }
-
-  public function show(Residente $Residente)
-  {
-    //
   }
 
   public function edit($Residente)

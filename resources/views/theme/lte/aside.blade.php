@@ -34,8 +34,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item" id="personasLi">
+            <a href="#" class="nav-link" id="personasA">
               <i class="nav-icon fas fa-people-arrows"></i>
               <p>
                 Personas
@@ -44,14 +44,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('residente')}}" class="nav-link">
+                <a href="{{route('residente')}}" class="nav-link" id="residentes">
                   <i class="fas fa-user-check nav-icon"></i>
                   
                   <p>Residentes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="{{route('visitante')}}" class="nav-link" id="visitantes">
                   <i class="fas fa-user-friends nav-icon"></i>
                   <p>Visitantes</p>
                 </a>

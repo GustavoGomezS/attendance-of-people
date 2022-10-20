@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('fotoVisitante')->nullable($value = 'true');
             $table->string('telefonoVisitante', 15);
             $table->unsignedBigInteger('estadoVisitante');
-            $table->foreign('estadoVisitante', 'fk_visitante_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('estadoVisitante', 'fk_visitante_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict')->default("3");
             $table->string('sexoVisitante', 8);
             $table->date('fechaNacimientoVisitante', $precision = 0);
             $table->timestamps();

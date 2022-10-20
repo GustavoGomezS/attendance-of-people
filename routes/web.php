@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\PuertaController;
 use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\SectorController;
+use App\Http\Controllers\admin\VisitanteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +67,14 @@ Route::resource('residente', App\Http\Controllers\admin\residenteController::cla
 Route::get('residente.listar{page?}', [ResidenteController::class, 'listar'])->name('residente.listar');
 Route::get('residente.sectorBusqueda', [ResidenteController::class, 'sectorBusqueda'])->name('residente.sectorBusqueda');
 Route::get('residente.localidadBusqueda', [ResidenteController::class, 'localidadBusqueda'])->name('residente.localidadBusqueda');
-Route::get('residente.localidad', [ResidenteController::class, 'localidad'])->name('residente.localidad');
 /* rutas de residente */
+/* rutas de visitante */
+Route::resource('visitante', App\Http\Controllers\admin\VisitanteController::class)->names([
+    'index' => 'visitante',
+    'store' => 'visitante.guardar',
+    'edit' => 'visitante.editar',
+    'update' => 'visitante.actualizar',
+    'destroy' => 'visitante.eliminar',
+])->middleware('auth');
+Route::get('visitante.listar{page?}', [VisitanteController::class, 'listar'])->name('visitante.listar');
+/* rutas de visitante */

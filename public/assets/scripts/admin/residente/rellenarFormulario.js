@@ -3,7 +3,6 @@ function Rellenar(data) {
   $('#nombreResidente').val(data.nombreResidente);
   $('#apellidoResidente').val(data.apellidoResidente);
   $('#telefonoResidente').val(data.telefonoResidente);
-  $('#estadoResidente').val(data.estadoResidente);
   $('#sexoResidente').val(data.sexoResidente);
   $('#fechaNacimientoResidente').val(data.fechaNacimientoResidente);
   $('#blah').attr('src', data.fotoResidente);

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('localidad', 'fk_residente_localidad')->references('id')->on('localidad')->onDelete('restrict')->onUpdate('restrict');
             $table->string('telefonoResidente', 15);
             $table->unsignedBigInteger('estadoResidente');
-            $table->foreign('estadoResidente', 'fk_residente_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('estadoResidente', 'fk_residente_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict')->default("3");
             $table->string('sexoResidente', 8);
             $table->date('fechaNacimientoResidente', $precision = 0);
             $table->timestamps();

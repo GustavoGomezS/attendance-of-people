@@ -1,16 +1,14 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-Residentes
+visitantes
 @endsection
 @section('metadata')
 <script src="{{asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.js")}}"></script>
 <meta name="csrf-token" content="{{csrf_token()}}"/> 
-<script src="{{asset("assets/scripts/admin/residente/rellenarFormulario.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/guardarResidente.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/validarArchivo.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/mostrarFoto.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/rellenarSelectSectorBusqueda.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/rellenarSelectLocalidadBusqueda.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/visitante/rellenarFormulario.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/visitante/guardarVisitante.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/visitante/validarArchivo.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/visitante/mostrarFoto.js")}}"></script> 
 <script src="{{asset("assets/scripts/buscar.js")}}"></script> 
 <script src="{{asset("assets/scripts/eliminar.js")}}"></script> 
 <script src="{{asset("assets/scripts/editar.js")}}"></script> 
@@ -23,16 +21,16 @@ Residentes
     <div class="col-lg-12">
       <div class="card card-info card-outline">
         <div class="card-header h-25">
-            @include('admin/residente/includes/formularioBusqueda')
+            @include('admin/visitante/includes/formularioBusqueda')
         </div>
         <div class="card-body">
           <div id="datos"></div>
           <form id="formulario" autocomplete="off" enctype="multipart/form-data">
-            @include('admin/residente/includes/modalFormulario')
+            @include('admin/visitante/includes/modalFormulario')
           </form> 
           {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
-            Nuevo Residente
+            Nuevo visitante
           </button>
         </div>
       </div>
@@ -43,15 +41,12 @@ Residentes
 <script>  
   var token = $("#token").val();
   var urlEliminar,urlEditar,urlFormulario,tipo;
-  const urlListar = "{{route('residente.listar')}}";
-  const urlRellenarSelectSectorBusqueda = "{{route('residente.sectorBusqueda')}}";
-  const urlRellenarSelectLocalidadBusqueda = "{{route('residente.localidadBusqueda')}}";
+  const urlListar = "{{route('visitante.listar')}}";
   $(document).ready(function () {
     bsCustomFileInput.init()
-    rellenarSelectSectorBusqueda(urlRellenarSelectSectorBusqueda);
     $("#personasLi").addClass("menu-open");;
     $("#personasA").addClass("active");
-    $("#residentes").addClass("active");
+    $("#visitantes").addClass("active");
   });
 
   function AccionSucces() {
@@ -70,7 +65,7 @@ Residentes
 
   /* Cambiar urlFormulario a guardar*/   
   $(document).on("click","#opcionCrear",function(e){
-    urlFormulario="{{route('residente.guardar')}}";
+    urlFormulario="{{route('visitante.guardar')}}";
     tipo="POST"
     document.getElementById("formulario").reset(); 
   });
@@ -101,18 +96,13 @@ Residentes
     }                              
   });
 
-  /* buscar localidad */
-  $('.sectorBusqueda').on('change',function(){
-    var id = $(this).val();
-    var datos = {sector : id}                                
-    rellenarSelectLocalidadBusqueda(urlRellenarSelectLocalidadBusqueda,datos);
-  });
-    /* buscar Residentes */   
-  $(document).on("click","#buscar",function(e){
-    e.preventDefault();   
+  /* buscar visitantes */  
+    /* buscar */
+  $("#buscar").keyup(function (evento) {
     var infoLocalidad = $("#formularioBusqueda").serialize();
-    buscar(urlListar,infoLocalidad);                                      
+    buscar(urlListar,infoLocalidad);
   });
+
   /* paginacion */
   $(document).on("click",".pagination li a",function(e){
     e.preventDefault();   
@@ -138,7 +128,7 @@ Residentes
       /* Activar - Desactivar */   
   $(document).on("click","#actDes",function(e){
     e.preventDefault();
-    var attr = $("#nombreResidente").attr("disabled");
+    var attr = $("#nombreVisitante").attr("disabled");
     if (typeof attr == typeof undefined || attr == "false") {
         $("#formulario :input").prop("disabled", true);
         $("#formulario :button").removeAttr('disabled');
