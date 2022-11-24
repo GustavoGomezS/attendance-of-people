@@ -15,11 +15,11 @@ class TipoUsuarioSeeder extends Seeder
    */
   public function run()
   {
-    $etipo_usuario = [
+    $tipo_usuario = [
       'Admin',
       'Guarda',
     ];
-    foreach ($etipo_usuario as $key => $value) {
+    foreach ($tipo_usuario as $key => $value) {
       DB::table('tipo_usuario')->insert([
         'nombreTipoUsuario' => $value,
       ]);

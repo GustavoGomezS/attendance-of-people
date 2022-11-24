@@ -6,7 +6,9 @@ function rellenarSelectLocalidadBusqueda(url,datos) {
     dataType: "json",
     success: function (data) {
       $('.localidadBusqueda').html('');
-      $(".localidadBusqueda").prepend("<option value='' seleted>Localidad</option>");  
+      $('.localidadBusqueda').css('background-color', data[0].color);
+      $('.localidadBusqueda').css('color', 'white');
+      $(".localidadBusqueda").prepend("<option value='' seleted >Localidad</option>");  
       $.each(data, function (indexInArray, valueOfElement) { 
         $(".localidadBusqueda").append("<option value="+valueOfElement.id+">"+valueOfElement.unidad+"</option>"); 
       }); 

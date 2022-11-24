@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VisitanteRequest extends FormRequest
@@ -31,7 +32,7 @@ class VisitanteRequest extends FormRequest
             'nombreVisitante' => 'required |max:40',
             'apellidoVisitante' => 'required | max:40',
             'telefonoVisitante' => 'required|digits_between:7,10|numeric',
-            'documentoVisitante' => 'required | max:15',
+            'documentoVisitante' => ['required', 'digits_between:7,10', Rule::unique('visitante', 'documentoVisitante')->ignore($this->visitante)],
             'sexoVisitante' => 'required',
             'fechaNacimientoVisitante' => 'required',
         ];
@@ -40,17 +41,18 @@ class VisitanteRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombreVisitante.required' => 'El nombre del Visitante es obligatorio!',
+            'nombreVisitante.required' => 'El nombre es obligatorio!',
             'nombreVisitante.max' => 'El nombre tiene mas de 40 caracteres!',
-            'telefonoVisitante.required' => 'El telefono del Visitante es obligatorio!',
+            'telefonoVisitante.required' => 'El telefono es obligatorio!',
             'telefonoVisitante.digits_between' => 'El telefono debe tener entre 7 y 10 caracteres!',
             'telefonoVisitante.numeric' => 'El telefono debe ser solo numeros!',
-            'apellidoVisitante.required' => 'El apellido del Visitante es obligatorio!',
+            'apellidoVisitante.required' => 'El apellido es obligatorio!',
             'apellidoVisitante.max' => 'El apellido tiene mas de 40 caracteres!',
-            'documentoVisitante.required' => 'El documento del Visitante es obligatorio!',
-            'documentoVisitante.max' => 'El documento tiene mas de 15 caracteres!',
-            'sexoVisitante.required' => 'El sexo del Visitante es obligatorio!',
-            'fechaNacimientoVisitante.required' => 'La fecha de nacimiento del Visitante es obligatorio!',
+            'documentoVisitante.required' => 'El documento es obligatorio!',
+            'documentoVisitante.digits_between' => 'El documento debe tener entre 7 y 15 caracteres!',
+            'documentoVisitante.unique' => 'El documento ya se encuentra registrado!',
+            'sexoVisitante.required' => 'El sexo es obligatorio!',
+            'fechaNacimientoVisitante.required' => 'La fecha de nacimiento es obligatoria!',
         ];
     }
 }

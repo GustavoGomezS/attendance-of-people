@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\PuertaController;
 use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\SectorController;
 use App\Http\Controllers\admin\VisitanteController;
+use App\Http\Controllers\admin\RegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ require __DIR__ . '/auth.php';
 Route::resource('sector', App\Http\Controllers\admin\SectorController::class)->names([
     'store' => 'sector.guardar',
     'destroy' => 'sector.eliminar',
+    'edit' => 'sector.editar',
+    'update' => 'sector.actualizar',
 ])->middleware('auth');
 Route::get('sector.listar{page?}', [SectorController::class, 'listar'])->name('sector.listar')->middleware('auth');
 /* rutas de sector */
@@ -77,4 +80,19 @@ Route::resource('visitante', App\Http\Controllers\admin\VisitanteController::cla
     'destroy' => 'visitante.eliminar',
 ])->middleware('auth');
 Route::get('visitante.listar{page?}', [VisitanteController::class, 'listar'])->name('visitante.listar');
+Route::get('visitante.dentro', [VisitanteController::class, 'dentro'])->name('visitante.dentro');
+Route::get('visitante.dentro.buscar', [VisitanteController::class, 'buscar'])->name('visitante.dentro.buscar');
+Route::post('visitante.darSalida', [VisitanteController::class, 'darSalida'])->name('visitante.darSalida');
 /* rutas de visitante */
+/* rutas de registro */
+Route::resource('registro', App\Http\Controllers\admin\RegistroController::class)->names([
+    'index' => 'registro',
+    'store' => 'registro.guardar',
+])->middleware('auth');
+Route::get('registro.listarResidente{page?}', [RegistroController::class, 'listarResidente'])->name('registro.listarResidente');
+Route::get('registro.listarRegistro{page?}', [RegistroController::class, 'listarRegistro'])->name('registro.listarRegistro');
+Route::get('registro.listarVisitante{page?}', [RegistroController::class, 'listarVisitante'])->name('registro.listarVisitante');
+Route::get('registro.puerta{page?}', [RegistroController::class, 'puerta'])->name('registro.puerta');
+Route::get('registro.autoriza{page?}', [RegistroController::class, 'autoriza'])->name('registro.autoriza');
+Route::get('registro.visitante{page?}', [RegistroController::class, 'visitante'])->name('registro.visitante');
+/* rutas de registro */

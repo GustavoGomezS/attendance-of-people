@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('localidad', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sector');
-            $table->foreign('sector', 'fk_localidad_sector')->references('id')->on('sector')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('sector', 'fk_localidad_sector')->references('id')->on('sector')->onDelete('cascade')->onUpdate('cascade');
             $table->string('unidad', 10);
             $table->timestamps();
             $table->charset = 'utf8mb4';

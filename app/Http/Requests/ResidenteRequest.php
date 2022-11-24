@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResidenteRequest extends FormRequest
@@ -31,28 +33,30 @@ class ResidenteRequest extends FormRequest
             'nombreResidente' => 'required |max:40',
             'apellidoResidente' => 'required | max:40',
             'telefonoResidente' => 'required|digits_between:7,10|numeric',
-            'documentoResidente' => 'required | max:15',
+            'documentoResidente' => ['required', 'max:15', 'digits_between:7,10', Rule::unique('residente', 'documentoResidente')->ignore($this->residente)],
             'sexoResidente' => 'required',
             'fechaNacimientoResidente' => 'required',
             'localidad' => 'required',
         ];
     }
 
+
     public function messages()
     {
         return [
-            'nombreResidente.required' => 'El nombre del Residente es obligatorio!',
+            'nombreResidente.required' => 'El nombre es obligatorio!',
             'nombreResidente.max' => 'El nombre tiene mas de 40 caracteres!',
-            'telefonoResidente.required' => 'El telefono del Residente es obligatorio!',
+            'telefonoResidente.required' => 'El telefono es obligatorio!',
             'telefonoResidente.digits_between' => 'El telefono debe tener entre 7 y 10 caracteres!',
             'telefonoResidente.numeric' => 'El telefono debe ser solo numeros!',
-            'apellidoResidente.required' => 'El apellido del Residente es obligatorio!',
+            'apellidoResidente.required' => 'El apellido es obligatorio!',
             'apellidoResidente.max' => 'El apellido tiene mas de 40 caracteres!',
-            'estadoResidente' => 'El estado del Residente es obligatorio!',
-            'estadoResidente.required' => 'El estado del Residente es obligatorio!',
-            'sexoResidente.required' => 'El sexo del Residente es obligatorio!',
-            'fechaNacimientoResidente.required' => 'La fecha de nacimiento del Residente es obligatorio!',
-            'localidad.required' => 'La localidad del Residente es obligatorio!',
+            'documentoResidente.digits_between' => 'El documento debe tener de 7 a 15 caracteres!',
+            'documentoResidente.required' => 'El documento es obligatorio!',
+            'documentoResidente.unique' => 'El documento ya se encuentra registrado!',
+            'sexoResidente.required' => 'El sexo es obligatorio!',
+            'fechaNacimientoResidente.required' => 'La fecha de nacimiento es obligatoria!',
+            'localidad.required' => 'La localidad es obligatoria!',
         ];
     }
 }

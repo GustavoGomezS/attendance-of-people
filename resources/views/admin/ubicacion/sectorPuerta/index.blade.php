@@ -6,8 +6,11 @@ Edificios y Puertas
 <meta name="csrf-token" content="{{csrf_token()}}"/> 
 <script src="{{asset("assets/scripts/admin/sectorPuerta/buscarSector.js")}}"></script> 
 <script src="{{asset("assets/scripts/admin/sectorPuerta/buscarPuerta.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/sectorPuerta/rellenarFormulario.js")}}"></script> 
 <script src="{{asset("assets/scripts/guardarFormulario.js")}}"></script> 
 <script src="{{asset("assets/scripts/eliminar.js")}}"></script> 
+<script src="{{asset("assets/scripts/editar.js")}}"></script> 
+<script src="{{asset("assets/scripts/buscar.js")}}"></script> 
 @endsection
 @section('contenido')
   <div class="row">
@@ -37,10 +40,13 @@ Edificios y Puertas
     <!-- /.col-md-6 -->
   </div>
   @include('admin/includes/modalConfirmDelet')
+  <form id="formularioSectorUpdate" method="post" autocomplete="off" class="form-inline">
+  @include('admin/ubicacion/sectorPuerta/includes/modalFormulario')
+  </form>
 <script>
   const urlGuardarSector = "{{route('sector.guardar')}}";
   const urlGuardarPuerta = "{{route('puerta.guardar')}}";
-  var data,tipo,datos={a:"a"};
+  var urlFormulario,data,tipo,datos={a:"a"};
   const urlBuscarSector =  "{{route('sector.listar')}}";
   const urlBuscarPuerta = "{{route('puerta.listar')}}";
   var token = $("#token").val();
@@ -51,14 +57,16 @@ Edificios y Puertas
     buscarPuerta(urlBuscarPuerta, datos);
     document.getElementById("formularioPuerta").reset();
     document.getElementById("formularioSector").reset();
-    $(".close").trigger('click'); 
+    $(".close").each(function () {
+      $(this).trigger('click');
+    });  
   }
   function AccionError(messages) {
     $.each(messages, function(index, val) {
       toastr.error( val, 'Problema al Ejecutar la Acción',{
         "positionClass": "toast-top-right"})   
     });
-    $(".close").trigger('click');  
+      
   }
   /* Buscar */
   $(document).ready(function () {
@@ -76,6 +84,13 @@ Edificios y Puertas
     tipo = "post";
     EnvioFormulario(data,urlGuardarSector,token,tipo);                    
   });
+ /*  actualizar sector */
+  $('#formularioSectorUpdate').on('submit', function(e){
+    e.preventDefault();
+    data = $("#formularioSectorUpdate").serialize();
+    tipo = "put";
+    EnvioFormulario(data,urlFormulario,token,tipo);                    
+  });
   $('#formularioPuerta').on('submit', function(e){
     e.preventDefault();
     data = $("#formularioPuerta").serialize();
@@ -90,11 +105,22 @@ Edificios y Puertas
   $('#confirmar').on('click', function(){
     eliminar(urlEliminar);
   });
+   /* paginacion */
+  $(document).on("click",".pagination li a",function(e){
+    e.preventDefault();   
+    var url = $(this).attr("href");                                      
+    buscarSector(url);
+  });
+
+    /* Rellenar datos para editar y cambio urlformulario a actualizar*/   
+  $(document).on("click",".actualizar",function(e){
+    e.preventDefault();         
+    /* tomo el valores impresos en el link */
+    tipo="PUT"
+    var id = $(this).attr("id");
+    urlEditar=$(this).attr("href");
+    urlFormulario=$(this).attr("value");
+    Editar(urlEditar,id);                                      
+  });
 </script>
 @endsection
-
-
-
-
-
-

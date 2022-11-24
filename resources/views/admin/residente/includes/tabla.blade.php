@@ -28,7 +28,7 @@
             </th>        
             <td>{{$item->documentoResidente}}</td>
             <td>{{$item->nombreResidente}} &nbsp {{$item->apellidoResidente}}</td>
-            <td>{{$item->nombresector}} &nbsp {{$item->unidad}}</td>
+            <td>{{$item->nombreSector}} -  {{$item->unidad}}</td>
             <td>{{$item->telefonoResidente}}</td>
             <td>{{$item->nombreEstado}}</td>          
             <td class="py-0 align-middle text-center">

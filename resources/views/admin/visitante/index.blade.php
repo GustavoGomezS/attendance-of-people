@@ -53,14 +53,15 @@ visitantes
     toastr.success( 'Accion Realizada Correctamente', 'Exito',{
       "positionClass": "toast-top-right"});
     document.getElementById("formulario").reset();
-    $(".close").trigger('click'); 
+    $(".close").each(function () {
+      $(this).trigger('click');
+    }); 
   }
   function AccionError(messages) {
     $.each(messages, function(index, val) {
       toastr.error( val, 'Problema al Ejecutar la Acción',{
         "positionClass": "toast-top-right"})   
     });
-    $(".close").trigger('click');  
   }
 
   /* Cambiar urlFormulario a guardar*/   
@@ -99,8 +100,11 @@ visitantes
   /* buscar visitantes */  
     /* buscar */
   $("#buscar").keyup(function (evento) {
-    var infoLocalidad = $("#formularioBusqueda").serialize();
-    buscar(urlListar,infoLocalidad);
+    var largoFiltro = $("#buscar").val();
+    if (largoFiltro.length>=7) {
+      var infoLocalidad = $("#formularioBusqueda").serialize();
+      buscar(urlListar,infoLocalidad);
+    }
   });
 
   /* paginacion */

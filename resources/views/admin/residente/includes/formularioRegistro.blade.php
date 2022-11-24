@@ -36,7 +36,7 @@
   </div>
 </div>
 <!-- campo nombre,apellido,documento y fecha de nacimiento-->
-<!-- /campo telefonoResidente,sexo,estado y sector-->
+<!-- campo sector y localidad-->
 <div class="row">
   <div class="col-lg-3">
     {{-- campo telefonoResidente --}}
@@ -77,7 +77,7 @@
     {{-- campo localidad --}}
   </div> 
 </div>
-<!-- campo telefonoResidente,sexo,estado y sector-->
+<!-- campo sector y localidad-->
 <!-- campo foto y boton editar-->
 <div class="row">
   <div class="form-group col-lg-3">

@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/assets/lte
+/public/assets/DataTables
 /storage/*.key
 /vendor
 .env

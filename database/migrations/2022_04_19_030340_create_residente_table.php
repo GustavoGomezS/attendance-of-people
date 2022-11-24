@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('residente', function (Blueprint $table) {
             $table->id();
-            $table->string('documentoResidente', 15);
+            $table->string('documentoResidente', 15)->unique();
             $table->string('nombreResidente', 40);
             $table->string('apellidoResidente', 40);
             $table->string('fotoResidente')->nullable($value = 'true');
-            $table->unsignedBigInteger('localidad');
-            $table->foreign('localidad', 'fk_residente_localidad')->references('id')->on('localidad')->onDelete('restrict')->onUpdate('restrict');
+            $table->unsignedBigInteger('localidad')->nullable();
+            $table->foreign('localidad', 'fk_residente_localidad')->references('id')->on('localidad')->cascadeOnUpdate()->nullOnDelete();
             $table->string('telefonoResidente', 15);
             $table->unsignedBigInteger('estadoResidente');
             $table->foreign('estadoResidente', 'fk_residente_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict')->default("3");

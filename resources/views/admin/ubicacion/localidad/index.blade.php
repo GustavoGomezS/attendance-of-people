@@ -36,14 +36,16 @@ Localidades
       "positionClass": "toast-top-right"});
     buscar(urlBuscar, datos);
     document.getElementById("formulario").reset();
-    $(".close").trigger('click'); 
+    $(".close").each(function () {
+      $(this).trigger('click');
+    });  
   }
   function AccionError(messages) {
     $.each(messages, function(index, val) {
       toastr.error( val, 'Problema al Ejecutar la Acción',{
         "positionClass": "toast-top-right"})   
     });
-    $(".close").trigger('click');  
+    
   }
   /* Buscar al cargar la pagina*/
   $(document).ready(function () {
@@ -67,6 +69,12 @@ Localidades
   });
   $('#confirmar').on('click', function(){
     eliminar(urlEliminar);
+  });
+   /* paginacion */
+  $(document).on("click",".pagination li a",function(e){
+    e.preventDefault();   
+    var url = $(this).attr("href");                                      
+    buscar(url);
   });
 </script>
 @endsection

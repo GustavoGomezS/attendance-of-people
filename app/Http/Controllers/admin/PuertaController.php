@@ -50,7 +50,7 @@ class PuertaController extends Controller
       $datos = Puerta::select('*')
         ->orderBy('nombrePuerta', 'desc')
         ->from('puerta')
-        ->paginate(6);
+        ->get();
       return view('admin/ubicacion/sectorPuerta/tablas/tablaPuerta')->with('datos', $datos);
     } else {
       return back();

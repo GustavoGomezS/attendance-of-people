@@ -31,6 +31,45 @@ class SectorController extends Controller
       return back();
     }
   }
+  public function edit($Sector)
+  {
+    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
+      $detalleSector = Sector::select()
+        ->from('sector')
+        ->where('sector.id', '=', "$Sector")
+        ->get();
+      /* decodifico la respuesta para modificar el campo de la foto */
+      if ($detalleSector) {
+        return response()->json(['success' => 'true', 'data' => $detalleSector]);
+      } else {
+        return response()->json(['success' => 'false']);
+      }
+    } else {
+      return back();
+    }
+  }
+
+  public function update(Request $request, $sector)
+  {
+    //
+    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
+      if ($request->ajax()) {
+        $request->validate([
+          'nombreSector' => ['required', 'string', 'max:19'],
+        ]);
+        $registro = Sector::findOrFail($sector);
+        $formulario = $request->all();
+        $resultado = $registro->fill($formulario)->save();
+        if ($resultado) {
+          return response()->json(['success' => 'true']);
+        } else {
+          return response()->json(['success' => 'false']);
+        }
+      }
+    } else {
+      return back();
+    }
+  }
   public function destroy($sector)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {

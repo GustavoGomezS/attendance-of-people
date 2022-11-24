@@ -25,7 +25,3 @@
     @endforeach
   </tbody>
 </table>
-{{-- paginacion --}}
-<div class="d-flex justify-content-end text-center">
-    {{ $datos->links() }}
-</div>

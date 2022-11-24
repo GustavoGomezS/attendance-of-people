@@ -17,10 +17,16 @@
         <td class="text-center"><input type="color" disabled name="color" value="{{ $item->color }}" class="form-control"></td>
         <td class="text-right py-0 align-middle text-center">
           <div class="btn-group btn-group-sm">
+            <a href="{{route('sector.editar',$item->id)}}" 
+              id="{{ $item->id }} " class="actualizar btn btn-info" value="{{route('sector.actualizar',$item->id)}}"
+              data-toggle="modal" data-target="#modal-lg">
+                  <i class="fas fa-eye"></i>
+            </a>
             <a href="{{route('sector.eliminar',$item->id)}}"  class="eliminar btn btn-danger" 
                 data-toggle="modal" data-target="#exampleModalCenter">
                   <i class="fas fa-trash"></i>
             </a>
+
           </div>
         </td>
       </tr>

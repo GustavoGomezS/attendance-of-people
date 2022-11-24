@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VisitanteRequest;
+use App\Models\Registro;
 use App\Models\Visitante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -40,6 +42,8 @@ class VisitanteController extends Controller
         $visitante->fotoVisitante = '/storage/imagenes/' . $nombre; //guardo la url en la bd
         $visitante->telefonoVisitante = $request->telefonoVisitante;
         $visitante->sexoVisitante = $request->sexoVisitante;
+        $visitante->estadoVisitante = 4;
+        $visitante->localidadVisita = null;
         $visitante->fechaNacimientoVisitante = $request->fechaNacimientoVisitante;
         $visitante->save();
         if ($visitante->save()) {
@@ -139,6 +143,58 @@ class VisitanteController extends Controller
           ->join('estados', 'estados.id', '=', 'visitante.estadoVisitante')
           ->paginate(6);
         return view('admin/visitante/includes/tabla')->with('datos', $datos);
+      }
+    } else {
+      return back();
+    }
+  }
+  public function dentro()
+  {
+    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
+      return view('admin/darSalida/index');
+    } else {
+      return back();
+    }
+  }
+  public function buscar()
+  {
+    $datos = Visitante::select(DB::raw("CONCAT(nombreVisitante,' ', apellidoVisitante) AS nombreVisitante"), 'visitante.documentoVisitante', 'visitante.id as DT_RowId', 'visitante.telefonoVisitante', DB::raw("CONCAT(nombreSector,' - ',unidad) AS sectorUnidad"),)
+      ->from('visitante')
+      ->join('localidad', 'localidad.id', '=', 'visitante.localidadVisita')
+      ->join('sector', 'sector.id', '=', 'localidad.sector')
+      ->where([
+        ['visitante.estadoVisitante', "=", "3"]
+      ])->get();
+
+    return response()->json(['data' => $datos]);
+  }
+  public function darSalida(Request $request)
+  {
+    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
+      $arrayInputs = $request->all();
+
+      if ($request->ajax()) {
+        if (isset($arrayInputs['id'])) {
+          for ($i = 0; $i < count($arrayInputs['id']); $i++) {
+            $visitante = Visitante::select()->where('id', '=', $arrayInputs['id'][$i])->get();
+            $registro = new Registro();
+            $registro->ingresoSalida = $request->ingresoSalida;
+            $registro->visitante = $arrayInputs['id'][$i];
+            $registro->autorizaSeguridad =  auth()->user()->id;
+            $registro->autorizaResidente = null;
+            $registro->localidad = $visitante[0]->localidadVisita;
+            $registro->comentario = $request->comentario;
+            $registro->ingresoSalida = $request->ingresoSalida;
+            $registro->puerta = $request->puerta;
+            $registro->save();
+            DB::table('visitante')->where('id', '=', $arrayInputs['id'][$i])->update(['estadoVisitante' => 4, 'localidadVisita' => null]);
+          }
+          if ($registro->save()) {
+            return response()->json(['success' => 'true']);
+          } else {
+            return response()->json(['success' => 'false']);
+          }
+        }
       }
     } else {
       return back();

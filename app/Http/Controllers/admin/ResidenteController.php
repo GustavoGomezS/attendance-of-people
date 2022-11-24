@@ -7,6 +7,7 @@ use App\Http\Requests\ResidenteRequest;
 use App\Models\Localidad;
 use App\Models\Residente;
 use App\Models\Sector;
+use App\Models\Visitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -40,6 +41,7 @@ class ResidenteController extends Controller
         $residente->apellidoResidente = $request->apellidoResidente;
         $residente->fotoResidente = '/storage/imagenes/' . $nombre; //guardo la url en la bd
         $residente->localidad = $request->localidad;
+        $residente->estadoResidente = 3;
         $residente->telefonoResidente = $request->telefonoResidente;
         $residente->sexoResidente = $request->sexoResidente;
         $residente->fechaNacimientoResidente = $request->fechaNacimientoResidente;
@@ -133,25 +135,41 @@ class ResidenteController extends Controller
   //consulta para rellenar el select de sectorBusqueda en index
   public function localidadBusqueda(Request $request)
   {
-    $datos = Localidad::where('localidad.sector', '=', $request->sector)
+    $datos = Localidad::select('localidad.*', 'sector.color')
+      ->where('localidad.sector', '=', $request->sector)
       ->orderBy('localidad.unidad', 'asc')
+      ->join('sector', 'sector.id', '=', 'localidad.sector')
       ->get();
     return response()->json($datos);
   }
+
+
+
   public function listar(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $datos = Localidad::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
-        ->orderBy('created_at', 'desc')
-        ->from('residente')
-        ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
-        ->join('localidad', 'localidad.id', '=', 'residente.localidad')
-        ->join('sector', 'sector.id', '=', 'localidad.sector')
-        ->where([
-          ["residente.localidad", '=', "$request->localidadBusqueda"]
-        ])
-        ->paginate(6);
-      return view('admin/residente/includes/tabla')->with('datos', $datos);
+      if ($request->filtro != "0" && $request->buscar != "") {
+        $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
+          ->orderBy('created_at', 'desc')
+          ->from('residente')
+          ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
+          ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
+          ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
+          ->where([
+            ["$request->filtro", 'LIKE', "$request->buscar%"]
+          ])
+          ->paginate(6);
+        return view('admin/residente/includes/tabla')->with('datos', $datos);
+      } else {
+        $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
+          ->orderBy('created_at', 'desc')
+          ->from('residente')
+          ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
+          ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
+          ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
+          ->paginate(6);
+        return view('admin/residente/includes/tabla')->with('datos', $datos);
+      }
     } else {
       return back();
     }

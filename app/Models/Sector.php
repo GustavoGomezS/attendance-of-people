@@ -9,5 +9,5 @@ class Sector extends Model
 {
     protected $connection = 'mysql';
     protected $table = "sector";
-    protected $fillable = ['id', 'nombresector', 'color'];
+    protected $fillable = ['id', 'nombreSector', 'color'];
 }

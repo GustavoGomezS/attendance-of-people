@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('visitante', function (Blueprint $table) {
             $table->id();
-            $table->string('documentoVisitante', 15);
+            $table->string('documentoVisitante', 15)->unique();
             $table->string('nombreVisitante', 40);
             $table->string('apellidoVisitante', 40);
             $table->string('fotoVisitante')->nullable($value = 'true');
@@ -24,6 +24,9 @@ return new class extends Migration
             $table->foreign('estadoVisitante', 'fk_visitante_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict')->default("3");
             $table->string('sexoVisitante', 8);
             $table->date('fechaNacimientoVisitante', $precision = 0);
+            $table->unsignedBigInteger('localidadVisita')->nullable();
+            $table->foreign('localidadVisita', 'fk_visitante_localidad')->references('id')->on('localidad')->onDelete('restrict')->onUpdate('restrict');
+
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

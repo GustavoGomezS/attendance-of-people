@@ -58,14 +58,15 @@ Residentes
     toastr.success( 'Accion Realizada Correctamente', 'Exito',{
       "positionClass": "toast-top-right"});
     document.getElementById("formulario").reset();
-    $(".close").trigger('click'); 
+    $(".close").each(function () {
+      $(this).trigger('click');
+    });  
   }
   function AccionError(messages) {
     $.each(messages, function(index, val) {
       toastr.error( val, 'Problema al Ejecutar la Acción',{
         "positionClass": "toast-top-right"})   
     });
-    $(".close").trigger('click');  
   }
 
   /* Cambiar urlFormulario a guardar*/   
@@ -103,16 +104,22 @@ Residentes
 
   /* buscar localidad */
   $('.sectorBusqueda').on('change',function(){
+    var color = $(this).find("option:selected").css('background-color');
+    $(this).css('background-color', color);
     var id = $(this).val();
     var datos = {sector : id}                                
     rellenarSelectLocalidadBusqueda(urlRellenarSelectLocalidadBusqueda,datos);
   });
     /* buscar Residentes */   
-  $(document).on("click","#buscar",function(e){
-    e.preventDefault();   
-    var infoLocalidad = $("#formularioBusqueda").serialize();
-    buscar(urlListar,infoLocalidad);                                      
+    /* buscar */
+  $("#buscar").keyup(function (evento) {
+    var largoFiltro = $("#buscar").val();
+    if (largoFiltro.length>=7) {
+      var infoLocalidad = $("#formularioBusqueda").serialize();
+      buscar(urlListar,infoLocalidad);
+    }
   });
+
   /* paginacion */
   $(document).on("click",".pagination li a",function(e){
     e.preventDefault();   
