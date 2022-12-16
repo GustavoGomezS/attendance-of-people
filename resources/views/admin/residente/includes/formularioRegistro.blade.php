@@ -159,14 +159,14 @@
     
     context.drawImage(video, 0, 0, 200, 170);
     /* Convertir la imagen a Base64 */
-    var  dataUrl = canvas.toDataURL();
-          let enlace = document.createElement('a');
-          // El título
-          enlace.download = "ImagenResidente.png";
-          // Convertir la imagen a Base64 y ponerlo en el enlace
-          enlace.href = dataUrl; 
-          // Hacer click en él
-          enlace.click();
+    var dataUrl = canvas.toDataURL();
+    let enlace = document.createElement('a');
+    // El título
+    enlace.download = "ImagenResidente.png";
+    // Convertir la imagen a Base64 y ponerlo en el enlace
+    enlace.href = dataUrl; 
+    // Hacer click en él
+    enlace.click();
     
   });  
 </script>

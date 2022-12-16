@@ -26,40 +26,32 @@ class RegistroController extends Controller
   public function store(RegistroRequest $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      if ($request->ajax()) {
-        DB::table('visitante')->where('id', $request->visitante)->update(['estadoVisitante' => 3, 'localidadVisita' => $request->idLocalidad]);
-        $registro = new Registro();
-        $registro->ingresoSalida = $request->ingresoSalida;
-        $registro->puerta = $request->puerta;
-        $registro->visitante = $request->visitante;
-        $registro->localidad = $request->idLocalidad;
-        $registro->autorizaSeguridad = $request->autorizaSeguridad;
-        $registro->autorizaResidente = $request->autorizaResidente;
-        $registro->comentario = $request->comentario;
-        $registro->save();
-        if ($registro->save()) {
-          return response()->json(['success' => 'true']);
-        } else {
-          return response()->json(['success' => 'false']);
-        }
-      } else {
-        return back();
+      DB::table('visitante')
+        ->where('id', $request->visitante)
+        ->update(['estadoVisitante' => 3, 'localidadVisita' => $request->idLocalidad]);
+      $registro = new Registro();
+      $registro->ingresoSalida = $request->ingresoSalida;
+      $registro->puerta = $request->puerta;
+      $registro->visitante = $request->visitante;
+      $registro->localidad = $request->idLocalidad;
+      $registro->autorizaSeguridad = $request->autorizaSeguridad;
+      $registro->autorizaResidente = $request->autorizaResidente;
+      $registro->comentario = $request->comentario;
+      $registro->save();
+      if ($registro->save()) {
+        return response()->json(['success' => true]);
       }
     } else {
       return back();
     }
   }
 
-  //consulta para rellenar el select de puerta en index
-  public function puerta(Puerta $localidad)
+  public function puertas(Puerta $puertas)
   {
-    $localidad = Puerta::select()
-      ->orderBy('nombrePuerta', 'desc')
-      ->get();
-    return response()->json($localidad);
+    $puertas = Puerta::select()->orderBy('nombrePuerta', 'desc')->get();
+    return response()->json($puertas);
   }
 
-  //consulta para rellenar el select de autoriza en index
   public function autoriza(Request $request)
   {
     $datos = Residente::where('localidad', '=', $request->localidadBusqueda)
@@ -68,7 +60,7 @@ class RegistroController extends Controller
     return response()->json($datos);
   }
 
-  public function visitante(Request $request)
+  public function ingresa(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       $detalleVisitante = Visitante::select()
@@ -87,7 +79,7 @@ class RegistroController extends Controller
     }
   }
 
-  public function listarResidente(Request $request)
+  public function residentes(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       $datos = Residente::select('residente.*', 'estados.nombreEstado')
@@ -103,7 +95,8 @@ class RegistroController extends Controller
       return back();
     }
   }
-  public function listarRegistro(Request $request)
+
+  public function registros(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       $datos = Registro::select('registro.*', 'visitante.nombreVisitante', 'visitante.telefonoVisitante', 'residente.nombreResidente', 'estados.nombreEstado')
@@ -122,7 +115,8 @@ class RegistroController extends Controller
       return back();
     }
   }
-  public function listarVisitante(Request $request)
+
+  public function visitantes(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       $datos = Visitante::select('visitante.nombreVisitante', 'visitante.telefonoVisitante', 'estados.nombreEstado')

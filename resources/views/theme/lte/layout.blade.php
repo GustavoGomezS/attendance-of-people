@@ -46,7 +46,7 @@
   <!-- AdminLTE App -->
   <script src="{{asset("assets/$theme/dist/js/adminlte.min.js")}}"></script>
     <!-- toastr -->
-  <script src="{{asset("assets/$theme/plugins/toastr/toastr.min.js")}}"></script>  
+  <script src="{{asset("assets/$theme/plugins/toastr/toastr.min.js")}}"></script> 
   <script>    
     $(document).on("click","nav ul li",function(){
       if ($('a:first',this).hasClass("active")) {
@@ -56,5 +56,6 @@
       } 
     });
   </script>
+  @yield('scripts')
 </body>
 </html>

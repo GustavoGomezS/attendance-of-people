@@ -20,23 +20,27 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($datos as $item)  
-          <tr>       
-            <td>{{$item->nombreVisitante}}</td>
-            <td>{{$item->telefonoVisitante}}</td>
-            <td>
-              @if ($item->ingresoSalida == 1)
-                {{"Ingreso"}} 
-              @else
-                {{"Salida"}}
-              @endif
-            </td>          
-            <td>{{$item->nombreResidente}}</td>          
-            <td>{{$item->comentario}}</td>          
-            <td>{{$item->created_at}}</td>          
-          </tr>
-        @endforeach</tbody>
+        @foreach ($datos as $item)
+        <tr>
+          <td>{{$item->nombreVisitante}}</td>
+          <td>{{$item->telefonoVisitante}}</td>
+          <td>
+            @if ($item->ingresoSalida == 1)
+            {{"Ingreso"}}
+            @else
+            {{"Salida"}}
+            @endif
+          </td>
+          <td>{{$item->nombreResidente}}</td>
+          <td>{{$item->comentario}}</td>
+          <td>{{$item->created_at}}</td>
+        </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
-  <!-- /.card-body -->
+</div>
+{{-- paginacion --}}
+<div class="d-flex justify-content-end text-center">
+  {{ $datos->links() }}
 </div>

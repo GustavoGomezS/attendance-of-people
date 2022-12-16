@@ -148,6 +148,7 @@ class VisitanteController extends Controller
       return back();
     }
   }
+  
   public function dentro()
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
@@ -156,6 +157,7 @@ class VisitanteController extends Controller
       return back();
     }
   }
+
   public function buscar()
   {
     $datos = Visitante::select(DB::raw("CONCAT(nombreVisitante,' ', apellidoVisitante) AS nombreVisitante"), 'visitante.documentoVisitante', 'visitante.id as DT_RowId', 'visitante.telefonoVisitante', DB::raw("CONCAT(nombreSector,' - ',unidad) AS sectorUnidad"),)
@@ -168,36 +170,36 @@ class VisitanteController extends Controller
 
     return response()->json(['data' => $datos]);
   }
+
   public function darSalida(Request $request)
   {
     if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
       $arrayInputs = $request->all();
-
-      if ($request->ajax()) {
-        if (isset($arrayInputs['id'])) {
-          for ($i = 0; $i < count($arrayInputs['id']); $i++) {
-            $visitante = Visitante::select()->where('id', '=', $arrayInputs['id'][$i])->get();
-            $registro = new Registro();
-            $registro->ingresoSalida = $request->ingresoSalida;
-            $registro->visitante = $arrayInputs['id'][$i];
-            $registro->autorizaSeguridad =  auth()->user()->id;
-            $registro->autorizaResidente = null;
-            $registro->localidad = $visitante[0]->localidadVisita;
-            $registro->comentario = $request->comentario;
-            $registro->ingresoSalida = $request->ingresoSalida;
-            $registro->puerta = $request->puerta;
-            $registro->save();
-            DB::table('visitante')->where('id', '=', $arrayInputs['id'][$i])->update(['estadoVisitante' => 4, 'localidadVisita' => null]);
-          }
-          if ($registro->save()) {
-            return response()->json(['success' => 'true']);
-          } else {
-            return response()->json(['success' => 'false']);
-          }
-        }
+      if (isset($arrayInputs['id'])) {
+        VisitanteController::procesoDeSalida($arrayInputs);
+        return response()->json(['success' => true]);
       }
-    } else {
-      return back();
+    }  
+  }
+  private function procesoDeSalida($arrayInputs)
+  {
+    for ($i = 0; $i < count($arrayInputs['id']); $i++) {
+      $visitante = Visitante::findOrFail($arrayInputs['id'][$i]);
+      VisitanteController::crearRegistroDeSalida($visitante, $arrayInputs,$i);
+      $visitante->update(['estadoVisitante' => 4, 'localidadVisita' =>null]);
     }
+  }
+  private function crearRegistroDeSalida($visitante,$arrayInputs,$i)
+  {
+    $registro = new Registro();
+    $registro->ingresoSalida = $arrayInputs['ingresoSalida'];
+    $registro->visitante = $arrayInputs['id'][$i];
+    $registro->autorizaSeguridad = auth()->user()->id;
+    $registro->autorizaResidente = null;
+    $registro->localidad = $visitante->localidadVisita;
+    $registro->comentario = $arrayInputs['comentario'];
+    $registro->ingresoSalida = $arrayInputs['ingresoSalida'];
+    $registro->puerta = $arrayInputs['puerta'];
+    $registro->save();
   }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\EstadoResidente;
 use App\Http\Controllers\admin\LocalidadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\PuertaController;
@@ -85,14 +86,21 @@ Route::get('visitante.dentro.buscar', [VisitanteController::class, 'buscar'])->n
 Route::post('visitante.darSalida', [VisitanteController::class, 'darSalida'])->name('visitante.darSalida');
 /* rutas de visitante */
 /* rutas de registro */
-Route::resource('registro', App\Http\Controllers\admin\RegistroController::class)->names([
-    'index' => 'registro',
-    'store' => 'registro.guardar',
-])->middleware('auth');
-Route::get('registro.listarResidente{page?}', [RegistroController::class, 'listarResidente'])->name('registro.listarResidente');
-Route::get('registro.listarRegistro{page?}', [RegistroController::class, 'listarRegistro'])->name('registro.listarRegistro');
-Route::get('registro.listarVisitante{page?}', [RegistroController::class, 'listarVisitante'])->name('registro.listarVisitante');
-Route::get('registro.puerta{page?}', [RegistroController::class, 'puerta'])->name('registro.puerta');
-Route::get('registro.autoriza{page?}', [RegistroController::class, 'autoriza'])->name('registro.autoriza');
-Route::get('registro.visitante{page?}', [RegistroController::class, 'visitante'])->name('registro.visitante');
+Route::middleware('auth')->prefix('registro/')->name('registro.')->controller(RegistroController::class)->group(function () {
+    Route::get('index', 'index')->name('registro');
+    Route::post('store', 'store')->name('guardar');
+    Route::get('residentes{page?}', 'residentes')->name('residentes');
+    Route::get('registros{page?}',  'registros')->name('registros');
+    Route::get('visitante{page?}',  'visitantes')->name('visitantes');
+    Route::get('puertas{page?}',    'puertas')->name('puertas');
+    Route::get('autoriza{page?}',   'autoriza')->name('autoriza');
+    Route::get('ingresa{page?}',    'ingresa')->name('ingresa');
+});
 /* rutas de registro */
+/* rutas de estadoResidente */
+Route::middleware('auth')->prefix('estadoResidente/')->name('estadoResidente.')->controller(EstadoResidente::class)->group(function () {
+    Route::get('index', 'index')->name('index');
+    Route::get('residentes/{id}', 'residentes')->name('residentes');
+    Route::get('update', 'update')->name('update');
+});
+/* rutas de estadoResidente */
