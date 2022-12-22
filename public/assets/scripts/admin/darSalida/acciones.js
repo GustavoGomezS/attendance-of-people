@@ -1,4 +1,4 @@
-const accionSucces = function () {
+const accionSucces = () => {
   alertarMensajeSucces();
   cerrarTodosLosModal();
   document.getElementById("formulario").reset();
@@ -15,7 +15,7 @@ function cerrarTodosLosModal() {
   }); 
 }
 
-const accionError = function (messages) {
+const accionError = (messages) => {
   toastr.error( 'La accion no se pudo realizar', 
   'Problema al Ejecutar la Acción',{
   "positionClass": "toast-top-right"});   
@@ -23,7 +23,7 @@ const accionError = function (messages) {
   $("#cerrarModal").trigger('click');  
 }
 
-const rellenarSelectPuerta = function (data) {
+const rellenarSelectPuerta = (data) => {
   $('#puerta').html('');
   $.each(data, function (indexInArray, valueOfElement) { 
     $("#puerta").append("<option value="+valueOfElement.id+">"+valueOfElement.nombrePuerta+"</option>"); 

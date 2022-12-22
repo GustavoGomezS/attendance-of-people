@@ -44,10 +44,10 @@ const rellenarSelectQuienAutoriza = function (data) {
 }
 
 const datosQuienIngresa = function (data) {
-  if (data.success=="true") {
+  if (data.success==true) {
     Rellenar(data.data[0]);
   }else{
-    if (data.success=="false") {
+    if (data.success==false) {
       toastr.error( data.messages, 'Problema al Ejecutar la Acción',{
       "positionClass": "toast-top-right"}) 
     }
@@ -59,7 +59,7 @@ function Rellenar(data) {
   $("#visitante").val(data.id);
 }
 
-const despuesDeGuardar = function AccionSucces(data) {
+const despuesDeGuardar = (data) => {
   toastr.success('Accion Realizada Correctamente', 'Exito', {
     "positionClass": "toast-top-right"
   });
@@ -70,7 +70,7 @@ const despuesDeGuardar = function AccionSucces(data) {
   $("#buscar").trigger('click');
 }
 
-const accionError = function  AccionError(messages) {
+const accionError = (messages) => {
   try {
     this.alertarMensajesDeError(messages);
   }

@@ -16,69 +16,53 @@ class LocalidadController extends Controller
 
   public function store(Request $request)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $arrayInputs = $request->all();
-      if ($request->ajax()) {
-        $request->validate([
-          'unidad' => ['required', 'string', 'max:9'],
-          'sector' => ['required']
-        ]);
-        if (isset($arrayInputs['unidad'])) {
-          for ($i = 0; $i < count($arrayInputs['sector']); $i++) {
-            $localidad = new Localidad();
-            $localidad->unidad = $request->unidad;
-            $localidad->sector = $arrayInputs['sector'][$i];
-            $localidad->save();
-          }
-        }
-
-        if ($localidad->save()) {
-          return response()->json(['success' => 'true']);
-        } else {
-          return response()->json(['success' => 'false']);
-        }
-      } else {
-        return back();
+    $arrayInputs = $request->all();
+    $request->validate([
+      'unidad' => ['required', 'string', 'max:9'],
+      'sector' => ['required']
+    ]);
+    if (isset($arrayInputs['sector'])) {
+      for ($i = 0; $i < count($arrayInputs['sector']); $i++) {
+        $localidad = new Localidad();
+        $localidad->unidad = $request->unidad;
+        $localidad->sector = $arrayInputs['sector'][$i];
+        $localidad->save();
       }
+    }
+    if ($localidad->save()) {
+      return response()->json(['success' => true]);
     } else {
-      return back();
+      return response()->json(['success' => false]);
     }
   }
+
   public function destroy($localidad)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $borrado = Localidad::findOrFail($localidad);
-      $resultado = $borrado->delete();
-      if ($resultado) {
-        return response()->json(['success' => 'true']);
-      } else {
-        return response()->json(['success' => 'false']);
-      }
+    $localidadParaBorrar = Localidad::findOrFail($localidad);
+    $resultado = $localidadParaBorrar->delete();
+    if ($resultado) {
+      return response()->json(['success' => true]);
     } else {
-      return back();
+      return response()->json(['success' => false]);
     }
   }
+
   //consulta para rellenar el select de sector en index
-  public function checkSector(Sector $checkSector)
+  public function sectores(Sector $sectores)
   {
-    $checkSector = Sector::select('sector.*')
-      ->from('sector')
-      ->get();
-    return response()->json($checkSector);
+    $sectores = Sector::select()->get();
+    return response()->json($sectores);
   }
+
   //listar 
   public function listar()
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $datos = Localidad::select('localidad.*', 'sector.nombreSector')
-        ->orderBy('sector.nombreSector', 'desc')
-        ->orderBy('unidad', 'asc')
-        ->from('localidad')
-        ->join('sector', 'sector.id', '=', 'localidad.sector')
-        ->paginate(6);
-      return view('admin/ubicacion/localidad/includes/tabla')->with('datos', $datos);
-    } else {
-      return back();
-    }
+    $datos = Localidad::select('localidad.*', 'sector.nombreSector')
+      ->orderBy('sector.nombreSector', 'desc')
+      ->orderBy('unidad', 'asc')
+      ->from('localidad')
+      ->join('sector', 'sector.id', '=', 'localidad.sector')
+      ->paginate(6);
+    return view('admin/ubicacion/localidad/includes/tabla')->with('datos', $datos);
   }
 }

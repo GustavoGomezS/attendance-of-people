@@ -1,13 +1,9 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-Localidades
+  Localidades
 @endsection
 @section('metadata')
-<meta name="csrf-token" content="{{csrf_token()}}"/> 
-<script src="{{asset("assets/scripts/admin/localidad/rellenarCheckSector.js")}}"></script> 
-<script src="{{asset("assets/scripts/guardarFormulario.js")}}"></script> 
-<script src="{{asset("assets/scripts/buscar.js")}}"></script> 
-<script src="{{asset("assets/scripts/eliminar.js")}}"></script> 
+  <meta name="csrf-token" content="{{csrf_token()}}"/> 
 @endsection
 @section('contenido')
   <div class="row">
@@ -24,63 +20,17 @@ Localidades
     </div>
   </div>
   @include('admin/includes/modalConfirmDelet')
-<script>
-  const urlGuardar = "{{route('localidad.guardar')}}";
-  const urlBuscar = "{{route('localidad.listar')}}";
-  const urlCheckSector = "{{route('localidad.checkSector')}}";
-  var data,tipo,datos={a:"a"};
-  var token = $("#token").val();
-  
-  function AccionSucces() {
-    toastr.success( 'Accion Realizada Correctamente', 'Exito',{
-      "positionClass": "toast-top-right"});
-    buscar(urlBuscar, datos);
-    document.getElementById("formulario").reset();
-    $(".close").each(function () {
-      $(this).trigger('click');
-    });  
-  }
-  function AccionError(messages) {
-    $.each(messages, function(index, val) {
-      toastr.error( val, 'Problema al Ejecutar la Acción',{
-        "positionClass": "toast-top-right"})   
-    });
-    
-  }
-  /* Buscar al cargar la pagina*/
-  $(document).ready(function () {
-    $("#ubicacionesLi").addClass("menu-open");;
-    $("#ubicacionesA").addClass("active");
-    $("#localidad").addClass("active");
-    rellenarCheckSector(urlCheckSector);
-    buscar(urlBuscar, datos);
-  });
-    /* registro del formulario */
-  $('#formulario').on('submit', function(e){
-    e.preventDefault();
-    data = $("#formulario").serialize();
-    tipo = "post";
-    EnvioFormulario(data,urlGuardar,token,tipo);                    
-  });
-    /* Eliminar elementos de la lista */   
-  $(document).on("click",".eliminar",function(e){
-    e.preventDefault();   
-    urlEliminar = $(this).attr("href");                                      
-  });
-  $('#confirmar').on('click', function(){
-    eliminar(urlEliminar);
-  });
-   /* paginacion */
-  $(document).on("click",".pagination li a",function(e){
-    e.preventDefault();   
-    var url = $(this).attr("href");                                      
-    buscar(url);
-  });
-</script>
 @endsection
 
-
-
-
-
-
+@section('scripts')
+  <script>
+    const url = {
+      "guardarLocalidad": "{{route('localidad.guardar')}}",
+      "localidades": "{{route('localidad.listar')}}",
+      "sectores": "{{route('localidad.sectores')}}",
+    } 
+  </script>
+  <script src="{{asset("assets/scripts/admin/localidad/acciones.js")}}"></script>
+  <script src="{{asset("assets/scripts/AsyncFunction.js")}}"></script>
+  <script src="{{asset("assets/scripts/admin/localidad/listeners.js")}}"></script>
+@endsection

@@ -10,21 +10,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
-class EstadoResidente extends Controller
+class EstadoResidenteController extends Controller
 {
-  public function index()
+public function index()
   {
-    $datos = EstadoResidente::datosIndex();
+    $datos = EstadoResidenteController::datosIndex();
     return view('admin/estadoResidente/index')->with('datos', $datos);
   }
-
   private function datosIndex()
   {
     $sectores = json_decode(Sector::select('id', 'color')->get(), true);
-    $localidades = EstadoResidente::getLocalidades($sectores);
+    $localidades = EstadoResidenteController::getLocalidades($sectores);
     return $localidades;
   }
-
   private function getLocalidades($sectores)
   {
     $datos = array();

@@ -1,7 +1,7 @@
 var table;
 
-const puertas =    new AsyncFunction(url.puertas,     null, rellenarSelectPuerta);
-const formulario = new AsyncFunction(url.darSalida,   null, accionSucces, accionError);
+const puertas =    new GetAsyncFunction(url.puertas,     null, rellenarSelectPuerta);
+const formulario = new PostAsyncFunction(url.darSalida,   null, accionSucces, accionError);
 
 $(document).ready(function () {
   puertas.ObtenerDatosDe();
@@ -44,7 +44,7 @@ $(document).ready(function () {
   $('#formulario').on('submit', function(e){
     e.preventDefault();
     var data = prepararData();
-    formulario.Datos = data;
+    formulario.datos = data;
     formulario.Guardar();                 
   });
   function prepararData() {

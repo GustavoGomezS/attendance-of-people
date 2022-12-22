@@ -10,90 +10,50 @@ class SectorController extends Controller
 {
   public function store(Request $request)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      if ($request->ajax()) {
-        $request->validate([
-          'nombre' => ['required', 'string', 'max:19'],
-        ]);
-        $sector = new Sector();
-        $sector->nombreSector = $request->nombre;
-        $sector->color = $request->color;
-        $sector->save();
-        if ($sector->save()) {
-          return response()->json(['success' => 'true']);
-        } else {
-          return response()->json(['success' => 'false']);
-        }
-      } else {
-        return "Error en el envio Ajax";
-      }
+    $request->validate(['nombre' => ['required', 'string', 'max:19']]);
+    $sector = new Sector();
+    $sector->nombreSector = $request->nombre;
+    $sector->color = $request->color;
+    $sector->save();
+    if ($sector->save()) {
+      return response()->json(['success' => true]);
     } else {
-      return back();
+      return response()->json(['success' => false]);
     }
   }
+  
   public function edit($Sector)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $detalleSector = Sector::select()
-        ->from('sector')
-        ->where('sector.id', '=', "$Sector")
-        ->get();
-      /* decodifico la respuesta para modificar el campo de la foto */
-      if ($detalleSector) {
-        return response()->json(['success' => 'true', 'data' => $detalleSector]);
-      } else {
-        return response()->json(['success' => 'false']);
-      }
-    } else {
-      return back();
+    $detalleSector = Sector::findOrFail($Sector);
+    if ($detalleSector) {
+      return response()->json($detalleSector);
     }
   }
 
   public function update(Request $request, $sector)
   {
-    //
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      if ($request->ajax()) {
-        $request->validate([
-          'nombreSector' => ['required', 'string', 'max:19'],
-        ]);
-        $registro = Sector::findOrFail($sector);
-        $formulario = $request->all();
-        $resultado = $registro->fill($formulario)->save();
-        if ($resultado) {
-          return response()->json(['success' => 'true']);
-        } else {
-          return response()->json(['success' => 'false']);
-        }
-      }
-    } else {
-      return back();
+    $request->validate(['nombreSector' => ['required', 'string', 'max:19']]);
+    $sectorParaActualizar = Sector::findOrFail($sector);
+    $formulario = $request->all();
+    $resultado = $sectorParaActualizar->fill($formulario)->save();
+    if ($resultado) {
+      return response()->json(['success' => true]);
     }
+    
   }
+
   public function destroy($sector)
-  {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $borrado = Sector::findOrFail($sector);
-      $resultado = $borrado->delete();
-      if ($resultado) {
-        return response()->json(['success' => 'true']);
-      } else {
-        return response()->json(['success' => 'false']);
-      }
-    } else {
-      return back();
+  { 
+    $sectorParaEliminar = Sector::findOrFail($sector);
+    $resultado = $sectorParaEliminar->delete();
+    if ($resultado) {
+      return response()->json(['success' => true]);
     }
   }
+
   public function listar()
-  {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $datos = Sector::select('*')
-        ->orderBy('nombreSector', 'desc')
-        ->from('sector')
-        ->paginate(6);
-      return view('admin/ubicacion/sectorPuerta/tablas/tablaSector')->with('datos', $datos);
-    } else {
-      return back();
-    }
+  {  
+    $datos = Sector::select()->orderBy('nombreSector', 'desc')->paginate(6);
+    return view('admin/ubicacion/sectorPuerta/tablas/tablaSector')->with('datos', $datos);
   }
 }

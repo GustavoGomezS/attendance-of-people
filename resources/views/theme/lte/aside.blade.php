@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('localidad')}}" class="nav-link" id="localidad">
+              <a href="{{route('localidad.localidad')}}" class="nav-link" id="localidad">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Localidad</p>
               </a>

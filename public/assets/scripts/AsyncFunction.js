@@ -1,28 +1,29 @@
 class AsyncFunction {
   constructor(url, datos, accionExitosa, accionAlFallar) {
-    this.url = url;
-    this.datos = datos;
-    this.accionExitosa = accionExitosa;
-    this.accionAlFallar = accionAlFallar;
+    this._url = url;
+    this._datos = datos;
+    this._accionExitosa = accionExitosa;
+    this._accionAlFallar = accionAlFallar;
   }
 
-  set Datos(val){
-    this.datos = val;
+  set datos(val){
+    this._datos = val;
   }
-  
-  get Datos(){
-     return this.datos;
-  }
-  set Url(val){
-    this.url = val;
-  }
-  
-  get Url(){
-     return this.url;
+  get datos(){
+     return this._datos;
   }
 
-  ObtenerDatosDe(accionExitosa = this.accionExitosa) {
-  $.get( this.url, this.datos )
+  set url(val){
+    this._url = val;
+  }  
+  get url(){
+     return this._url;
+  }
+}
+
+class GetAsyncFunction extends AsyncFunction {
+  ObtenerDatosDe(accionExitosa = this._accionExitosa) {
+  $.get( this._url, this._datos )
     .done(function( data ) {
       try {
         accionExitosa(data);
@@ -34,13 +35,15 @@ class AsyncFunction {
       console.log(status, error);
     });
   }
+}
 
-  Guardar(accionExitosa = this.accionExitosa, accionAlFallar = this.accionAlFallar) {
+class PostAsyncFunction extends AsyncFunction {
+  Guardar(accionExitosa = this._accionExitosa, accionAlFallar = this._accionAlFallar) {
     $.ajax({                        
       type: "post",
       headers: {'X-CSRF-TOKEN':$("#token").val()},                
-      url: this.url,                 
-      data: this.datos,
+      url: this._url,                 
+      data: this._datos,
       dataType : 'json',
     })
     .done(function( data ) {
@@ -52,12 +55,14 @@ class AsyncFunction {
       accionAlFallar(messages);
     });
   }
+}
 
-  Eliminar(accionExitosa = this.accionExitosa, accionAlFallar = this.accionAlFallar){
+class DeleteAsyncFunction extends AsyncFunction {
+  Eliminar(accionExitosa = this._accionExitosa, accionAlFallar = this._accionAlFallar){
     $.ajax({
     type: "delete",
-    url: this.url,                 
-    data: this.datos,
+    url: this._url,                 
+    data: this._datos,
     headers: {'X-CSRF-TOKEN':$("#token").val()}
     })
     .done(function( data ) {
@@ -67,7 +72,23 @@ class AsyncFunction {
       let messages = data.responseJSON.errors;
       accionAlFallar(messages);
     });
-
   }
+}
 
+class PutAsyncFunction extends AsyncFunction {
+  Actualizar(accionExitosa = this._accionExitosa, accionAlFallar = this._accionAlFallar){
+    $.ajax({
+    type: "put",
+    url: this._url,                 
+    data: this._datos,
+    headers: {'X-CSRF-TOKEN':$("#token").val()}
+    })
+    .done(function( data ) {
+      accionExitosa(data)   
+    })
+    .fail(function(data) {
+      let messages = data.responseJSON.errors;
+      accionAlFallar(messages);
+    });
+  }
 }
