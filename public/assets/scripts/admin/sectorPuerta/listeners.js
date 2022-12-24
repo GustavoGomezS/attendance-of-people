@@ -19,13 +19,13 @@ $(document).ready(function () {
   /* registro del formulario */
 $('#formularioSector').on('submit', function(e){
   e.preventDefault();
-  nuevoSector.datos = $("#formularioSector").serialize();
+  nuevoSector.datos = new FormData($('#formularioSector')[0]);
   nuevoSector.Guardar();            
 });
 
 $('#formularioPuerta').on('submit', function(e){
   e.preventDefault();
-  nuevaPuerta.datos = $("#formularioPuerta").serialize();
+  nuevaPuerta.datos =  new FormData($('#formularioPuerta')[0]);
   nuevaPuerta.Guardar();                        
 });
 

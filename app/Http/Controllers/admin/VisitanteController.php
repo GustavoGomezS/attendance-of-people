@@ -173,13 +173,11 @@ class VisitanteController extends Controller
 
   public function darSalida(Request $request)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $arrayInputs = $request->all();
-      if (isset($arrayInputs['id'])) {
-        VisitanteController::procesoDeSalida($arrayInputs);
-        return response()->json(['success' => true]);
-      }
-    }  
+    $arrayInputs = $request->all();
+    if (isset($arrayInputs['id'])) {
+      VisitanteController::procesoDeSalida($arrayInputs);
+      return response()->json(['success' => true]);
+    }
   }
   private function procesoDeSalida($arrayInputs)
   {

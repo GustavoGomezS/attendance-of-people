@@ -15,125 +15,97 @@ use Illuminate\Support\Str;
 
 class ResidenteController extends Controller
 {
-
   public function index()
   {
     return view('admin/Residente/index');
   }
 
-  public function store(ResidenteRequest $request)
-  {
-    $request->validate([
-      'foto' => 'required|',
-    ]);
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      /* cargar imagenes con plugin para redimencionar imagenes */
-      /* al nombre original del archivo le agrego 10 caracteres random */
-      $nombre = Str::Random(5) . date('YmdHis') . $request->file('foto')->getClientOriginalName();
-      /* selecciono la ruta donde queda guardada la imagen con su nombre */
-      $url = storage_path() . '\app\public\imagenes/' . $nombre;
-      /*   redimenciono y  guardo en el servidor independientedel guardado en la bd */
-      Image::make($request->file('foto'))->resize(300, 200)->save($url);
-      if ($request->ajax()) {
-        $residente = new Residente();
-        $residente->documentoResidente = $request->documentoResidente;
-        $residente->nombreResidente = $request->nombreResidente;
-        $residente->apellidoResidente = $request->apellidoResidente;
-        $residente->fotoResidente = '/storage/imagenes/' . $nombre; //guardo la url en la bd
-        $residente->localidad = $request->localidad;
-        $residente->estadoResidente = 3;
-        $residente->telefonoResidente = $request->telefonoResidente;
-        $residente->sexoResidente = $request->sexoResidente;
-        $residente->fechaNacimientoResidente = $request->fechaNacimientoResidente;
-        $residente->save();
-        if ($residente->save()) {
-          return response()->json(['success' => 'true']);
-        } else {
-          return response()->json(['success' => 'false']);
-        }
-      } else {
-        return back();
-      }
+  public function store(ResidenteRequest $request){
+    $request->validate(['fotoResidente' => 'required|']);
+    $nombreImagen = Self::GuardarYObtenerNombreDeImagen($request->file('fotoResidente'));
+    $guardaConExito = Self::GuardarResidente($nombreImagen, $request);
+    if ($guardaConExito) {
+    return response()->json(['success' => true]);
     } else {
-      return back();
+    return response()->json(['success' => false]);
+    }
+  }
+  private function GuardarYObtenerNombreDeImagen($foto){
+    $nuevoNombreImagen = Str::Random(5) . date('YmdHis') . $foto->getClientOriginalName();
+    $url = storage_path() . '\app\public\imagenes/' . $nuevoNombreImagen;//url de storage para la imagen
+    Image::make($foto)->resize(300, 200)->save($url);
+    return $nuevoNombreImagen;
+  }
+  private function GuardarResidente($nombreImagen, $request){
+    $residente = new Residente();
+    $residente->documentoResidente = $request->documentoResidente;
+    $residente->nombreResidente = $request->nombreResidente;
+    $residente->apellidoResidente = $request->apellidoResidente;
+    $residente->fotoResidente = '/storage/imagenes/' . $nombreImagen; //guardo la url en la bd
+    $residente->localidad = $request->localidad;
+    $residente->estadoResidente = 3;
+    $residente->telefonoResidente = $request->telefonoResidente;
+    $residente->sexoResidente = $request->sexoResidente;
+    $residente->fechaNacimientoResidente = $request->fechaNacimientoResidente;
+    $residente->save();
+    if ($residente->save()) {
+      return true;
+    } else {
+      return false;
     }
   }
 
-  public function edit($Residente)
-  {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      $detalleResidente = Residente::select()
-        ->from('residente')
-        ->where('residente.id', '=', "$Residente")
-        ->get();
-      /* decodifico la respuesta para modificar el campo de la foto */
-      $array = json_decode($detalleResidente, true);
-      $array[0]["fotoResidente"] =  asset($array[0]["fotoResidente"]);
-      if ($detalleResidente) {
-        return response()->json(['success' => 'true', 'data' => $array]);
-      } else {
-        return response()->json(['success' => 'false']);
-      }
+  public function desactivar(Residente $Residente){
+    if ($Residente->estadoResidente == 3 || $Residente->estadoResidente == 4) {
+      $Residente->update(['estadoResidente' => 2]);
+    }else {
+      $Residente->update(['estadoResidente' => 3]);
+    }
+    if ($Residente->update()) {
+    return response()->json(['success' => true]);
     } else {
-      return back();
+    return response()->json(['success' => false]);
     }
   }
 
-  public function update(ResidenteRequest $request, Residente $Residente)
-  {
+  public function update(ResidenteRequest $request,Residente $residente,){
     $formulario = $request->all();
     if ($request->hasFile('fotoResidente')) {
-      /* elimino la imagen anterior */
-      $url = str_replace('storage', 'public', $Residente->fotoResidente);
-      Storage::delete($url);
-      /* cargar imagenes con plugin para redimencionar imagenes */
-      /* al nombre original del archivo le agrego 10 caracteres random */
-      $nombre = Str::Random(5) . date('YmdHis') . $request->file('fotoResidente')->getClientOriginalName();
-      /* selecciono la ruta donde queda guardada la imagen con su nombre */
-      $urlNuevo = storage_path() . '\app\public\imagenes/' . $nombre;
-      /*   redimenciono y  guardo en el servidor independientedel guardado en la bd */
-      Image::make($request->file('fotoResidente'))->resize(300, 200)->save($urlNuevo);
-      $formulario["fotoResidente"] = '/storage/imagenes/' . $nombre; //guardo la url en la bd
+      Self::eliminarFotoDelStorage($residente->fotoResidente);
+      $nombreImagen = Self::GuardarYObtenerNombreDeImagen($request->file('fotoResidente'));
+      $formulario["fotoResidente"] = '/storage/imagenes/' . $nombreImagen; //url para la BD
     }
-
-    $resultado = $Residente->fill($formulario)->save();
-
-    if ($resultado) {
-      return response()->json(['success' => 'true']);
+    $actualizaCorrectamente = $residente->fill($formulario)->save();
+    if ($actualizaCorrectamente) {
+      return response()->json(['success' => true]);
     } else {
-      return response()->json(['success' => 'false']);
+      return response()->json(['success' => false]);
     }
   }
+  private function eliminarFotoDelStorage($urlFotoResidente){
+    $url = str_replace('storage', 'public', $urlFotoResidente);
+    Storage::delete($url);
+  }
 
-  public function destroy(Residente $Residente)
-  {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      /* Elimino archivo del servidor */
-      $url = str_replace('storage', 'public', $Residente->fotoResidente);
-      Storage::delete($url);
-      /* Elimino registro de la bd */
-
-      $resultado = $Residente->delete();
-      if ($resultado) {
-        return response()->json(['success' => 'true']);
-      } else {
-        return response()->json(['success' => 'false']);
-      }
+  public function edit($Residente){
+    $residente = Residente::findOrFail($Residente);
+    $residente->fotoResidente = asset($residente->fotoResidente); //agrego direccion url de la foto
+    if ($residente) {
+    return response()->json(['success' => true, 'data' => $residente]);
     } else {
-      return back();
+    return response()->json(['success' => false]);
     }
   }
 
   //consulta para rellenar el select de sectorBusqueda en index
-  public function sectorBusqueda(Sector $localidad)
+  public function sectores(Sector $sectores)
   {
-    $localidad = Sector::select()
-      ->orderBy('sector.nombreSector', 'asc')
-      ->get();
-    return response()->json($localidad);
+    $sectores = Sector::select()->orderBy('sector.nombreSector', 'asc')->get();
+    return response()->json($sectores);
   }
+
   //consulta para rellenar el select de sectorBusqueda en index
-  public function localidadBusqueda(Request $request)
+  public function localidades(Request $request)
   {
     $datos = Localidad::select('localidad.*', 'sector.color')
       ->where('localidad.sector', '=', $request->sector)
@@ -143,35 +115,30 @@ class ResidenteController extends Controller
     return response()->json($datos);
   }
 
-
-
   public function listar(Request $request)
   {
-    if (auth()->user()->tipoUsuario == "1" &&  auth()->user()->estadoUsuario == "1") {
-      if ($request->filtro != "0" && $request->buscar != "") {
-        $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
-          ->orderBy('created_at', 'desc')
-          ->from('residente')
-          ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
-          ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
-          ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
-          ->where([
-            ["$request->filtro", 'LIKE', "$request->buscar%"]
-          ])
-          ->paginate(6);
-        return view('admin/residente/includes/tabla')->with('datos', $datos);
-      } else {
-        $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
-          ->orderBy('created_at', 'desc')
-          ->from('residente')
-          ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
-          ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
-          ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
-          ->paginate(6);
-        return view('admin/residente/includes/tabla')->with('datos', $datos);
-      }
+    if ($request->filtro != "0" && $request->buscar != "") {
+      $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
+        ->orderBy('created_at', 'desc')
+        ->from('residente')
+        ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
+        ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
+        ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
+        ->where([
+          ["$request->filtro", 'LIKE', "$request->buscar%"]
+        ])
+        ->paginate(6);
+      return view('admin/residente/includes/tabla')->with('datos', $datos);
     } else {
-      return back();
+      $datos = Residente::select('residente.*', 'estados.nombreEstado', 'sector.nombreSector', 'localidad.unidad')
+        ->orderBy('created_at', 'desc')
+        ->from('residente')
+        ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
+        ->leftJoin('localidad', 'localidad.id', '=', 'residente.localidad')
+        ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
+        ->paginate(6);
+      return view('admin/residente/includes/tabla')->with('datos', $datos);
     }
+
   }
 }

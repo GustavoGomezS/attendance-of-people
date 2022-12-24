@@ -20,8 +20,8 @@ class RegistroController extends Controller
 
   public function store(RegistroRequest $request)
   {
-    RegistroController::cambiarEstadoVisitante($request); 
-    $registro=RegistroController::creaeRegistro($request); 
+    Self::cambiarEstadoVisitante($request); 
+    $registro=Self::creaeRegistro($request); 
     if ($registro) {
       return response()->json(['success' => true]);
     }   
@@ -56,7 +56,7 @@ class RegistroController extends Controller
 
   public function autoriza(Request $request)
   {
-    $datos = Residente::where('localidad', '=', $request->localidadBusqueda)
+    $datos = Residente::where([['localidad', '=', $request->localidadBusqueda],['estadoResidente','<>',2]])
       ->orderBy('fechaNacimientoResidente', 'asc')
       ->get();
     return response()->json($datos);
@@ -84,7 +84,8 @@ class RegistroController extends Controller
       ->from('residente')
       ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
       ->where([
-        ["residente.localidad", '=', "$request->localidadBusqueda"]
+        ["residente.localidad", '=', "$request->localidadBusqueda"],
+        ['estadoResidente','<>',2]
       ])
       ->paginate(6);
     return view('admin/registro/includes/tablaResidente')->with('datos', $datos);

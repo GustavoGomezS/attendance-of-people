@@ -7,7 +7,7 @@ const paginacion =    new GetAsyncFunction(null,            null, listarRegistro
 const visitantes =    new GetAsyncFunction(url.visitantes,  null, listarVisitantes);
 const quienAutoriza = new GetAsyncFunction(url.autoriza,    null, rellenarSelectQuienAutoriza);
 const quienIngresa =  new GetAsyncFunction(url.ingresa,     null, datosQuienIngresa);
-const formulario =    new PostAsyncFunction(url.guardar,     null, despuesDeGuardar, accionError);
+const formulario =    new PostAsyncFunction(url.guardar,     null, accionSucces, accionError);
 
 $(document).ready(function() {
   bsCustomFileInput.init()
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 $('#formulario').on('submit', function(e) {
   e.preventDefault();
-  formulario.datos = $("#formulario").serialize();
+  formulario.datos = new FormData($('#formulario')[0]);
   formulario.Guardar();
   /* EnviarFormulario(data, url.guardar, ); */
 });

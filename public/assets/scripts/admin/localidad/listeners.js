@@ -18,7 +18,7 @@ function resaltarLinkEnAside() {
   /* registro del formulario */
 $('#formulario').on('submit', function(e){
   e.preventDefault();
-  nuevaLocalidad.datos = $("#formulario").serialize();
+  nuevaLocalidad.datos = new FormData($('#formulario')[0]);
   nuevaLocalidad.Guardar();                
 });
 

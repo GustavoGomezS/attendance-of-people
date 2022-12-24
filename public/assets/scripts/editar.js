@@ -7,7 +7,12 @@ function Editar(url,id) {
     contentType : 'application/json',   
     success: function (data) {
       if (data.success=="true") {
-        Rellenar(data.data[0]);
+        try {
+          Rellenar(data.data[0]);
+        } catch (error) {
+          Rellenar(data.data);
+        }
+        
       }else{
         if (data.success=="false") {
           try {

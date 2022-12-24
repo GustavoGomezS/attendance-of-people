@@ -1,3 +1,25 @@
+const rellenarSelectSector = (data) =>{
+    $('.sectorBusqueda').html('');
+    $('.sectorBusqueda').css('color', 'white');
+    $(".sectorBusqueda").prepend("<option value='' seleted>Sector</option>");  
+    $.each(data, function (indexInArray, valueOfElement) { 
+      $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
+    });
+}
+
+const rellenarFormulario = (info) => {
+  let data = info.data;
+  $('#documentoResidente').val(data.documentoResidente);
+  $('#nombreResidente').val(data.nombreResidente);
+  $('#apellidoResidente').val(data.apellidoResidente);
+  $('#telefonoResidente').val(data.telefonoResidente);
+  $('#sexoResidente').val(data.sexoResidente);
+  $('#fechaNacimientoResidente').val(data.fechaNacimientoResidente);
+  $('#blah').attr('src', data.fotoResidente);
+  $("#formulario :input").prop("disabled", true);
+  $("#formulario :button").removeAttr('disabled');
+}
+
 const rellenarSelectSectores = function (data) {
   $('.sectorBusqueda').html('');
   $('.sectorBusqueda').css('color', 'white');
@@ -17,49 +39,11 @@ const rellenarSelectLocalidades= function (data) {
     }); 
 }
 
-const rellenarSelectPuerta = function (data) {
-  $('#puerta').html('');
-  $.each(data, function (indexInArray, valueOfElement) { 
-    $("#puerta").append("<option value="+valueOfElement.id+">"+valueOfElement.nombrePuerta+"</option>"); 
-  }); 
-}
-
 const listarResidentes = function (data) {
   $('#datos').empty().html(data); 
 }
-const listarRegistros = function (data) {
-  $('#datosRegistro').empty().html(data); 
-}
 
-const listarVisitantes = function (data) {
-  $('#datosVisitante').empty().html(data);  
-}
-
-const rellenarSelectQuienAutoriza = function (data) {
-  $('#autorizaResidente').html('');
-  $("#autorizaResidente").prepend("<option value='' seleted>Residente</option>");  
-  $.each(data, function (indexInArray, valueOfElement) { 
-    $("#autorizaResidente").append("<option value="+valueOfElement.id+">"+valueOfElement.nombreResidente+" "+valueOfElement.apellidoResidente+"</option>"); 
-  });    
-}
-
-const datosQuienIngresa = function (data) {
-  if (data.success==true) {
-    Rellenar(data.data[0]);
-  }else{
-    if (data.success==false) {
-      toastr.error( data.messages, 'Problema al Ejecutar la Acción',{
-      "positionClass": "toast-top-right"}) 
-    }
-  }
-}
-function Rellenar(data) {
-  $('#nombreVisitante').html(data.nombreVisitante + " " + data.apellidoVisitante);
-  $('#blah').attr('src', data.fotoVisitante);
-  $("#visitante").val(data.id);
-}
-
-const accionSucces = () => {  
+const acionSuccess = () => {  
   mostrarMensaje();
   resetearFormularios();
   refrescarDatos();
@@ -74,14 +58,13 @@ function resetearFormularios() {
   document.getElementById("formulario").reset();
 }
 function refrescarDatos() {
-  $("#buscar").trigger('click');
+  filtroDeBusqueda.ObtenerDatosDe();
 }
 function cerrarModals() {
   $(".close").each(function () {
     $(this).trigger('click');
   });  
 }
-
 
 const accionError = (messages) => {
   try {

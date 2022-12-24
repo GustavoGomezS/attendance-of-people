@@ -52,21 +52,23 @@ Route::middleware('auth')->prefix('localidad/')
   Route::get('index', 'index')->name('localidad');
   Route::post('store', 'store')->name('guardar');
   Route::delete('destroy{localidad}', 'destroy')->name('eliminar');
-  Route::get('sectores', 'sectores')->name('sectores');
   Route::get('listar', 'listar')->name('listar');
 });
 
 /* rutas de residente */
-Route::resource('residente', App\Http\Controllers\admin\residenteController::class)->names([
-    'index' => 'residente',
-    'store' => 'residente.guardar',
-    'edit' => 'residente.editar',
-    'update' => 'residente.actualizar',
-    'destroy' => 'residente.eliminar',
-])->middleware('auth');
-Route::get('residente.listar{page?}', [ResidenteController::class, 'listar'])->name('residente.listar');
-Route::get('residente.sectorBusqueda', [ResidenteController::class, 'sectorBusqueda'])->name('residente.sectorBusqueda');
-Route::get('residente.localidadBusqueda', [ResidenteController::class, 'localidadBusqueda'])->name('residente.localidadBusqueda');
+Route::middleware('auth')->prefix('residente/')
+->name('residente.')
+->controller(ResidenteController::class)
+->group(function () {
+  Route::get('index', 'index')->name('residente');
+  Route::post('store', 'store')->name('guardar');
+  Route::get('{residente}/edit', 'edit')->name('editar');
+  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->name('actualizar');
+  Route::delete('desactivar{residente}', 'desactivar')->name('desactivar');
+  Route::get('sectores', 'sectores')->name('sectores');
+  Route::get('localidades', 'localidades')->name('localidades');
+  Route::get('listar', 'listar')->name('listar');
+});
 
 /* rutas de visitante */
 Route::resource('visitante', App\Http\Controllers\admin\VisitanteController::class)->names([

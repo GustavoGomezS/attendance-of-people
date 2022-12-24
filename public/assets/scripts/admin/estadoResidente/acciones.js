@@ -1,7 +1,5 @@
 const mostrarResidentesDeEstaLocalidad = (data)=>{
   $('#datos').empty().html(data); 
-  $(".modal-header h4").text($(this).text());
-  $(".modal-header").css({'background-color': $(this).css('background-color'), 'color' : 'white'});
 }
 
 const alertarSucces = (data)=>{

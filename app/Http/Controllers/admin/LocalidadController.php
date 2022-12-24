@@ -47,13 +47,6 @@ class LocalidadController extends Controller
     }
   }
 
-  //consulta para rellenar el select de sector en index
-  public function sectores(Sector $sectores)
-  {
-    $sectores = Sector::select()->get();
-    return response()->json($sectores);
-  }
-
   //listar 
   public function listar()
   {

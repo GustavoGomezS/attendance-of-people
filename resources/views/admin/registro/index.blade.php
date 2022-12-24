@@ -40,7 +40,6 @@ Registro
 @endsection
 @section('scripts')
 <script>
-  var token = $("#token").val();
   const url = {
   "guardar": "{{route('registro.guardar')}}",
   "residentes": "{{route('registro.residentes')}}",
@@ -49,8 +48,8 @@ Registro
   "puertas": "{{route('registro.puertas')}}",
   "autoriza": "{{route('registro.autoriza')}}",
   "ingresa": "{{route('registro.ingresa')}}",
-  "sectores": "{{route('residente.sectorBusqueda')}}",
-  "localidades":"{{route('residente.localidadBusqueda')}}",
+  "sectores": "{{route('residente.sectores')}}",
+  "localidades":"{{route('residente.localidades')}}",
   } 
 </script>
 <script src="{{asset("assets/scripts/admin/registro/acciones.js")}}"></script>

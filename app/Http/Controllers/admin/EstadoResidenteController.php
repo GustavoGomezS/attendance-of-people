@@ -14,13 +14,13 @@ class EstadoResidenteController extends Controller
 {
 public function index()
   {
-    $datos = EstadoResidenteController::datosIndex();
+    $datos = Self::datosIndex();
     return view('admin/estadoResidente/index')->with('datos', $datos);
   }
   private function datosIndex()
   {
     $sectores = json_decode(Sector::select('id', 'color')->get(), true);
-    $localidades = EstadoResidenteController::getLocalidades($sectores);
+    $localidades = Self::getLocalidades($sectores);
     return $localidades;
   }
   private function getLocalidades($sectores)
@@ -39,7 +39,8 @@ public function index()
 
   public function residentes($localidad)
   {
-    $residentes = Residente::select()->where('localidad', '=', $localidad)->get();
+    $residentes = Residente::select()
+    ->where([['localidad', '=', $localidad],['estadoResidente','<>', 2]])->get();
     return view('admin/estadoResidente/includes/tablaResidente')->with('datos', $residentes);
   }
 

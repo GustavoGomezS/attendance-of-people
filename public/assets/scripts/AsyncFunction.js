@@ -28,7 +28,7 @@ class GetAsyncFunction extends AsyncFunction {
       try {
         accionExitosa(data);
       } catch (error) {
-        console.log("sin accion");
+        console.log(error);
       }
     })
     .fail(function(xhr, status, error) {
@@ -44,7 +44,10 @@ class PostAsyncFunction extends AsyncFunction {
       headers: {'X-CSRF-TOKEN':$("#token").val()},                
       url: this._url,                 
       data: this._datos,
+      contentType: false,
       dataType : 'json',
+      cache: false,
+      processData:false,
     })
     .done(function( data ) {
       if (data.success == true) {accionExitosa()}      

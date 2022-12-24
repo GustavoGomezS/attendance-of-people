@@ -43,23 +43,20 @@ $(document).ready(function () {
   /* accion con filas seleccionadas */
   $('#formulario').on('submit', function(e){
     e.preventDefault();
-    var data = prepararData();
-    formulario.datos = data;
+    formulario.datos = prepararData();
     formulario.Guardar();                 
   });
   function prepararData() {
-    var data = { 
-      id : [], 
-      puerta : $("#puerta").val(), 
-      comentario : $("#comentario").val(),
-      ingresoSalida : $("#ingresoSalida").val()
-    }
-    agregarIdResidentesAlData(data);
-    return data;
+    var formData = new FormData();
+    formData.append('puerta', $("#puerta").val());
+    formData.append('comentario', $("#comentario").val());
+    formData.append('ingresoSalida', $("#ingresoSalida").val());
+    agregarIdResidentes(formData)
+    return formData;
   }
-  function agregarIdResidentesAlData(data) {
+  function agregarIdResidentes(formData) {
     for (let index = 0; index < table.rows('.selected').data().length; index++) {
-      data.id.push(table.rows('.selected').data()[index].DT_RowId);
+      formData.append('id[]', table.rows('.selected').data()[index].DT_RowId);
     }
   }
 });
