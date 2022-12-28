@@ -39,8 +39,8 @@ Salida
 <script>
 const url = {
   "puertas": "{{route('registro.puertas')}}",
-  "darSalida": "{{route('visitante.darSalida')}}",
-  "visitantes": "{{route('visitante.dentro.buscar')}}",
+  "darSalida": "{{route('darSalida.darSalida')}}",
+  "visitantes": "{{route('darSalida.visitantes')}}",
   }
 </script>
 <script src="{{asset("assets/scripts/admin/darSalida/acciones.js")}}"></script>

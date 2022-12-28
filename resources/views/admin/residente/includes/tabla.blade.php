@@ -38,22 +38,16 @@
                   data-toggle="modal" data-target="#modal-lg">
                       <i class="fas fa-eye"></i>
                 </a>
-                @if ($item->estadoResidente==2)
-                  <a  href="{{route('residente.desactivar',$item->id)}}" 
-                      class="desactivar btn btn-danger" 
-                      data-toggle="modal"
-                      data-target="#exampleModalCenter">
-                    <i class="fas fa-check-circle"></i>
-                  </a>
-                @else
-                  <a  href="{{route('residente.desactivar',$item->id)}}" 
-                      class="desactivar btn btn-success" 
-                      data-toggle="modal"
-                      data-target="#exampleModalCenter">
-                      <i class="fas fa-check-circle"></i>
-                  </a>
-                @endif
-
+                <a  href="{{route('residente.desactivar',$item->id)}}"
+                  @if ($item->estadoResidente==2) 
+                    class="desactivar btn btn-danger"
+                  @else 
+                    class="desactivar btn btn-success"
+                  @endif
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                  <i class="fas fa-check-circle"></i>
+                </a>
               </div>
             </td>
           </tr>

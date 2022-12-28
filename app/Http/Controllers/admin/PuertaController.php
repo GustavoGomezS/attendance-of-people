@@ -8,23 +8,26 @@ use Illuminate\Http\Request;
 
 class PuertaController extends Controller
 {
-  public function store(Request $request)
-  {
+  public function store(Request $request){
     $request->validate(['nombre' => ['required', 'string', 'max:9']]);
+    $guardaCorrectamente = Self::puertaNueva($request);
+    if ($guardaCorrectamente) { 
+      return response()->json(['success' => true]); 
+    }
+  }
+  private function puertaNueva($request){
     $puerta = new Puerta();
     $puerta->nombrepuerta = $request->nombre;
     $puerta->save();
-    if ($puerta->save()) {
-      return response()->json(['success' => true]);
+    if ($puerta->save()) { 
+      return true; 
     }
   }
 
-  public function destroy($puerta)
-  {
-    $borrado = Puerta::findOrFail($puerta);
-    $resultado = $borrado->delete();
-    if ($resultado) {
-      return response()->json(['success' => true]);
+  public function destroy($puerta){
+    $borraCorrectamente = Puerta::findOrFail($puerta)->delete();
+    if ($borraCorrectamente) { 
+      return response()->json(['success' => true]); 
     }
   }
 

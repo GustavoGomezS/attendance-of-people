@@ -40,7 +40,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('visitante')}}" class="nav-link" id="visitantes">
+              <a href="{{route('visitante.visitante')}}" class="nav-link" id="visitantes">
                 <i class="fas fa-user-friends nav-icon"></i>
                 <p>Visitantes</p>
               </a>

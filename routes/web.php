@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\PuertaController;
-use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\SectorController;
 use App\Http\Controllers\admin\VisitanteController;
-use App\Http\Controllers\admin\RegistroController;
-use App\Http\Controllers\admin\EstadoResidenteController;
+use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\LocalidadController;
-
+use App\Http\Controllers\admin\RegistroController;
+use App\Http\Controllers\admin\DarSalidaController;
+use App\Http\Controllers\admin\EstadoResidenteController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -71,17 +71,17 @@ Route::middleware('auth')->prefix('residente/')
 });
 
 /* rutas de visitante */
-Route::resource('visitante', App\Http\Controllers\admin\VisitanteController::class)->names([
-    'index' => 'visitante',
-    'store' => 'visitante.guardar',
-    'edit' => 'visitante.editar',
-    'update' => 'visitante.actualizar',
-    'destroy' => 'visitante.eliminar',
-])->middleware('auth');
-Route::get('visitante.listar{page?}', [VisitanteController::class, 'listar'])->name('visitante.listar');
-Route::get('visitante.dentro', [VisitanteController::class, 'dentro'])->name('visitante.dentro');
-Route::get('visitante.dentro.buscar', [VisitanteController::class, 'buscar'])->name('visitante.dentro.buscar');
-Route::post('visitante.darSalida', [VisitanteController::class, 'darSalida'])->name('visitante.darSalida');
+Route::middleware('auth')->prefix('visitante/')
+->name('visitante.')
+->controller(VisitanteController::class)
+->group(function () {
+  Route::get('index', 'index')->name('visitante');
+  Route::post('store', 'store')->name('guardar');
+  Route::get('{visitante}/edit', 'edit')->name('editar');
+  Route::match(array('PUT', 'PATCH'),'update{visitante}', 'update')->name('actualizar');
+  Route::delete('desactivar{visitante}', 'desactivar')->name('desactivar');
+  Route::get('listar', 'listar')->name('listar');
+});
 
 /* rutas de registro */
 Route::middleware('auth')->prefix('registro/')
@@ -96,6 +96,16 @@ Route::middleware('auth')->prefix('registro/')
   Route::get('puertas{page?}',    'puertas')->name('puertas');
   Route::get('autoriza{page?}',   'autoriza')->name('autoriza');
   Route::get('ingresa{page?}',    'ingresa')->name('ingresa');
+});
+
+/* rutas de darSalida */
+Route::middleware('auth')->prefix('darSalida/')
+->name('darSalida.')
+->controller(DarSalidaController::class)
+->group(function () {
+  Route::get('index', 'index')->name('index');
+  Route::get('visitantes', 'visitantes')->name('visitantes');
+  Route::post('darSalida', 'darSalida')->name('darSalida');
 });
 
 /* rutas de estadoResidente */

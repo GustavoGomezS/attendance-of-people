@@ -36,15 +36,25 @@
                   data-toggle="modal" data-target="#modal-lg">
                       <i class="fas fa-eye"></i>
                 </a>
-                <a href="{{route('visitante.eliminar',$item->id)}}"  class="eliminar btn btn-danger" 
-                    data-toggle="modal" data-target="#exampleModalCenter">
-                      <i class="fas fa-trash"></i>
+                <a href="{{route('visitante.desactivar',$item->id)}}"
+                    @if ($item->estadoVisitante==2)
+                      class="desactivar btn btn-danger" 
+                    @else
+                      class="desactivar btn btn-success"
+                    @endif
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                  <i class="fas fa-check-circle"></i>
                 </a>
               </div>
             </td>
           </tr>
         @endforeach</tbody>
     </table>
+    {{-- paginacion --}}
+    <div class="d-flex justify-content-end text-center">
+      {{ $datos->links() }}
+    </div>
   </div>
   <!-- /.card-body -->
 </div>

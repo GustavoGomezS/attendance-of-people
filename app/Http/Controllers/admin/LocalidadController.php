@@ -9,53 +9,58 @@ use Illuminate\Http\Request;
 
 class LocalidadController extends Controller
 {
-  public function index()
-  {
+  public function index(){
     return view('admin/ubicacion/localidad/index');
   }
 
-  public function store(Request $request)
-  {
+  public function store(Request $request){
     $arrayInputs = $request->all();
     $request->validate([
       'unidad' => ['required', 'string', 'max:9'],
       'sector' => ['required']
     ]);
     if (isset($arrayInputs['sector'])) {
-      for ($i = 0; $i < count($arrayInputs['sector']); $i++) {
-        $localidad = new Localidad();
-        $localidad->unidad = $request->unidad;
-        $localidad->sector = $arrayInputs['sector'][$i];
-        $localidad->save();
+      $guardaCorrectamente = Self::localidadesNuevas($arrayInputs);
+      if ($guardaCorrectamente) { 
+        return response()->json(['success' => true]);
+      } else {
+        return response()->json(['success' => false]); 
       }
     }
-    if ($localidad->save()) {
-      return response()->json(['success' => true]);
-    } else {
-      return response()->json(['success' => false]);
+  }
+  private function localidadesNuevas($arrayInputs){
+    for ($i = 0; $i < count($arrayInputs['sector']); $i++) { 
+      $localidad=new Localidad(); 
+      $localidad->unidad = $arrayInputs['unidad'];
+      $localidad->sector = $arrayInputs['sector'][$i];
+      $localidad->save();
     }
+    if ($localidad->save()) {
+      return true; 
+    } 
   }
 
-  public function destroy($localidad)
-  {
-    $localidadParaBorrar = Localidad::findOrFail($localidad);
-    $resultado = $localidadParaBorrar->delete();
-    if ($resultado) {
+  public function destroy($localidad){
+    $eliminaCorrectamente = Localidad::findOrFail($localidad)->delete();
+    if ($eliminaCorrectamente) { 
       return response()->json(['success' => true]);
-    } else {
-      return response()->json(['success' => false]);
+    }else { 
+      return response()->json(['success' => false]); 
     }
   }
 
   //listar 
-  public function listar()
-  {
-    $datos = Localidad::select('localidad.*', 'sector.nombreSector')
-      ->orderBy('sector.nombreSector', 'desc')
-      ->orderBy('unidad', 'asc')
-      ->from('localidad')
-      ->join('sector', 'sector.id', '=', 'localidad.sector')
-      ->paginate(6);
+  public function listar(){
+    $datos = Self::localidades();
     return view('admin/ubicacion/localidad/includes/tabla')->with('datos', $datos);
+  }
+  private function localidades(){
+    $datos = Localidad::select('localidad.*', 'sector.nombreSector')
+        ->orderBy('sector.nombreSector', 'desc')
+        ->orderBy('unidad', 'asc')
+        ->from('localidad')
+        ->join('sector', 'sector.id', '=', 'localidad.sector')
+        ->paginate(6);
+    return $datos;
   }
 }

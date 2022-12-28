@@ -5,8 +5,8 @@ Residentes
 @section('metadata')
 <script src="{{asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.js")}}"></script>
 <meta name="csrf-token" content="{{csrf_token()}}"/> 
-<script src="{{asset("assets/scripts/admin/residente/validarArchivo.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/residente/mostrarFoto.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/documentos/validarArchivo.js")}}"></script> 
+<script src="{{asset("assets/scripts/admin/documentos/mostrarFoto.js")}}"></script> 
 @endsection
 @section('contenido')
   <div class="row">
@@ -37,11 +37,11 @@ Residentes
 
 @section('scripts')
 <script>
-const url = {
-  "guardar": "{{route('residente.guardar')}}",
-  "residentes": "{{route('residente.listar')}}",
-  "sectores": "{{route('residente.sectores')}}",
-  "localidades":"{{route('residente.localidades')}}",
+  const url = {
+    "guardar": "{{route('residente.guardar')}}",
+    "residentes": "{{route('residente.listar')}}",
+    "sectores": "{{route('residente.sectores')}}",
+    "localidades":"{{route('residente.localidades')}}",
   }
 </script>
 <script src="{{asset("assets/scripts/admin/residente/acciones.js")}}"></script>

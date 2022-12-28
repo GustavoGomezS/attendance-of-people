@@ -9,12 +9,15 @@ const sectorAntiguo = new PutAsyncFunction(null, null, accionSucces, accionError
 
 /* Buscar */
 $(document).ready(function () {
-  $("#ubicacionesLi").addClass("menu-open");;
-  $("#ubicacionesA").addClass("active");
-  $("#entradasEdificios").addClass("active");
+  resaltarLinkEnAside();
   sectores.ObtenerDatosDe();
   puertas.ObtenerDatosDe();
 });
+function resaltarLinkEnAside() {
+  $("#ubicacionesLi").addClass("menu-open");;
+  $("#ubicacionesA").addClass("active");
+  $("#entradasEdificios").addClass("active");
+}
 
   /* registro del formulario */
 $('#formularioSector').on('submit', function(e){

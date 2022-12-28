@@ -12,19 +12,16 @@ use Illuminate\Support\Facades\DB;
 
 class EstadoResidenteController extends Controller
 {
-public function index()
-  {
+  public function index(){
     $datos = Self::datosIndex();
     return view('admin/estadoResidente/index')->with('datos', $datos);
   }
-  private function datosIndex()
-  {
+  private function datosIndex(){
     $sectores = json_decode(Sector::select('id', 'color')->get(), true);
     $localidades = Self::getLocalidades($sectores);
     return $localidades;
   }
-  private function getLocalidades($sectores)
-  {
+  private function getLocalidades($sectores){
     $datos = array();
     for ($i = 0; $i < count($sectores); $i++) {
       $queryLocalidades = Localidad::select('localidad.id', DB::raw("CONCAT(sector.nombreSector,' - ', localidad.unidad) AS unidad"))
@@ -37,15 +34,13 @@ public function index()
     return $datos;
   }
 
-  public function residentes($localidad)
-  {
+  public function residentes($localidad){
     $residentes = Residente::select()
     ->where([['localidad', '=', $localidad],['estadoResidente','<>', 2]])->get();
     return view('admin/estadoResidente/includes/tablaResidente')->with('datos', $residentes);
   }
 
-  public function update(Request $request)
-  {
+  public function update(Request $request){
     $formulario = $request->all();
     if (isset($formulario['estadoResidente'])) {
       DB::table('residente')->where('id', $request->idResidente)->update(['estadoResidente' => 3]);

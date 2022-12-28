@@ -1,12 +1,3 @@
-const rellenarSelectSector = (data) =>{
-    $('.sectorBusqueda').html('');
-    $('.sectorBusqueda').css('color', 'white');
-    $(".sectorBusqueda").prepend("<option value='' seleted>Sector</option>");  
-    $.each(data, function (indexInArray, valueOfElement) { 
-      $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
-    });
-}
-
 const rellenarFormulario = (info) => {
   let data = info.data;
   $('#documentoResidente').val(data.documentoResidente);
@@ -20,13 +11,13 @@ const rellenarFormulario = (info) => {
   $("#formulario :button").removeAttr('disabled');
 }
 
-const rellenarSelectSectores = function (data) {
-  $('.sectorBusqueda').html('');
-  $('.sectorBusqueda').css('color', 'white');
-  $(".sectorBusqueda").prepend("<option value='' seleted>Sector</option>");  
-  $.each(data, function (indexInArray, valueOfElement) { 
-    $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
-  });
+const rellenarSelectSectores = (data) =>{
+    $('.sectorBusqueda').html('');
+    $('.sectorBusqueda').css('color', 'white');
+    $(".sectorBusqueda").prepend("<option value='' seleted>Sector</option>");  
+    $.each(data, function (indexInArray, valueOfElement) { 
+      $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
+    });
 }
 
 const rellenarSelectLocalidades= function (data) {

@@ -62,7 +62,7 @@
     {{-- campo foto --}}
     <label for="foto" class="col-lg-12 control-label ">Foto</label>
     <div class="custom-file">
-      <input  type="file" id="foto" name="foto" class="custom-file-input"  value="{{old('foto')}}" accept="image/*">
+      <input  type="file" id="foto" name="fotoVisitante" class="custom-file-input"  value="{{old('foto')}}" accept="image/*">
       <label class="custom-file-label" for="foto" id="labelBorrable"></label>
     </div>
     {{-- campo foto --}}

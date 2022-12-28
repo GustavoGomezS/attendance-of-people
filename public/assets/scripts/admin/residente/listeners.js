@@ -83,7 +83,7 @@ $(document).on("click",".desactivar",function(e){
 $('#confirmar').on('click', function(){
   residenteInactivo.Eliminar();
 });
-/* _______________________Quedé por Aquí En el Refactoring______________________________ */
+
 /* paginacion */
 $(document).on("click",".pagination li a",function(e){
   e.preventDefault();   
@@ -99,7 +99,7 @@ $("#foto").change(function() {
 /* Activar - Desactivar */   
 $(document).on("click","#actDes",function(e){
   e.preventDefault();
-  var attr = $("#nombreResidente").attr("disabled");//input para verificacion
+  let attr = $("#nombreResidente").attr("disabled");//input para verificacion
   if (typeof attr == typeof undefined || attr == "false") {
     $("#formulario :input").prop("disabled", true);
     $("#formulario :button").removeAttr('disabled');
