@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\View\Components\ModalForm;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->share('theme', 'lte');
         Paginator::useBootstrap();
+        Blade::component('modal-formulario', ModalForm::class);
     }
 }

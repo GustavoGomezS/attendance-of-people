@@ -17,13 +17,14 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($datos as $item)  
-          <tr>       
-            <td>{{$item->nombreVisitante}}</td>
-            <td>{{$item->telefonoVisitante}}</td>
-            <td>{{$item->nombreEstado}}</td>          
+        @foreach ($datos as $item)
+          <tr>
+            <td>{{ $item->nombreVisitante }}</td>
+            <td>{{ $item->telefonoVisitante }}</td>
+            <td>{{ $item->nombreEstado }}</td>
           </tr>
-        @endforeach</tbody>
+        @endforeach
+      </tbody>
     </table>
   </div>
   <!-- /.card-body -->

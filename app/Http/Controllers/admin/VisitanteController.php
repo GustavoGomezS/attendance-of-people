@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class VisitanteController extends Controller
 {
   public function index(){
-    return view('admin/visitante/index');
+    return view('admin.visitante.index');
   }
 
   public function store(VisitanteRequest $request){
@@ -111,7 +111,7 @@ class VisitanteController extends Controller
   public function listar(Request $request){
     if ($request->filtro != "0" && $request->buscar != "") {
       $datos = Self::getVisitantes($request);
-      return view('admin/visitante/includes/tabla')->with('datos', $datos);
+      return view('admin.visitante.includes.tabla')->with('datos', $datos);
     } 
   }
   private function getVisitantes($request){

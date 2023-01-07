@@ -11,23 +11,23 @@
     @foreach ($datos as $item)
       <tr>
         <th scope="row">
-          {{$item->id}}
-        </th>        
-        <td>{{$item->nombreSector	}}</td>
-        <td>{{$item->unidad	}}</td>
+          {{ $item->id }}
+        </th>
+        <td>{{ $item->nombreSector }}</td>
+        <td>{{ $item->unidad }}</td>
         <td class="text-right py-0 align-middle text-center">
           <div class="btn-group btn-group-sm">
-            <a href="{{route('localidad.eliminar',$item->id)}}"  class="eliminar btn btn-danger" 
-                data-toggle="modal" data-target="#exampleModalCenter">
-                  <i class="fas fa-trash"></i>
+            <a href="{{ route('localidad.eliminar', $item->id) }}" class="eliminar btn btn-danger" data-toggle="modal"
+              data-target="#exampleModalCenter">
+              <i class="fas fa-trash"></i>
             </a>
           </div>
         </td>
       </tr>
-    @endforeach  
+    @endforeach
   </tbody>
 </table>
 {{-- paginacion --}}
 <div class="d-flex justify-content-end text-center">
-    {{ $datos->links() }}
+  {{ $datos->links() }}
 </div>

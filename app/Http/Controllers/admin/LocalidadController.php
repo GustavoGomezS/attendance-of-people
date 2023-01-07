@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class LocalidadController extends Controller
 {
   public function index(){
-    return view('admin/ubicacion/localidad/index');
+    return view('admin.ubicacion.localidad.index');
   }
 
   public function store(Request $request){
@@ -52,7 +52,7 @@ class LocalidadController extends Controller
   //listar 
   public function listar(){
     $datos = Self::localidades();
-    return view('admin/ubicacion/localidad/includes/tabla')->with('datos', $datos);
+    return view('admin.ubicacion.localidad.includes.tabla')->with('datos', $datos);
   }
   private function localidades(){
     $datos = Localidad::select('localidad.*', 'sector.nombreSector')

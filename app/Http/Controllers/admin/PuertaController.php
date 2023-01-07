@@ -34,6 +34,6 @@ class PuertaController extends Controller
   public function listar()
   {
     $datos = Puerta::select()->orderBy('nombrePuerta', 'desc')->get();
-    return view('admin/ubicacion/sectorPuerta/tablas/tablaPuerta')->with('datos', $datos);
+    return view('admin.ubicacion.sectorPuerta.tablas.tablaPuerta')->with('datos', $datos);
   }
 }

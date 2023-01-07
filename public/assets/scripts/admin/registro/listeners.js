@@ -10,7 +10,6 @@ const quienIngresa =  new GetAsyncFunction(url.ingresa,     null, datosQuienIngr
 const formulario =    new PostAsyncFunction(url.guardar,     null, accionSucces, accionError);
 
 $(document).ready(function() {
-  bsCustomFileInput.init()
   sectores.ObtenerDatosDe();
   puertas.ObtenerDatosDe();
 });

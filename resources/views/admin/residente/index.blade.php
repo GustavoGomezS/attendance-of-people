@@ -1,12 +1,11 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-Residentes
+  Residentes
 @endsection
 @section('metadata')
-<script src="{{asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.js")}}"></script>
-<meta name="csrf-token" content="{{csrf_token()}}"/> 
-<script src="{{asset("assets/scripts/admin/documentos/validarArchivo.js")}}"></script> 
-<script src="{{asset("assets/scripts/admin/documentos/mostrarFoto.js")}}"></script> 
+  <script src="{{ asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.js") }}"></script>
+  <script src="{{ asset('assets/scripts/admin/documentos/validarArchivo.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/documentos/mostrarFoto.js') }}"></script>
 @endsection
 @section('contenido')
   <div class="row">
@@ -16,13 +15,17 @@ Residentes
     <div class="col-lg-12">
       <div class="card card-info card-outline">
         <div class="card-header h-25">
-            @include('admin/residente/includes/formularioBusqueda')
+          @include('admin.residente.includes.formularioBusqueda')
         </div>
         <div class="card-body">
           <div id="datos"></div>
           <form id="formulario" autocomplete="off" enctype="multipart/form-data">
-            @include('admin/residente/includes/modalFormulario')
-          </form> 
+            @include('admin.includes.modalFormulario', [
+                'titulo' => 'Nuevo Residente',
+                'formulario' => 'admin/residente/includes/formularioRegistro',
+                'class' => 'modal-dialog modal-lg modal-dialog-scrollable',
+            ])
+          </form>
           {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
             Nuevo Residente
@@ -32,19 +35,18 @@ Residentes
     </div>
     <!-- /.col-md-6 -->
   </div>
-  @include('admin/includes/modalConfirmDelet')
+  @include('admin.includes.modalConfirmDelet')
 @endsection
 
 @section('scripts')
-<script>
-  const url = {
-    "guardar": "{{route('residente.guardar')}}",
-    "residentes": "{{route('residente.listar')}}",
-    "sectores": "{{route('residente.sectores')}}",
-    "localidades":"{{route('residente.localidades')}}",
-  }
-</script>
-<script src="{{asset("assets/scripts/admin/residente/acciones.js")}}"></script>
-<script src="{{asset("assets/scripts/AsyncFunction.js")}}"></script>
-<script src="{{asset("assets/scripts/admin/residente/listeners.js")}}"></script>
+  <script>
+    const url = {
+      "guardar": "{{ route('residente.guardar') }}",
+      "residentes": "{{ route('residente.listar') }}",
+      "sectores": "{{ route('residente.sectores') }}",
+      "localidades": "{{ route('residente.localidades') }}",
+    }
+  </script>
+  <script src="{{ asset('assets/scripts/admin/residente/acciones.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/residente/listeners.js') }}"></script>
 @endsection

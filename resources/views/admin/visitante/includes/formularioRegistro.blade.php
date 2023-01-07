@@ -1,83 +1,63 @@
 <!-- /campo nombre,apellido,documento y fecha de nacimiento-->
 <div class="row">
-  <div class="col-lg-3">
-    {{-- campo nombre --}}
-    <div class="form-group">
-        <label for="nombreVisitante" class="col-lg-12 control-label requerido">Nombres</label>
-        <input  type="text" id="nombreVisitante" name="nombreVisitante" class="form-control" placeholder="Nombres"  value="{{old('nombreVisitante')}}" >
-    </div>
-    {{-- campo nombre --}}
+  <div class="col-lg-3 form-group">
+    <label for="nombreVisitante" class="col-lg-12 control-label requerido">Nombres</label>
+    <input type="text" id="nombreVisitante" name="nombreVisitante" class="form-control" placeholder="Nombres"
+      value="{{ old('nombreVisitante') }}">
   </div>
-  <div class="col-lg-3">
-    {{-- campo apellido --}}
-    <div class="form-group">
-      <label for="apellidoVisitante" class="col-lg-12 control-label requerido">Apellidos</label>
-      <input  type="text" id="apellidoVisitante" name="apellidoVisitante" class="form-control" placeholder="Apellidos"  value="{{old('apellidoVisitante')}}" >
-    </div>
-    {{-- campo apellido --}}
+
+  <div class="col-lg-3 form-group">
+    <label for="apellidoVisitante" class="col-lg-12 control-label requerido">Apellidos</label>
+    <input type="text" id="apellidoVisitante" name="apellidoVisitante" class="form-control" placeholder="Apellidos"
+      value="{{ old('apellidoVisitante') }}">
   </div>
-  <div class="col-lg-3">
-    {{-- campo documento --}}
-    <div class="form-group">
-      <label for="documentoVisitante" class="col-lg-12 control-label requerido">Documento</label>
-      <input  type="number" id="documentoVisitante" name="documentoVisitante" class="form-control" placeholder="Documento"  value="{{old('documentoVisitante')}}" >
-    </div>
-    {{-- campo documento --}}
+
+  <div class="col-lg-3 form-group">
+    <label for="documentoVisitante" class="col-lg-12 control-label requerido">Documento</label>
+    <input type="number" id="documentoVisitante" name="documentoVisitante" class="form-control" placeholder="Documento"
+      value="{{ old('documentoVisitante') }}">
   </div>
-  <div class="col-lg-3">
-    {{-- campo fecha de nacimiento --}}
-    <div class="form-group">
-      <div class="form-group">
-        <label for="fechaNacimientoVisitante" class="col-lg-12 control-label ">Fecha de Nacimiento</label>
-        <input  type="date" id="fechaNacimientoVisitante" name="fechaNacimientoVisitante" class="form-control"  value="{{old('fechaNacimientoVisitante')}}" >
-      </div>
-    </div>
-    {{-- campo fecha de nacimiento --}}
+
+  <div class="col-lg-3 form-group">
+    <label for="fechaNacimientoVisitante" class="col-lg-12 control-label ">Fecha de Nacimiento</label>
+    <input type="date" id="fechaNacimientoVisitante" name="fechaNacimientoVisitante" class="form-control"
+      value="{{ old('fechaNacimientoVisitante') }}">
   </div>
 </div>
-<!-- campo nombre,apellido,documento y fecha de nacimiento-->
-<!-- /campo telefonoVisitante,sexo,foto y boton editar-->
+
 <div class="row">
-  <div class="col-lg-3">
-    {{-- campo telefonoVisitante --}}
-    <div class="form-group">
-      <label for="telefonoVisitante" class="col-lg-12 control-label ">Telefono</label>
-      <input  type="number" id="telefonoVisitante" name="telefonoVisitante" class="form-control" placeholder="telefonoVisitante"  value="{{old('telefonoVisitante')}}" >
-    </div>
-    {{-- campo telefonoVisitante --}}
+  <div class="col-lg-3 form-group">
+    <label for="telefonoVisitante" class="col-lg-12 control-label ">Telefono</label>
+    <input type="number" id="telefonoVisitante" name="telefonoVisitante" class="form-control"
+      placeholder="telefonoVisitante" value="{{ old('telefonoVisitante') }}">
   </div>
-  <div class="col-lg-3">
-    {{-- campo sexo --}}
-    <div class="form-group">
-      <label for="sexoVisitante" class="col-lg-12 control-label ">Sexo</label>
-      <select class="form-control " id="sexoVisitante" name="sexoVisitante" >
-        <option value="" disabled selected>Seleccion...</option>
-        <option value="M" >Mujer</option>
-        <option value="H" >Hombre</option>
-      </select>
-    </div>
-    {{-- campo sexo --}}
+
+  <div class="col-lg-3 form-group">
+    <label for="sexoVisitante" class="col-lg-12 control-label ">Sexo</label>
+    <select class="form-control " id="sexoVisitante" name="sexoVisitante">
+      <option value="" disabled selected>Seleccion...</option>
+      <option value="M">Mujer</option>
+      <option value="H">Hombre</option>
+    </select>
   </div>
-  <div class="col-lg-3">
-    {{-- campo foto --}}
+
+  <div class="col-lg-3 form-group">
     <label for="foto" class="col-lg-12 control-label ">Foto</label>
     <div class="custom-file">
-      <input  type="file" id="foto" name="fotoVisitante" class="custom-file-input"  value="{{old('foto')}}" accept="image/*">
+      <input type="file" id="foto" name="fotoVisitante" class="custom-file-input" value="{{ old('foto') }}"
+        accept="image/*">
       <label class="custom-file-label" for="foto" id="labelBorrable"></label>
     </div>
-    {{-- campo foto --}}
   </div>
-  <div class="col-lg-3">
-    {{-- Boton Editar --}}
+
+  <div class="col-lg-3 form-group">
     <label for="actDes" class="col-lg-12 control-label ">A/D</label>
-      <a class="btn btn-info" id="actDes">
-        <i class="fas fa-pen"></i>
-      </a>
-    {{-- Boton Editar --}}
-  </div> 
+    <a class="btn btn-info" id="actDes">
+      <i class="fas fa-pen"></i>
+    </a>
+  </div>
 </div>
-<!-- campo telefonoVisitante,sexo,foto y boton editar-->
-{{-- tomar foto --}}
+
 <div class="d-flex justify-content-center bd-highlight ">
   <div class="p-2 bd-highlight">
     <!-- Stream video via webcam -->
@@ -87,16 +67,18 @@
     <!-- Trigger canvas web API -->
     <button id="snap" class="btn btn-info block" type="button">Capturar</button>
   </div>
+
   <div class="p-2 bd-highlight">
     <div style="vertical-align: inherit;">
       <!-- Webcam video snapshot -->
-      <img src="{{asset("assets/$theme/dist/img/boxed.jpg")}}" alt="foto de Visitante" width="200" height="170" class="rounded border-bottom-0 border border-info" id="blah">
+      <img src="{{ asset("assets/$theme/dist/img/boxed.jpg") }}" alt="foto de Visitante" width="200" height="170"
+        class="rounded border-bottom-0 border border-info" id="blah">
       <canvas id="canvas" width="200" height="170" class="border border-info" style="display: none"></canvas>
     </div>
   </div>
 </div>
 {{-- tomar foto --}}
-<input type="hidden" name="_token" value="{{csrf_token()}}" id="token">
+@csrf
 <script>
   'use strict';
 
@@ -108,7 +90,8 @@
   const constraints = {
     audio: false,
     video: {
-      width: 200, height: 170
+      width: 200,
+      height: 170
     }
   };
 
@@ -134,18 +117,17 @@
   // Draw image
   var context = canvas.getContext('2d');
   snap.addEventListener("click", function() {
-    
+
     context.drawImage(video, 0, 0, 200, 170);
     /* Convertir la imagen a Base64 */
-    var  dataUrl = canvas.toDataURL();
-          let enlace = document.createElement('a');
-          // El título
-          enlace.download = "ImagenVisitante.png";
-          // Convertir la imagen a Base64 y ponerlo en el enlace
-          enlace.href = dataUrl; 
-          // Hacer click en él
-          enlace.click();
-    
-  });  
-</script>
+    var dataUrl = canvas.toDataURL();
+    let enlace = document.createElement('a');
+    // El título
+    enlace.download = "ImagenVisitante.png";
+    // Convertir la imagen a Base64 y ponerlo en el enlace
+    enlace.href = dataUrl;
+    // Hacer click en él
+    enlace.click();
 
+  });
+</script>

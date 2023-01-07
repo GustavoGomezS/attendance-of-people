@@ -53,6 +53,6 @@ class SectorController extends Controller
 
   public function listar(){  
     $datos = Sector::select()->orderBy('nombreSector', 'desc')->paginate(6);
-    return view('admin/ubicacion/sectorPuerta/tablas/tablaSector')->with('datos', $datos);
+    return view('admin.ubicacion.sectorPuerta.tablas.tablaSector')->with('datos', $datos);
   }
 }

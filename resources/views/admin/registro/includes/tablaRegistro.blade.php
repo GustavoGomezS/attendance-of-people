@@ -21,20 +21,20 @@
       </thead>
       <tbody>
         @foreach ($datos as $item)
-        <tr>
-          <td>{{$item->nombreVisitante}}</td>
-          <td>{{$item->telefonoVisitante}}</td>
-          <td>
-            @if ($item->ingresoSalida == 1)
-            {{"Ingreso"}}
-            @else
-            {{"Salida"}}
-            @endif
-          </td>
-          <td>{{$item->nombreResidente}}</td>
-          <td>{{$item->comentario}}</td>
-          <td>{{$item->created_at}}</td>
-        </tr>
+          <tr>
+            <td>{{ $item->nombreVisitante }}</td>
+            <td>{{ $item->telefonoVisitante }}</td>
+            <td>
+              @if ($item->ingresoSalida == 1)
+                {{ 'Ingreso' }}
+              @else
+                {{ 'Salida' }}
+              @endif
+            </td>
+            <td>{{ $item->nombreResidente }}</td>
+            <td>{{ $item->comentario }}</td>
+            <td>{{ $item->created_at }}</td>
+          </tr>
         @endforeach
       </tbody>
     </table>

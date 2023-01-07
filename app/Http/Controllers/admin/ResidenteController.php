@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 class ResidenteController extends Controller
 {
   public function index(){
-    return view('admin/Residente/index');
+    return view('admin.Residente.index');
   }
 
   public function store(ResidenteRequest $request){
@@ -117,7 +117,7 @@ class ResidenteController extends Controller
   public function listar(Request $request){
     if ($request->filtro != "0" && $request->buscar != "") {
       $datos = Self::getResidentes($request);
-      return view('admin/residente/includes/tabla')->with('datos', $datos);
+      return view('admin.residente.includes.tabla')->with('datos', $datos);
     } 
   }
   private function getResidentes($request){

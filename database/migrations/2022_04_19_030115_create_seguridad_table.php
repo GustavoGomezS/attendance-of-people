@@ -21,9 +21,11 @@ return new class extends Migration
             $table->unsignedBigInteger('tipoUsuario');
             $table->foreign('tipoUsuario', 'fk_usuario_tipoUsuario')->references('id')->on('tipo_usuario')->onDelete('restrict')->onUpdate('restrict');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('estadoUsuario');
             $table->foreign('estadoUsuario', 'fk_usuario_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict');
+            $table->rememberToken();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

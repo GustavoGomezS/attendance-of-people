@@ -14,7 +14,7 @@ class EstadoResidenteController extends Controller
 {
   public function index(){
     $datos = Self::datosIndex();
-    return view('admin/estadoResidente/index')->with('datos', $datos);
+    return view('admin.estadoResidente.index')->with('datos', $datos);
   }
   private function datosIndex(){
     $sectores = json_decode(Sector::select('id', 'color')->get(), true);
@@ -37,7 +37,7 @@ class EstadoResidenteController extends Controller
   public function residentes($localidad){
     $residentes = Residente::select()
     ->where([['localidad', '=', $localidad],['estadoResidente','<>', 2]])->get();
-    return view('admin/estadoResidente/includes/tablaResidente')->with('datos', $residentes);
+    return view('admin.estadoResidente.includes.tablaResidente')->with('datos', $residentes);
   }
 
   public function update(Request $request){

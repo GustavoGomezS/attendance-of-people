@@ -20,36 +20,34 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($datos as $item)  
+        @foreach ($datos as $item)
           <tr>
             <th scope="row">
-              {{$item->id}}
-            </th>        
-            <td>{{$item->documentoVisitante}}</td>
-            <td>{{$item->nombreVisitante}} &nbsp {{$item->apellidoVisitante}}</td>
-            <td>{{$item->telefonoVisitante}}</td>
-            <td>{{$item->nombreEstado}}</td>          
+              {{ $item->id }}
+            </th>
+            <td>{{ $item->documentoVisitante }}</td>
+            <td>{{ $item->nombreVisitante }} &nbsp {{ $item->apellidoVisitante }}</td>
+            <td>{{ $item->telefonoVisitante }}</td>
+            <td>{{ $item->nombreEstado }}</td>
             <td class="py-0 align-middle text-center">
               <div class="btn-group btn-group-sm">
-                <a href="{{route('visitante.editar',$item->id)}}" 
-                  id="{{ $item->id }} " class="actualizar btn btn-info" value="{{route('visitante.actualizar',$item->id)}}"
+                <a href="{{ route('visitante.editar', $item->id) }}" id="{{ $item->id }} "
+                  class="actualizar btn btn-info" value="{{ route('visitante.actualizar', $item->id) }}"
                   data-toggle="modal" data-target="#modal-lg">
-                      <i class="fas fa-eye"></i>
+                  <i class="fas fa-eye"></i>
                 </a>
-                <a href="{{route('visitante.desactivar',$item->id)}}"
-                    @if ($item->estadoVisitante==2)
-                      class="desactivar btn btn-danger" 
+                <a href="{{ route('visitante.desactivar', $item->id) }}"
+                  @if ($item->estadoVisitante == 2) class="desactivar btn btn-danger" 
                     @else
-                      class="desactivar btn btn-success"
-                    @endif
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter">
+                      class="desactivar btn btn-success" @endif
+                  data-toggle="modal" data-target="#exampleModalCenter">
                   <i class="fas fa-check-circle"></i>
                 </a>
               </div>
             </td>
           </tr>
-        @endforeach</tbody>
+        @endforeach
+      </tbody>
     </table>
     {{-- paginacion --}}
     <div class="d-flex justify-content-end text-center">

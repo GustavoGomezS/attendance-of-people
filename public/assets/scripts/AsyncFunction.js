@@ -4,6 +4,7 @@ class AsyncFunction {
     this._datos = datos;
     this._accionExitosa = accionExitosa;
     this._accionAlFallar = accionAlFallar;
+    this._token = $('meta[name="csrf-token"]').attr('content');
   }
 
   set datos(val){
@@ -18,6 +19,9 @@ class AsyncFunction {
   }  
   get url(){
      return this._url;
+  }
+  get token(){
+     return this._token;
   }
 }
 
@@ -41,7 +45,7 @@ class PostAsyncFunction extends AsyncFunction {
   Guardar(accionExitosa = this._accionExitosa, accionAlFallar = this._accionAlFallar) {
     $.ajax({                        
       type: "post",
-      headers: {'X-CSRF-TOKEN':$("#token").val()},                
+      headers: {'X-CSRF-TOKEN':this._token},                
       url: this._url,                 
       data: this._datos,
       contentType: false,
@@ -66,7 +70,7 @@ class DeleteAsyncFunction extends AsyncFunction {
     type: "delete",
     url: this._url,                 
     data: this._datos,
-    headers: {'X-CSRF-TOKEN':$("#token").val()}
+    headers: {'X-CSRF-TOKEN':this._token}
     })
     .done(function( data ) {
       accionExitosa(data)   
@@ -84,7 +88,7 @@ class PutAsyncFunction extends AsyncFunction {
     type: "put",
     url: this._url,                 
     data: this._datos,
-    headers: {'X-CSRF-TOKEN':$("#token").val()}
+    headers: {'X-CSRF-TOKEN':this._token}
     })
     .done(function( data ) {
       accionExitosa(data)   

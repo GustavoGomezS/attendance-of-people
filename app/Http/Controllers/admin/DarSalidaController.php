@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class DarSalidaController extends Controller
 {
   public function index(){
-    return view('admin/darSalida/index');
+    return view('admin.darSalida.index');
   }
 
   public function visitantes(){

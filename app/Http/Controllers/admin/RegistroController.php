@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class RegistroController extends Controller
 {
   public function index(){
-    return view('admin/registro/index');
+    return view('admin.registro.index');
   }
 
   public function store(RegistroRequest $request){
@@ -72,7 +72,7 @@ class RegistroController extends Controller
 
   public function residentes(Request $request){
     $datos = Self::getResidentes($request);
-    return view('admin/registro/includes/tablaResidente')->with('datos', $datos);
+    return view('admin.registro.includes.tablaResidente')->with('datos', $datos);
   }
   private function getResidentes($request){
     $datos = Residente::select('residente.*', 'estados.nombreEstado')
@@ -89,7 +89,7 @@ class RegistroController extends Controller
 
   public function registros(Request $request){
     $datos = Self::getRegistros($request);
-    return view('admin/registro/includes/tablaRegistro')->with('datos', $datos);
+    return view('admin.registro.includes.tablaRegistro')->with('datos', $datos);
   }
   private function getRegistros($request){
     $datos = Registro::select('registro.*', 'visitante.nombreVisitante', 'visitante.telefonoVisitante',
@@ -109,7 +109,7 @@ class RegistroController extends Controller
 
   public function visitantes(Request $request){
     $datos = Self::getVisitantes($request);
-    return view('admin/registro/includes/tablaVisitante')->with('datos', $datos);
+    return view('admin.registro.includes.tablaVisitante')->with('datos', $datos);
   }
   private function getVisitantes($request){
     $datos = Visitante::select('visitante.nombreVisitante', 'visitante.telefonoVisitante', 'estados.nombreEstado')
