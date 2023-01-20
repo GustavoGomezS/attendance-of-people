@@ -57,14 +57,14 @@ class RegistroController extends Controller
   }
 
   public function ingresa(Request $request){
-    $visitante = Visitante::select()
-      ->where('visitante.documentoVisitante', '=', "$request->documento")
-      ->get();
-    /* decodifico la respuesta para modificar el campo de la foto */
-    $array = json_decode($visitante, true);
-    if (isset($array[0]["fotoVisitante"])) {
-      $array[0]["fotoVisitante"] =  asset($array[0]["fotoVisitante"]);
-      return response()->json(['success' => true, 'data' => $array]);
+    $existeVisitante = Visitante::firstWhere('documentoVisitante', $request->documento);
+    if ($existeVisitante) {
+      if ($existeVisitante->estadoVisitante == 3) {
+        return response()->json(['success' => false, 'messages' => 'Ya se encuentra dentro.']);
+      }else {
+        $existeVisitante->fotoVisitante = asset($existeVisitante->fotoVisitante);
+        return response()->json(['success' => true, 'data' => $existeVisitante]);
+      }
     } else {
       return response()->json(['success' => false, 'messages' => 'Visitante no registrado.']);
     }

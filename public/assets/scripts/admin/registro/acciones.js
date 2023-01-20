@@ -1,10 +1,12 @@
 const rellenarSelectSectores = function (data) {
   $('.sectorBusqueda').html('');
   $('.sectorBusqueda').css('color', 'white');
-  $(".sectorBusqueda").prepend("<option value='' seleted>Sector</option>");  
+  $(".sectorBusqueda").prepend("<option value='0' style='background-color : #030203'>Sector</option>");  
   $.each(data, function (indexInArray, valueOfElement) { 
     $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
   });
+  $("#sectorBusqueda").val("0");
+  $("#sectorBusqueda").change();
 }
 
 const rellenarSelectLocalidades= function (data) {
@@ -45,7 +47,7 @@ const rellenarSelectQuienAutoriza = function (data) {
 
 const datosQuienIngresa = function (data) {
   if (data.success==true) {
-    Rellenar(data.data[0]);
+    Rellenar(data.data);
   }else{
     if (data.success==false) {
       toastr.error( data.messages, 'Problema al Ejecutar la Acción',{

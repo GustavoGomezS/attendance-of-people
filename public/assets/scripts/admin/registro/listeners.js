@@ -18,7 +18,6 @@ $('#formulario').on('submit', function(e) {
   e.preventDefault();
   formulario.datos = new FormData($('#formulario')[0]);
   formulario.Guardar();
-  /* EnviarFormulario(data, url.guardar, ); */
 });
 
 $('.sectorBusqueda').on('change', function() {

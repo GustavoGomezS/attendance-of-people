@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\PuertaController;
 use App\Http\Controllers\admin\SectorController;
+use App\Http\Controllers\admin\ReporteController;
+use App\Http\Controllers\admin\RegistroController;
+use App\Http\Controllers\admin\DarSalidaController;
 use App\Http\Controllers\admin\VisitanteController;
 use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\LocalidadController;
-use App\Http\Controllers\admin\RegistroController;
-use App\Http\Controllers\admin\DarSalidaController;
 use App\Http\Controllers\admin\EstadoResidenteController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -116,4 +119,13 @@ Route::middleware('auth')->prefix('estadoResidente/')
   Route::get('index', 'index')->name('index');
   Route::get('residentes/{id}', 'residentes')->name('residentes');
   Route::get('update', 'update')->name('update');
+});
+
+/* rutas de reporte */
+Route::middleware('auth')->prefix('reporte/')
+->name('reporte.')
+->controller(ReporteController::class)
+->group(function () {
+  Route::get('index/{clave}', 'index')->name('index');
+  Route::get('reportes', 'reportes')->name('reportes');
 });

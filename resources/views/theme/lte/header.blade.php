@@ -23,7 +23,7 @@
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Registros</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-            <li><a href="#" class="dropdown-item">Con Novedad </a></li>
+            <li><a href="{{ route('reporte.index',['clave' => 'conNovedad']) }}" class="dropdown-item">Con Novedad </a></li>
             <li><a href="#" class="dropdown-item">Some other action</a></li>
             <li class="dropdown-divider"></li>
             <!-- Level two dropdown-->
@@ -31,10 +31,10 @@
               <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" class="dropdown-item dropdown-toggle">Filtrado por</a>
               <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Recinto</a></li>
-                <li><a href="#" class="dropdown-item">Sector</a></li>
-                <li><a href="#" class="dropdown-item">Localidad</a></li>
-                <li><a href="#" class="dropdown-item">Visitante</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'recinto']) }}" class="dropdown-item">Recinto</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'sector']) }}" class="dropdown-item">Sector</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'localidad']) }}" class="dropdown-item">Localidad</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'visitante']) }}" class="dropdown-item">Visitante</a></li>
                 <!-- Level three dropdown-->
                 <li class="dropdown-submenu">
                   <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"

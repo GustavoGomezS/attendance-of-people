@@ -31,7 +31,7 @@ $(document).ready(function () {
       },
       lengthMenu: 'Mostrar _MENU_ Registros por página',
       zeroRecords: 'No se encontró nada - lo siento',
-      info: 'Mostrando página _PAGE_ de _PAGES_',
+      info: 'Mostrando _START_ a _END_ de _TOTAL_ Registros',
       infoEmpty: 'No hay registros disponibles',
       infoFiltered: '(Filtrado de _MAX_ Registros totales)',
     },
@@ -48,11 +48,14 @@ $(document).ready(function () {
   });
   function prepararData() {
     var formData = new FormData();
+    agregarDatosDelFormulario(formData);
+    agregarIdResidentes(formData);
+    return formData;
+  }
+  function agregarDatosDelFormulario(formData) {
     formData.append('puerta', $("#puerta").val());
     formData.append('comentario', $("#comentario").val());
     formData.append('ingresoSalida', $("#ingresoSalida").val());
-    agregarIdResidentes(formData)
-    return formData;
   }
   function agregarIdResidentes(formData) {
     for (let index = 0; index < table.rows('.selected').data().length; index++) {
