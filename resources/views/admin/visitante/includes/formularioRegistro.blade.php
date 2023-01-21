@@ -60,6 +60,13 @@
 
 <div class="d-flex justify-content-center bd-highlight ">
   <div class="p-2 bd-highlight">
+    <div class="" style="vertical-align: inherit;">
+      <textarea name="comentarioVisitante" id="comentarioVisitante" class="form-control" cols="30" rows="6"
+        value="{{ old('comentarioVisitante') }}" placeholder="comentario..."></textarea>
+    </div>
+  </div>
+
+  <div class="p-2 bd-highlight">
     <!-- Stream video via webcam -->
     <div class="video-wrap" style="vertical-align: inherit;">
       <video id="video" class="rounded border-bottom-0 border border-info " playsinline autoplay></video>

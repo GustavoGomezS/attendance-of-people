@@ -26,7 +26,7 @@ return new class extends Migration
             $table->date('fechaNacimientoVisitante', $precision = 0);
             $table->unsignedBigInteger('localidadVisita')->nullable();
             $table->foreign('localidadVisita', 'fk_visitante_localidad')->references('id')->on('localidad')->onDelete('restrict')->onUpdate('restrict');
-
+            $table->string('comentarioVisitante', 200)->nullable($value = 'true');
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

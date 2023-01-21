@@ -10,16 +10,16 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item">
-          <a href="{{ route('registro.registro') }}" class="nav-link">Ingreso</a>
+        <li class="nav-item" id="navItemIngresos">
+          <a href="{{ route('registro.registro') }}" class="nav-link" id="navItemIngresosLink">Ingreso</a>
         </li>
-        <li class="nav-item">
-          <a href="{{ route('darSalida.index') }}" class="nav-link">Salida</a>
+        <li class="nav-item" id="navItemSalida">
+          <a href="{{ route('darSalida.index') }}" class="nav-link" id="navItemSalidaLink">Salida</a>
         </li>
-        <li class="nav-item">
-          <a href="{{ route('estadoResidente.index') }}" class="nav-link">Residentes</a>
+        <li class="nav-item" id="navItemResidentes">
+          <a href="{{ route('estadoResidente.index') }}" class="nav-link" id="navItemResidentesLink">Residentes</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" id="navItemRegistros">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Registros</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">

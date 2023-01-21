@@ -9,5 +9,5 @@ class Visitante extends Model
 {
     protected $connection = 'mysql';
     protected $table = "Visitante";
-    protected $fillable = ['id', 'documentoVisitante', 'nombreVisitante', 'apellidoVisitante', 'fotoVisitante', 'telefonoVisitante', 'estadoVisitante', 'sexoVisitante', 'fechaNacimientoVisitante'];
+    protected $fillable = ['id', 'documentoVisitante', 'nombreVisitante', 'apellidoVisitante', 'fotoVisitante', 'telefonoVisitante', 'estadoVisitante', 'sexoVisitante', 'fechaNacimientoVisitante', 'comentarioVisitante'];
 }

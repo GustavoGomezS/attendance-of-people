@@ -3,6 +3,7 @@ const localidades = new GetAsyncFunction(url.localidades, null, rellenarSelectLo
 var table
 
 $(document).ready(function () {
+  resaltarLinkEnHeader();
   if (where=="sector" || where=="localidad") {
     sectores.ObtenerDatosDe();
   }
@@ -177,4 +178,9 @@ function establecerDatosDe(informacionGrafica) {
   data.addColumn('number', 'Slices');
   data.addRows(informacionGrafica);
   return data
+}
+
+function resaltarLinkEnHeader() {
+  $("#dropdownSubMenu1").html( "<strong>Registros</strong>");
+  $("#navItemRegistros").addClass("active");
 }

@@ -20,7 +20,7 @@
   @yield('styles')
 </head>
 
-<body class="layout-fixed control-sidebar-slide-open text-sm" style="height: auto;">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open text-sm" style="height: auto;">
   <div class="wrapper">
     <!--inicio header -->
     @include("theme/$theme/header")

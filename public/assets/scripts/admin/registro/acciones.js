@@ -1,12 +1,11 @@
-const rellenarSelectSectores = function (data) {
+const rellenarSelectSectores = (data) =>{
   $('.sectorBusqueda').html('');
-  $('.sectorBusqueda').css('color', 'white');
-  $(".sectorBusqueda").prepend("<option value='0' style='background-color : #030203'>Sector</option>");  
+  $(".sectorBusqueda").prepend("<option value='0' style='background-color : #FFFFFF; color : #000000;'>Sector</option>");  
   $.each(data, function (indexInArray, valueOfElement) { 
-    $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"'>"+valueOfElement.nombreSector+"</option>"); 
+    $(".sectorBusqueda").append("<option value="+valueOfElement.id+" style=' background-color :"+valueOfElement.color+"; color:#FFFFFF;'>"+valueOfElement.nombreSector+"</option>"); 
   });
-  $("#sectorBusqueda").val("0");
-  $("#sectorBusqueda").change();
+  $("#sector").val("0");
+  $("#sector").change();
 }
 
 const rellenarSelectLocalidades= function (data) {

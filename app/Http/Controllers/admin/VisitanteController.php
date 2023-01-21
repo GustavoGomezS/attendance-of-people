@@ -45,6 +45,7 @@ class VisitanteController extends Controller
     $visitante->estadoVisitante = 4;
     $visitante->localidadVisita = null;
     $visitante->fechaNacimientoVisitante = $request->fechaNacimientoVisitante;
+    $visitante->comentarioVisitante = $request->comentarioVisitante;
     $visitante->save();
     if ($visitante->save()) {
       return true;
@@ -84,7 +85,7 @@ class VisitanteController extends Controller
     if ($Visitante->estadoVisitante == 3 || $Visitante->estadoVisitante == 4) {
       $Visitante->update(['estadoVisitante' => 2]);
     }else {
-      $Visitante->update(['estadoVisitante' => 3]);
+      $Visitante->update(['estadoVisitante' => 4]);
     }
     if ($Visitante->update()) {
       return response()->json(['success' => true]);

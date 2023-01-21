@@ -62,8 +62,10 @@ localidades.datos = { sector: $(this).val() };
 localidades.ObtenerDatosDe();
 });
 function cambiarColorAlSelect(objeto) {
-  let color = objeto.find("option:selected").css('background-color');
-  objeto.css('background-color', color);
+  let colorBackGround = objeto.find("option:selected").css('background-color');
+  let colorTexto = objeto.find("option:selected").css('color');
+  objeto.css('background-color', colorBackGround);
+  objeto.css('color', colorTexto);
 }
 
 /* buscar Residentes */   

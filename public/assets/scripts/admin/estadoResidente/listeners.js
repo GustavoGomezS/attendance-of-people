@@ -16,3 +16,10 @@ $(document).on("change",".estadoResidente",function(e){
   nuevoEstadoDelResidente.datos = $(this).closest('.formulario').serialize();
   nuevoEstadoDelResidente.ObtenerDatosDe();
 });
+$(document).ready(function () {
+  resaltarLinkEnHeader();
+})
+function resaltarLinkEnHeader() {
+  $("#navItemResidentesLink").html( "<strong>Residentes</strong>");
+  $("#navItemResidentes").addClass("active");
+}

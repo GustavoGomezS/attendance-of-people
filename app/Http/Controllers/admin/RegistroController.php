@@ -59,11 +59,14 @@ class RegistroController extends Controller
   public function ingresa(Request $request){
     $existeVisitante = Visitante::firstWhere('documentoVisitante', $request->documento);
     if ($existeVisitante) {
-      if ($existeVisitante->estadoVisitante == 3) {
-        return response()->json(['success' => false, 'messages' => 'Ya se encuentra dentro.']);
-      }else {
-        $existeVisitante->fotoVisitante = asset($existeVisitante->fotoVisitante);
-        return response()->json(['success' => true, 'data' => $existeVisitante]);
+      switch ($existeVisitante->estadoVisitante) {
+        case 3:
+          return response()->json(['success' => false, 'messages' => 'Ya se encuentra dentro.']);
+        case 2:
+          return response()->json(['success' => false, 'messages' => $existeVisitante->comentarioVisitante]);
+        default:
+          $existeVisitante->fotoVisitante = asset($existeVisitante->fotoVisitante);
+          return response()->json(['success' => true, 'data' => $existeVisitante]);
       }
     } else {
       return response()->json(['success' => false, 'messages' => 'Visitante no registrado.']);
