@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Registro;
+
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +13,7 @@ date_default_timezone_set('UTC');
 
 class ReporteController extends Controller{
  /* se creo varios array asociativos que seran accedidos por medio de la variable que envia la 
- ruta ($pagina), se realiza una seleccion de cada  array y sen envia a la vista */
+ ruta (index/{clave}), se realiza una seleccion de cada  array y se envia a la vista */
   public function index($clave){
     $datosDeVista = Self::asignarDatosDeVista($clave);
     return view('admin.reporte.index')->with('datos', $datosDeVista);
@@ -125,5 +127,4 @@ class ReporteController extends Controller{
       ->get();
     return $data;
   }
-
 }

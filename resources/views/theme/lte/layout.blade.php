@@ -35,7 +35,7 @@
       </section>
     </div>
     <!-- Inicio footer-->
-    {{-- @include("theme/$theme/footer") --}}
+    @include("theme/$theme/footer")
     <!--fin footer -->
   </div>
   <!-- Bootstrap 4 -->

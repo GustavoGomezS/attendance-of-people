@@ -4,7 +4,6 @@ const puertas =    new GetAsyncFunction(url.puertas,     null, rellenarSelectPue
 const formulario = new PostAsyncFunction(url.darSalida,   null, accionSucces, accionError);
 
 $(document).ready(function () {
-  resaltarLinkEnHeader();
   puertas.ObtenerDatosDe();
   table = $('#tablaDatos').DataTable(
   {
@@ -63,6 +62,7 @@ $(document).ready(function () {
       formData.append('id[]', table.rows('.selected').data()[index].DT_RowId);
     }
   }
+  resaltarLinkEnHeader();
 });
 
 function resaltarLinkEnHeader() {

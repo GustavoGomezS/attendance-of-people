@@ -43,7 +43,7 @@ class DarSalidaController extends Controller
     for ($i = 0; $i < count($arrayInputs['id']); $i++) {
       $estadoDelVisitante = Visitante::findOrFail($arrayInputs['id'][$i]);
       $creaElRegistro = Self::registrarSalida($estadoDelVisitante, $arrayInputs,$i);
-      $estadoDelVisitante->update(['estadoVisitante' => 4, 'localidadVisita' =>null]);
+      $estadoDelVisitante->update(['estadoVisitante' => 4, 'localidadVisita' => null]);
     }
     if ($creaElRegistro && $estadoDelVisitante->update()) {
       return true;

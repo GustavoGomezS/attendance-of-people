@@ -28,7 +28,6 @@
                 'class' => 'modal-dialog ',
             ])
           </form>
-          {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
             Ingreso
           </button>

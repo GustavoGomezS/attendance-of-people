@@ -48,8 +48,8 @@
             <div class="text-bold pt-2">Cargando...</div>
           </div>
           <div class="row" >   
-            <div id="unidad" style="width:500; height:400"></div>                   
-            <div id="sector" style="width:500; height:400"></div>                   
+            <div id="unidad" style="width:500; height:450"></div>                   
+            <div id="sector" style="width:500; height:450"></div>                   
           </div>       
         </div>
       </div>
@@ -61,8 +61,6 @@
 @endsection
 
 @section('scripts')
-
-
   <script>
     const url = {
       "reportes"    : "{{ route('reporte.reportes') }}",

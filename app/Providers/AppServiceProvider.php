@@ -29,6 +29,5 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->share('theme', 'lte');
         Paginator::useBootstrap();
-        Blade::component('modal-formulario', ModalForm::class);
     }
 }

@@ -4,7 +4,7 @@
       <div class="form-group row mt-0 mb-0">
         <label for="fechaInicio" class="col-sm-2 col-form-label">Incio</label>
         <div class="col-sm-9">
-          <input type="date" name="fechaInicio" id="fechaInicio" value="{{ date('Y-m-d') }}" class="form-control input">
+          <input type="date"  name="fechaInicio" id="fechaInicio" max="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}" class="form-control input">
         </div>
       </div>
     </td>
@@ -13,7 +13,7 @@
       <div class="form-group row mt-0 mb-0">
         <label for="fechaFin" class="col-sm-2 col-form-label">Fin</label>
         <div class="col-sm-9">
-          <input type="date" name="fechaFin" id="fechaFin" value="{{ date('Y-m-d') }}" class="form-control input">
+          <input type="date" name="fechaFin" id="fechaFin" max="{{ date('Y-m-d') }}" value="{{ date('Y-m-d') }}" class="form-control input">
         </div>
       </div>
     </td>

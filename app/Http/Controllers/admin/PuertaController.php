@@ -25,7 +25,7 @@ class PuertaController extends Controller
   }
 
   public function destroy($puerta){
-    $borraCorrectamente = Puerta::findOrFail($puerta)->delete();
+    $borraCorrectamente = Puerta::destroy($puerta);
     if ($borraCorrectamente) { 
       return response()->json(['success' => true]); 
     }

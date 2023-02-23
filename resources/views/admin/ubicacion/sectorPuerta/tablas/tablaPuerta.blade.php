@@ -3,7 +3,7 @@
     <tr>
       <th>id</th>
       <th>Nombre Puerta</th>
-      <th>Acción</th>
+      <th class="text-center">#</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +13,7 @@
           {{$item->id}}
         </th>        
         <td>{{$item->nombrePuerta}}</td>
-        <td class="text-right py-0 align-middle">
+        <td class="text-right py-0 align-middle text-center">
           <div class="btn-group btn-group-sm">
             <a href="{{route('puerta.eliminar',$item->id)}}"  class="eliminar btn btn-danger" 
                 data-toggle="modal" data-target="#exampleModalCenter">

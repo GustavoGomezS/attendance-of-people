@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Puerta;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Sector;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            EstadoSeeder::class,
+            TipoUsuarioSeeder::class,
+            PuertaSeeder::class,
+        ]);
     }
+
 }

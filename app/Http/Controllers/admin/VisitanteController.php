@@ -93,21 +93,7 @@ class VisitanteController extends Controller
       return response()->json(['success' => false]);
     }
   }
-  public function destroy(Visitante $visitante)
-  {
-      /* Elimino archivo del servidor */
-      $url = str_replace('storage', 'public', $visitante->fotoVisitante);
-      Storage::delete($url);
-      /* Elimino registro de la bd */
 
-      $resultado = $visitante->delete();
-      if ($resultado) {
-        return response()->json(['success' => true]);
-      } else {
-        return response()->json(['success' => false]);
-      }
-    
-  }
 
   public function listar(Request $request){
     if ($request->filtro != "0" && $request->buscar != "") {

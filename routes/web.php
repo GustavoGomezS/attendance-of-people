@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\MinutaController;
 use App\Http\Controllers\admin\PuertaController;
 use App\Http\Controllers\admin\SectorController;
 use App\Http\Controllers\admin\ReporteController;
@@ -9,15 +10,16 @@ use App\Http\Controllers\admin\DarSalidaController;
 use App\Http\Controllers\admin\VisitanteController;
 use App\Http\Controllers\admin\ResidenteController;
 use App\Http\Controllers\admin\LocalidadController;
+use App\Http\Controllers\admin\EstadoActualController;
 use App\Http\Controllers\admin\EstadoResidenteController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('theme/lte/layout');
+  return view('theme/lte/layout');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
@@ -128,4 +130,22 @@ Route::middleware('auth')->prefix('reporte/')
 ->group(function () {
   Route::get('index/{clave}', 'index')->name('index');
   Route::get('reportes', 'reportes')->name('reportes');
+});
+
+/* rutas de estadoActual */
+Route::middleware('auth')->prefix('estadoActual/')
+->name('estadoActual.')
+->controller(EstadoActualController::class)
+->group(function () {
+  Route::get('index', 'index')->name('index');
+});
+
+/* rutas de minuta */
+Route::middleware('auth')->prefix('minuta/')
+->name('minuta.')
+->controller(MinutaController::class)
+->group(function () {
+  Route::get('index', 'index')->name('index');
+  Route::post('store', 'store')->name('guardar');
+  Route::get('registros', 'registros')->name('registros');
 });

@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="card-body p-0" style="display: block;">
-    <table class="table table-hover table-sm">
+    <table class="table table-hover table-sm table-responsive">
       <thead>
         <tr>
           <th>Nombre</th>

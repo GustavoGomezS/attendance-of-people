@@ -11,7 +11,6 @@
   <div class="row">
     <div class="col-lg-1">
     </div>
-    <!-- /.col-md-6 -->
     <div class="col-lg-12">
       <div class="card card-info card-outline">
         <div class="card-header h-25">
@@ -26,14 +25,12 @@
                 'class' => 'modal-dialog modal-lg modal-dialog-scrollable',
             ])
           </form>
-          {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
             Nuevo Residente
           </button>
         </div>
       </div>
     </div>
-    <!-- /.col-md-6 -->
   </div>
   @include('admin.includes.modalConfirmDelet')
 @endsection

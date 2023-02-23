@@ -3,7 +3,7 @@ const localidades = new GetAsyncFunction(url.localidades, null, rellenarSelectLo
 var table
 
 $(document).ready(function () {
-  resaltarLinkEnHeader();
+
   if (where=="sector" || where=="localidad") {
     sectores.ObtenerDatosDe();
   }
@@ -47,6 +47,7 @@ $(document).ready(function () {
       { data: 'comentario' },
       { data: 'created_at' },
     ],
+
     language: 
     {
       "loadingRecords": "Cargando...",
@@ -91,8 +92,8 @@ $(document).ready(function () {
   new $.fn.dataTable.Buttons( table, { buttons: ['copy', 'excel', 'pdf']});
   table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
 
-  $("#tituloTabla").html(tituloTabla);
-  
+  $("#tituloTabla").html(tituloTabla); 
+  resaltarLinkEnHeader();
 });
 
 // listener de apertura y cierre de detalles
@@ -156,10 +157,10 @@ function drawChart(data,titulo) {
   let options = {
     'title':'Ingresos por '+ titulo,
     pieHole: 0.4,
-    legend : {"position":"labeled","textStyle":{"color":"#000000","fontSize":14}},
+    legend : {"position":"none","textStyle":{"color":"#000000","fontSize":14}},
     'width':500,
-    'height':400,
-    "fontSize":18
+    'height':450,
+    "fontSize":14
   };
   let grafica = new google.visualization.PieChart(document.getElementById(titulo));
   grafica.draw(establecerDatosDe(infoGrafica), options);

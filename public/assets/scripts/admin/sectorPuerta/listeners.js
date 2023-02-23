@@ -9,9 +9,9 @@ const sectorAntiguo = new PutAsyncFunction(null, null, accionSucces, accionError
 
 /* Buscar */
 $(document).ready(function () {
-  resaltarLinkEnAside();
   sectores.ObtenerDatosDe();
   puertas.ObtenerDatosDe();
+  resaltarLinkEnAside();
 });
 function resaltarLinkEnAside() {
   $("#ubicacionesLi").addClass("menu-open");;

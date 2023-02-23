@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registro extends Model
 {
+    use HasFactory;
     protected $connection = 'mysql';
     protected $table = "registro";
     protected $fillable = ['id', 'ingresoSalida', 'puerta', 'visitante', 'localidad', 'autorizaSeguridad', 'autorizaResidente', 'comentario',];

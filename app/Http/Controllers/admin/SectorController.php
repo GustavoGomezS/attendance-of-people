@@ -45,7 +45,7 @@ class SectorController extends Controller
   }
 
   public function destroy($sector){ 
-    $eliminaCorrectamente = Sector::findOrFail($sector)->delete();
+    $eliminaCorrectamente = Sector::destroy($sector);
     if ($eliminaCorrectamente) {
       return response()->json(['success' => true]);
     }

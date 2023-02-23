@@ -13,7 +13,7 @@
           @foreach ($datos as $colorSector => $localidad)
             <div class="mt-1 text-center">
               @foreach ($localidad as $id => $nombreLocalidad)
-                <a data-toggle="modal" data-target="#modal-lg" class="btn buscar" id="{{ $id }}"
+                <a data-toggle="modal" data-target="#modal-lg" class="mt-1 btn buscar" id="{{ $id }}"
                   style="background-color: {{ $colorSector }};color:white;"
                   href="{{ route('estadoResidente.residentes', $id) }}">
                   {{ $nombreLocalidad }}

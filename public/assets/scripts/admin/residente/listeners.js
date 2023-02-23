@@ -8,9 +8,9 @@ const residenteInactivo=new DeleteAsyncFunction(null, null, acionSuccess,accionE
 
 var urlEliminar,tipo;
 $(document).ready(function () {
-  resaltarLinkEnAside();
   bsCustomFileInput.init()
   sectores.ObtenerDatosDe();
+  resaltarLinkEnAside();
 });
 function resaltarLinkEnAside() {
   $("#personasLi").addClass("menu-open");;

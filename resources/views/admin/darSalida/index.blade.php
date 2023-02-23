@@ -26,7 +26,10 @@
             </table>
           </div>
         </div>
-        <button id="button" class="btn btn-info" data-toggle="modal" data-target="#modal-lg">Dar Salida</button>
+        <div class="card-footer">
+          <button id="button" class="btn btn-info col-lg-12" data-toggle="modal" data-target="#modal-lg">Dar Salida</button>
+        </div>
+        
       </div>
     </div>
     <form id="formulario" autocomplete="off" enctype="multipart/form-data">

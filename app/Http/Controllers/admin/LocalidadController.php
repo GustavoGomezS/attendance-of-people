@@ -41,7 +41,7 @@ class LocalidadController extends Controller
   }
 
   public function destroy($localidad){
-    $eliminaCorrectamente = Localidad::findOrFail($localidad)->delete();
+    $eliminaCorrectamente = Localidad::destroy($localidad);
     if ($eliminaCorrectamente) { 
       return response()->json(['success' => true]);
     }else { 
@@ -52,7 +52,7 @@ class LocalidadController extends Controller
   //listar 
   public function listar(){
     $datos = Self::localidades();
-    return view('admin.ubicacion.localidad.includes.tabla')->with('datos', $datos);
+    return response()->json(['data' => $datos]);
   }
   private function localidades(){
     $datos = Localidad::select('localidad.*', 'sector.nombreSector')
@@ -60,7 +60,7 @@ class LocalidadController extends Controller
         ->orderBy('unidad', 'asc')
         ->from('localidad')
         ->join('sector', 'sector.id', '=', 'localidad.sector')
-        ->paginate(6);
+        ->get();
     return $datos;
   }
 }

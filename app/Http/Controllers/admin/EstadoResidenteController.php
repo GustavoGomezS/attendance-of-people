@@ -17,7 +17,7 @@ class EstadoResidenteController extends Controller
     return view('admin.estadoResidente.index')->with('datos', $datos);
   }
   private function datosIndex(){
-    $sectores = json_decode(Sector::select('id', 'color')->get(), true);
+    $sectores = json_decode(Sector::select('id', 'color')->orderBy('nombreSector', 'asc')->get(), true);
     $localidades = Self::getLocalidades($sectores);
     return $localidades;
   }

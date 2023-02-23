@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Residente extends Model
 {
+    use HasFactory;
     protected $connection = 'mysql';
     protected $table = "residente";
     protected $fillable = ['id', 'documentoResidente', 'nombreResidente', 'apellidoResidente', 'fotoResidente', 'localidad', 'telefonoResidente', 'estadoResidente', 'sexoResidente', 'fechaNacimientoResidente'];
