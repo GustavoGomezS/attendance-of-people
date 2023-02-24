@@ -23,7 +23,7 @@ const rellenarSelectSectores = (data) =>{
 
 const rellenarSelectLocalidades= function (data) {
     $('.localidadBusqueda').html('');
-    $('.localidadBusqueda').css('background-color', data[0].color);
+    $('.localidadBusqueda').css('background-color', data[0]?.color);
     $('.localidadBusqueda').css('color', 'white');
     $(".localidadBusqueda").prepend("<option value='' seleted >Localidad</option>");  
     $.each(data, function (indexInArray, valueOfElement) { 
