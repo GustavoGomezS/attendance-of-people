@@ -45,7 +45,7 @@ $laravelStyle = 'rounded-md shadow-sm border-gray-300 focus:border-indigo-300 fo
                 <select id="tipoUsuario" class="block mt-1 w-full {{ $laravelStyle }}" name="tipoUsuario" :value="old('tipoUsuario')" required autofocus>
                     <option value="" disabled selected>selección...</option>
                     <option value="1">Admin</option>
-                    <option value="2">Entrega</option>
+                    <option value="2">Operador</option>
                 </select>
             </div>
 

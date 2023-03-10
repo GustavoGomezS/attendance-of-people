@@ -1,23 +1,24 @@
 @component('mail::message')
-  {{-- Greeting --}}
-  @if (!empty($greeting))
-    # {{ $greeting }}
-  @else
-    @if ($level === 'error')
-      # @lang('Whoops!')
-    @else
-      # @lang('Hello!')
-    @endif
-  @endif
+{{-- Greeting --}}
+@if (! empty($greeting))
+# {{ $greeting }}
+@else
+@if ($level === 'error')
+# @lang('Whoops!')
+@else
+# @lang('Hola!')
+@endif
+@endif
 
-  {{-- Intro Lines --}}
-  @foreach ($introLines as $line)
-    {{ $line }}
-  @endforeach
+{{-- Intro Lines --}}
+@foreach ($introLines as $line)
+{{ $line }}
 
-  {{-- Action Button --}}
-  @isset($actionText)
-    <?php
+@endforeach
+
+{{-- Action Button --}}
+@isset($actionText)
+<?php
     switch ($level) {
         case 'success':
         case 'error':
@@ -26,30 +27,36 @@
         default:
             $color = 'primary';
     }
-    ?>
-    @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-      {{ $actionText }}
-    @endcomponent
-  @endisset
+?>
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
+{{ $actionText }}
+@endcomponent
+@endisset
 
-  {{-- Outro Lines --}}
-  @foreach ($outroLines as $line)
-    {{ $line }}
-  @endforeach
+{{-- Outro Lines --}}
+@foreach ($outroLines as $line)
+{{ $line }}
 
-  {{-- Salutation --}}
-  @if (!empty($salutation))
-    {{ $salutation }}
-  @else
-    @lang('Regards'),<br>
-    {{ config('app.name') }}
-  @endif
+@endforeach
 
-  {{-- Subcopy --}}
-  @isset($actionText)
-    @component('mail::subcopy')
-      Si usted está teniendo problemas para hacer clic en el botón "{{ $actionText }}" copia y pega el siguiente URL en su
-      navegador web: [{{ $actionUrl }}]({{ $actionUrl }})
-    @endcomponent
-  @endisset
+{{-- Salutation --}}
+@if (! empty($salutation))
+{{ $salutation }}
+@else
+@lang('Regards'),<br>
+{{ config('app.name') }}
+@endif
+
+{{-- Subcopy --}}
+@isset($actionText)
+@slot('subcopy')
+@lang(
+    "Si tiene problemas para hacer clic en el boton \":actionText\" , copia y pega la siguiente URL\n".
+    'into your web browser:',
+    [
+        'actionText' => $actionText,
+    ]
+) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+@endslot
+@endisset
 @endcomponent

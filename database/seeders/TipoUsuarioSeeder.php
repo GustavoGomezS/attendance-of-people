@@ -17,7 +17,7 @@ class TipoUsuarioSeeder extends Seeder
   {
     $tipo_usuario = [
       'Admin',
-      'Guarda',
+      'Operador',
     ];
     foreach ($tipo_usuario as $key => $value) {
       DB::table('tipo_usuario')->insert([
