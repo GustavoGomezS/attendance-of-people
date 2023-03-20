@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 require __DIR__ . '/auth.php';
 
 /* rutas de sector */
-Route::middleware('auth')->prefix('sector/')
+Route::middleware(['auth','can:esAdmin'])->prefix('sector/')
 ->name('sector.')
 ->controller(SectorController::class)
 ->group(function() {
@@ -37,7 +37,7 @@ Route::middleware('auth')->prefix('sector/')
 });
 
 /* rutas de puerta */
-Route::middleware('auth')->prefix('puerta/')
+Route::middleware(['auth','can:esAdmin'])->prefix('puerta/')
 ->name('puerta.')
 ->controller(PuertaController::class)
 ->group(function() {
@@ -47,10 +47,10 @@ Route::middleware('auth')->prefix('puerta/')
 });
 
 /* rutas de edificioPuerta */
-Route::view('sectorPuerta', 'admin/ubicacion/sectorPuerta/index')->name('sectorPuerta')->middleware('auth');
+Route::view('sectorPuerta', 'admin/ubicacion/sectorPuerta/index')->name('sectorPuerta')->middleware(['auth','can:esAdmin']);
 
 /* rutas de localidad */
-Route::middleware('auth')->prefix('localidad/')
+Route::middleware(['auth','can:esAdmin'])->prefix('localidad/')
 ->name('localidad.')
 ->controller(LocalidadController::class)
 ->group(function () {
@@ -66,10 +66,10 @@ Route::middleware('auth')->prefix('residente/')
 ->controller(ResidenteController::class)
 ->group(function () {
   Route::get('index', 'index')->name('residente');
-  Route::post('store', 'store')->name('guardar');
+  Route::post('store', 'store')->name('guardar')->middleware('can:esAdmin');
   Route::get('{residente}/edit', 'edit')->name('editar');
-  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->name('actualizar');
-  Route::delete('desactivar{residente}', 'desactivar')->name('desactivar');
+  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->middleware('can:esAdmin');
+  Route::delete('desactivar{residente}', 'desactivar')->middleware('can:esAdmin');
   Route::get('sectores', 'sectores')->name('sectores');
   Route::get('localidades', 'localidades')->name('localidades');
   Route::get('listar', 'listar')->name('listar');

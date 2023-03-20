@@ -27,8 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
-        ResetPassword::createUrlUsing(function ($user, string $token){
-            return 'http://34.176.42.100/reset-password?token='.$token;
-        });
+
     }
 }

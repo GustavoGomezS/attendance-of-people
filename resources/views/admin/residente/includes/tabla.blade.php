@@ -33,6 +33,7 @@
             <td>{{$item->nombreEstado}}</td>          
             <td class="py-0 align-middle text-center">
               <div class="btn-group btn-group-sm">
+                @can('esAdmin')
                 <a href="{{route('residente.editar',$item->id)}}" 
                   id="{{ $item->id }} " class="actualizar btn btn-info" value="{{route('residente.actualizar',$item->id)}}"
                   data-toggle="modal" data-target="#modal-lg">
@@ -48,6 +49,7 @@
                     data-target="#exampleModalCenter">
                   <i class="fas fa-check-circle"></i>
                 </a>
+                @endcan
               </div>
             </td>
           </tr>

@@ -49,6 +49,7 @@
             </li>
           </ul>
         </li>
+        @can('esAdmin')
         <li class="nav-item" id="ubicacionesLi">
           <a href="#" class="nav-link" id="ubicacionesA">
             <i class="nav-icon fa fa-building" aria-hidden="true"></i>
@@ -72,6 +73,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

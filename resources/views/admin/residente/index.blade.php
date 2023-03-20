@@ -25,9 +25,11 @@
                 'class' => 'modal-dialog modal-lg modal-dialog-scrollable',
             ])
           </form>
+          @can('esAdmin')
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
             Nuevo Residente
           </button>
+          @endcan
         </div>
       </div>
     </div>

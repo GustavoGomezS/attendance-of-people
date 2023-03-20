@@ -16,7 +16,10 @@ use Illuminate\Support\Str;
 class ResidenteController extends Controller
 {
   public function index(){
-    return view('admin.Residente.index');
+    return view('admin.residente.index');
+  }
+  public function hola(){
+    return "hola";
   }
 
   public function store(ResidenteRequest $request){
