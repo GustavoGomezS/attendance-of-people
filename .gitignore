@@ -5,7 +5,7 @@
 /public/assets/DataTables
 /storage/*.key
 /vendor
-.env
+
 .env.backup
 .phpunit.result.cache
 Homestead.json
