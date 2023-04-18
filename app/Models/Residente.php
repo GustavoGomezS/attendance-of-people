@@ -10,5 +10,5 @@ class Residente extends Model
     use HasFactory;
     protected $connection = 'mysql';
     protected $table = "residente";
-    protected $fillable = ['id', 'documentoResidente', 'nombreResidente', 'apellidoResidente', 'fotoResidente', 'localidad', 'telefonoResidente', 'estadoResidente', 'sexoResidente', 'fechaNacimientoResidente'];
+    protected $fillable = ['id', 'documentoResidente', 'nombreResidente', 'apellidoResidente', 'fotoResidente', 'localidad', 'telefonoResidente', 'estadoResidente', 'poderAutorizar', 'sexoResidente', 'fechaNacimientoResidente'];
 }

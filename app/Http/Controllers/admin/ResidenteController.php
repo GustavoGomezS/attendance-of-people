@@ -7,7 +7,6 @@ use App\Http\Requests\ResidenteRequest;
 use App\Models\Localidad;
 use App\Models\Residente;
 use App\Models\Sector;
-use App\Models\Visitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -46,6 +45,7 @@ class ResidenteController extends Controller
     $residente->fotoResidente = '/storage/imagenes/' . $nombreImagen; //guardo la url en la bd
     $residente->localidad = $request->localidad;
     $residente->estadoResidente = 3;
+    $residente->poderAutorizar = $request->poderAutorizar;
     $residente->telefonoResidente = $request->telefonoResidente;
     $residente->sexoResidente = $request->sexoResidente;
     $residente->fechaNacimientoResidente = $request->fechaNacimientoResidente;

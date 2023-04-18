@@ -25,6 +25,7 @@ class ResidenteFactory extends Factory
             'localidad' => Localidad::inRandomOrder()->first()->id,
             'telefonoResidente' =>	$this->faker->e164PhoneNumber(),
             'estadoResidente' => $this->faker->randomElement($array = array (1,3,4)),
+            'poderAutorizar' => $this->faker->randomElement($array = array (1,2,3)),
             'sexoResidente' => $this->faker->randomElement($array = array ('H','M')),
             'fechaNacimientoResidente'=>$this->faker->dateTimeThisCentury($max = 'now', $timezone = null)
         ];

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('telefonoResidente', 15);
             $table->unsignedBigInteger('estadoResidente');
             $table->foreign('estadoResidente', 'fk_residente_estado')->references('id')->on('estados')->onDelete('restrict')->onUpdate('restrict')->default("3");
+            $table->unsignedBigInteger('poderAutorizar');
+            $table->foreign('poderAutorizar', 'fk_residente_poderAutorizar')->references('id')->on('poder_autorizar')->onDelete('restrict')->onUpdate('restrict')->default("3");
             $table->string('sexoResidente', 8);
             $table->date('fechaNacimientoResidente', $precision = 0);
             $table->timestamps();

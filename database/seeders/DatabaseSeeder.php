@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             EstadoSeeder::class,
             TipoUsuarioSeeder::class,
             PuertaSeeder::class,
+            PoderAutorizarSeeder::class,
         ]);
     }
 

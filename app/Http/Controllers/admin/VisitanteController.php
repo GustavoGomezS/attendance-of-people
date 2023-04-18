@@ -4,7 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VisitanteRequest;
-use App\Models\Registro;
 use App\Models\Visitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

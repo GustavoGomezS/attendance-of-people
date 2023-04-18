@@ -57,6 +57,17 @@
 
 
 <div class="row">
+  
+  <div class="col-lg-3 form-group">
+    <label for="poderAutorizar" class="col-lg-12 control-label ">¿Puede Autorizar?</label>
+    <select class="form-control" id="poderAutorizar" name="poderAutorizar">
+      <option value="0" disabled selected>Seleccionar</option>
+      <option value="1">Si</option>
+      <option value="2">No</option>
+      <option value="3">Siempre</option>
+    </select>
+  </div>
+
   <div class="form-group col-lg-3">
     <label for="foto" class="col-lg-12 control-label ">Foto</label>
     <div class="custom-file">

@@ -5,6 +5,7 @@ const rellenarFormulario = (info) => {
   $('#apellidoResidente').val(data.apellidoResidente);
   $('#telefonoResidente').val(data.telefonoResidente);
   $('#sexoResidente').val(data.sexoResidente);
+  $('#poderAutorizar').val(data.poderAutorizar);
   $('#fechaNacimientoResidente').val(data.fechaNacimientoResidente);
   $('#blah').attr('src', data.fotoResidente);
   $("#formulario :input").prop("disabled", true);

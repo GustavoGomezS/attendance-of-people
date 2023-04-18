@@ -50,7 +50,9 @@ class RegistroController extends Controller
   }
 
   public function autoriza(Request $request){
-    $datos = Residente::where([['localidad', '=', $request->localidadBusqueda],['estadoResidente','<>',2]])
+    $datos = Residente::where([['localidad', '=', $request->localidadBusqueda],['estadoResidente','<>',2],['poderAutorizar','<>',2]])
+      ->orWhere([['estadoResidente','<>',2],['poderAutorizar','=',3]])  
+      ->orderBy('poderAutorizar', 'asc')
       ->orderBy('fechaNacimientoResidente', 'asc')
       ->get();
     return response()->json($datos);

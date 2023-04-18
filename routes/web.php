@@ -68,8 +68,8 @@ Route::middleware('auth')->prefix('residente/')
   Route::get('index', 'index')->name('residente');
   Route::post('store', 'store')->name('guardar')->middleware('can:esAdmin');
   Route::get('{residente}/edit', 'edit')->name('editar');
-  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->middleware('can:esAdmin');
-  Route::delete('desactivar{residente}', 'desactivar')->middleware('can:esAdmin');
+  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->name('actualizar')->middleware('can:esAdmin');
+  Route::delete('desactivar{residente}', 'desactivar')->name('desactivar')->middleware('can:esAdmin');
   Route::get('sectores', 'sectores')->name('sectores');
   Route::get('localidades', 'localidades')->name('localidades');
   Route::get('listar', 'listar')->name('listar');
