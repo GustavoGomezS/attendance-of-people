@@ -43,7 +43,7 @@
     const url = {
       "guardarLocalidad": "{{ route('localidad.guardar') }}",
       "localidades": "{{ route('localidad.listar') }}",
-      "sectores": "{{ route('residente.sectores') }}",
+      "sectores": "{{ route('funcionario.sectores') }}",
     }
   </script>
   <script src="{{ asset('assets/scripts/admin/localidad/acciones.js') }}"></script>

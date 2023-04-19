@@ -1,6 +1,6 @@
 <div class="card card-info">
   <div class="card-header">
-    <h3 class="card-title">Residentes registrados para esta localidad</h3>
+    <h3 class="card-title">Funcionarios registrados para esta localidad</h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
         <i class="fas fa-minus"></i>
@@ -26,21 +26,21 @@
             <th scope="row">
               {{$item->id}}
             </th>        
-            <td>{{$item->documentoResidente}}</td>
-            <td>{{$item->nombreResidente}} &nbsp {{$item->apellidoResidente}}</td>
+            <td>{{$item->documentoFuncionario}}</td>
+            <td>{{$item->nombreFuncionario}} &nbsp {{$item->apellidoFuncionario}}</td>
             <td>{{$item->nombreSector}} -  {{$item->unidad}}</td>
-            <td>{{$item->telefonoResidente}}</td>
+            <td>{{$item->telefonoFuncionario}}</td>
             <td>{{$item->nombreEstado}}</td>          
             <td class="py-0 align-middle text-center">
               <div class="btn-group btn-group-sm">
                 @can('esAdmin')
-                <a href="{{route('residente.editar',$item->id)}}" 
-                  id="{{ $item->id }} " class="actualizar btn btn-info" value="{{route('residente.actualizar',$item->id)}}"
+                <a href="{{route('funcionario.editar',$item->id)}}" 
+                  id="{{ $item->id }} " class="actualizar btn btn-info" value="{{route('funcionario.actualizar',$item->id)}}"
                   data-toggle="modal" data-target="#modal-lg">
                       <i class="fas fa-eye"></i>
                 </a>
-                <a  href="{{route('residente.desactivar',$item->id)}}"
-                  @if ($item->estadoResidente==2) 
+                <a  href="{{route('funcionario.desactivar',$item->id)}}"
+                  @if ($item->estadoFuncionario==2) 
                     class="desactivar btn btn-danger"
                   @else 
                     class="desactivar btn btn-success"

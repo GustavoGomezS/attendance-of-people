@@ -64,8 +64,8 @@
   <script>
     const url = {
       "reportes"    : "{{ route('reporte.reportes') }}",
-      "sectores"    : "{{ route('residente.sectores') }}",
-      "localidades" : "{{ route('residente.localidades') }}",
+      "sectores"    : "{{ route('funcionario.sectores') }}",
+      "localidades" : "{{ route('funcionario.localidades') }}",
     }
     var tituloTabla = "{{$datos['tituloPagina']}}";
     var where = "{{$datos['where']}}";

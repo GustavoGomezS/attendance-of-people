@@ -8,10 +8,10 @@ use App\Http\Controllers\admin\ReporteController;
 use App\Http\Controllers\admin\RegistroController;
 use App\Http\Controllers\admin\DarSalidaController;
 use App\Http\Controllers\admin\VisitanteController;
-use App\Http\Controllers\admin\ResidenteController;
+use App\Http\Controllers\admin\FuncionarioController;
 use App\Http\Controllers\admin\LocalidadController;
 use App\Http\Controllers\admin\EstadoActualController;
-use App\Http\Controllers\admin\EstadoResidenteController;
+use App\Http\Controllers\admin\EstadoFuncionarioController;
 
 
 Route::get('/', function () {
@@ -60,16 +60,16 @@ Route::middleware(['auth','can:esAdmin'])->prefix('localidad/')
   Route::get('listar', 'listar')->name('listar');
 });
 
-/* rutas de residente */
-Route::middleware('auth')->prefix('residente/')
-->name('residente.')
-->controller(ResidenteController::class)
+/* rutas de funcionario */
+Route::middleware('auth')->prefix('funcionario/')
+->name('funcionario.')
+->controller(FuncionarioController::class)
 ->group(function () {
-  Route::get('index', 'index')->name('residente');
+  Route::get('index', 'index')->name('funcionario');
   Route::post('store', 'store')->name('guardar')->middleware('can:esAdmin');
-  Route::get('{residente}/edit', 'edit')->name('editar');
-  Route::match(array('PUT', 'PATCH'),'update{residente}', 'update')->name('actualizar')->middleware('can:esAdmin');
-  Route::delete('desactivar{residente}', 'desactivar')->name('desactivar')->middleware('can:esAdmin');
+  Route::get('{funcionario}/edit', 'edit')->name('editar');
+  Route::match(array('PUT', 'PATCH'),'update{funcionario}', 'update')->name('actualizar')->middleware('can:esAdmin');
+  Route::delete('desactivar{funcionario}', 'desactivar')->name('desactivar')->middleware('can:esAdmin');
   Route::get('sectores', 'sectores')->name('sectores');
   Route::get('localidades', 'localidades')->name('localidades');
   Route::get('listar', 'listar')->name('listar');
@@ -95,7 +95,7 @@ Route::middleware('auth')->prefix('registro/')
 ->group(function () {
   Route::get('index', 'index')->name('registro');
   Route::post('store', 'store')->name('guardar');
-  Route::get('residentes{page?}', 'residentes')->name('residentes');
+  Route::get('funcionarios{page?}', 'funcionarios')->name('funcionarios');
   Route::get('registros{page?}',  'registros')->name('registros');
   Route::get('visitante{page?}',  'visitantes')->name('visitantes');
   Route::get('puertas{page?}',    'puertas')->name('puertas');
@@ -113,13 +113,13 @@ Route::middleware('auth')->prefix('darSalida/')
   Route::post('darSalida', 'darSalida')->name('darSalida');
 });
 
-/* rutas de estadoResidente */
-Route::middleware('auth')->prefix('estadoResidente/')
-->name('estadoResidente.')
-->controller(EstadoResidenteController::class)
+/* rutas de estadoFuncionario */
+Route::middleware('auth')->prefix('estadoFuncionario/')
+->name('estadoFuncionario.')
+->controller(EstadoFuncionarioController::class)
 ->group(function () {
   Route::get('index', 'index')->name('index');
-  Route::get('residentes/{id}', 'residentes')->name('residentes');
+  Route::get('funcionarios/{id}', 'funcionarios')->name('funcionarios');
   Route::get('update', 'update')->name('update');
 });
 

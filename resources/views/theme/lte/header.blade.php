@@ -16,8 +16,8 @@
         <li class="nav-item" id="navItemSalida">
           <a href="{{ route('darSalida.index') }}" class="nav-link" id="navItemSalidaLink">Salida</a>
         </li>
-        <li class="nav-item" id="navItemResidentes">
-          <a href="{{ route('estadoResidente.index') }}" class="nav-link" id="navItemResidentesLink">Residentes</a>
+        <li class="nav-item" id="navItemFuncionarios">
+          <a href="{{ route('estadoFuncionario.index') }}" class="nav-link" id="navItemFuncionariosLink">Funcionarios</a>
         </li>
         <li class="nav-item" id="navItemMinuta">
           <a href="{{ route('minuta.index') }}" class="nav-link" id="navItemMinutaLink">Minuta</a>

@@ -1,6 +1,6 @@
 <div class="card card-info">
   <div class="card-header">
-    <h3 class="card-title">Residentes</h3>
+    <h3 class="card-title">Funcionarios</h3>
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
         <i class="fas fa-minus"></i>
@@ -19,8 +19,8 @@
       <tbody>
         @foreach ($datos as $item)
           <tr>
-            <td>{{ $item->nombreResidente }}</td>
-            <td>{{ $item->telefonoResidente }}</td>
+            <td>{{ $item->nombreFuncionario }}</td>
+            <td>{{ $item->telefonoFuncionario }}</td>
             <td>{{ $item->nombreEstado }}</td>
           </tr>
         @endforeach

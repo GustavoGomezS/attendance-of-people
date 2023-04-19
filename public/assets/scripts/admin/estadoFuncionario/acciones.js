@@ -1,4 +1,4 @@
-const mostrarResidentesDeEstaLocalidad = (data)=>{
+const mostrarFuncionariosDeEstaLocalidad = (data)=>{
   $('#datos').empty().html(data); 
 }
 

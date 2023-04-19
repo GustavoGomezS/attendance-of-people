@@ -1,10 +1,10 @@
 const sectores =      new GetAsyncFunction(url.sectores,    null, rellenarSelectSectores);
 const localidades =   new GetAsyncFunction(url.localidades, null, rellenarSelectLocalidades);
-const residente =     new GetAsyncFunction(null, null, rellenarFormulario);
-const nuevoResidente =new PostAsyncFunction(url.guardar,     null, acionSuccess, accionError);
-const nuevaInformacionResidente =new PostAsyncFunction(null, null, acionSuccess, accionError);
-const filtroDeBusqueda=new GetAsyncFunction(url.residentes, null, listarResidentes);
-const residenteInactivo=new DeleteAsyncFunction(null, null, acionSuccess,accionError);
+const funcionario =     new GetAsyncFunction(null, null, rellenarFormulario);
+const nuevoFuncionario =new PostAsyncFunction(url.guardar,     null, acionSuccess, accionError);
+const nuevaInformacionFuncionario =new PostAsyncFunction(null, null, acionSuccess, accionError);
+const filtroDeBusqueda=new GetAsyncFunction(url.funcionario, null, listarFuncionarios);
+const funcionarioInactivo=new DeleteAsyncFunction(null, null, acionSuccess,accionError);
 
 var urlEliminar,tipo;
 $(document).ready(function () {
@@ -15,7 +15,7 @@ $(document).ready(function () {
 function resaltarLinkEnAside() {
   $("#personasLi").addClass("menu-open");;
   $("#personasA").addClass("active");
-  $("#residentes").addClass("active");
+  $("#funcionarios").addClass("active");
 }
 
 $(document).on("click","#opcionCrear",function(e){
@@ -26,13 +26,13 @@ $(document).on("click","#opcionCrear",function(e){
 $(document).on("click",".actualizar",function(e){
   e.preventDefault();   
   cambioValoresParaActualizar($(this));
-  residente.ObtenerDatosDe();                                  
+  funcionario.ObtenerDatosDe();                                  
 });
-function cambioValoresParaActualizar(esteResidente) {
+function cambioValoresParaActualizar(esteFuncionario) {
   tipo="PUT"
-  residente.datos = esteResidente.attr("id");
-  residente.url = esteResidente.attr("href"); 
-  nuevaInformacionResidente.url = esteResidente.attr("value");
+  funcionario.datos = esteFuncionario.attr("id");
+  funcionario.url = esteFuncionario.attr("href"); 
+  nuevaInformacionFuncionario.url = esteFuncionario.attr("value");
 }
 
 /* registro del formulario */
@@ -40,13 +40,13 @@ $('#formulario').on('submit', function(e){
   e.preventDefault();
   let data;
   if (tipo=="POST") {
-    nuevoResidente.datos = formDataConFile();
-    nuevoResidente.Guardar();  
+    nuevoFuncionario.datos = formDataConFile();
+    nuevoFuncionario.Guardar();  
   } else {
     data = formDataConFile();
     data.append("_method", "PUT");
-    nuevaInformacionResidente.datos = data;
-    nuevaInformacionResidente.Guardar();
+    nuevaInformacionFuncionario.datos = data;
+    nuevaInformacionFuncionario.Guardar();
   }                              
 });
 function formDataConFile() {
@@ -68,7 +68,7 @@ function cambiarColorAlSelect(objeto) {
   objeto.css('color', colorTexto);
 }
 
-/* buscar Residentes */   
+/* buscar Funcionarios */   
 $("#buscar").keyup(function (evento) {
   let caracteresDelFiltro = $("#buscar").val();
   if (caracteresDelFiltro.length>=7) {
@@ -77,13 +77,13 @@ $("#buscar").keyup(function (evento) {
   }
 });
 
-/* desactivar residentes */   
+/* desactivar Funcionario */   
 $(document).on("click",".desactivar",function(e){
   e.preventDefault();   
-  residenteInactivo.url = $(this).attr("href");                                      
+  funcionarioInactivo.url = $(this).attr("href");                                      
 });
 $('#confirmar').on('click', function(){
-  residenteInactivo.Eliminar();
+  funcionarioInactivo.Eliminar();
 });
 
 /* paginacion */
@@ -101,7 +101,7 @@ $("#foto").change(function() {
 /* Activar - Desactivar */   
 $(document).on("click","#actDes",function(e){
   e.preventDefault();
-  let attr = $("#nombreResidente").attr("disabled");//input para verificacion
+  let attr = $("#nombreFuncionario").attr("disabled");//input para verificacion
   if (typeof attr == typeof undefined || attr == "false") {
     $("#formulario :input").prop("disabled", true);
     $("#formulario :button").removeAttr('disabled');

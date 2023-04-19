@@ -1,13 +1,15 @@
 const rellenarFormulario = (info) => {
   let data = info.data;
-  $('#documentoResidente').val(data.documentoResidente);
-  $('#nombreResidente').val(data.nombreResidente);
-  $('#apellidoResidente').val(data.apellidoResidente);
-  $('#telefonoResidente').val(data.telefonoResidente);
-  $('#sexoResidente').val(data.sexoResidente);
+  $('#documentoFuncionario').val(data.documentoFuncionario);
+  $('#nombreFuncionario').val(data.nombreFuncionario);
+  $('#apellidoFuncionario').val(data.apellidoFuncionario);
+  $('#telefonoFuncionario').val(data.telefonoFuncionario);
+  $('#sexoFuncionario').val(data.sexoFuncionario);
   $('#poderAutorizar').val(data.poderAutorizar);
-  $('#fechaNacimientoResidente').val(data.fechaNacimientoResidente);
-  $('#blah').attr('src', data.fotoResidente);
+  $('#horaEntrada').val(data.horaEntrada);
+  $('#horaSalida').val(data.horaSalida);
+  $('#fechaNacimientoFuncionario').val(data.fechaNacimientoFuncionario);
+  $('#blah').attr('src', data.fotoFuncionario);
   $("#formulario :input").prop("disabled", true);
   $("#formulario :button").removeAttr('disabled');
 }
@@ -32,7 +34,7 @@ const rellenarSelectLocalidades= function (data) {
     }); 
 }
 
-const listarResidentes = function (data) {
+const listarFuncionarios = function (data) {
   $('#datos').empty().html(data); 
 }
 

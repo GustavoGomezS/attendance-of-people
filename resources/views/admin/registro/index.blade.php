@@ -42,14 +42,14 @@
   <script>
     const url = {
       "guardar": "{{ route('registro.guardar') }}",
-      "residentes": "{{ route('registro.residentes') }}",
+      "funcionarios": "{{ route('registro.funcionarios') }}",
       "registros": "{{ route('registro.registros') }}",
       "visitantes": "{{ route('registro.visitantes') }}",
       "puertas": "{{ route('registro.puertas') }}",
       "autoriza": "{{ route('registro.autoriza') }}",
       "ingresa": "{{ route('registro.ingresa') }}",
-      "sectores": "{{ route('residente.sectores') }}",
-      "localidades": "{{ route('residente.localidades') }}",
+      "sectores": "{{ route('funcionario.sectores') }}",
+      "localidades": "{{ route('funcionario.localidades') }}",
     }
   </script>
   <script src="{{ asset('assets/scripts/admin/registro/acciones.js') }}"></script>

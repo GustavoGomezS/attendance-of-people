@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegistroRequest;
 use App\Models\Puerta;
 use App\Models\Registro;
-use App\Models\Residente;
+use App\Models\Funcionario;
 use App\Models\Visitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +36,7 @@ class RegistroController extends Controller
     $registro->visitante = $request->visitante;
     $registro->localidad = $request->idLocalidad;
     $registro->autorizaSeguridad = $request->autorizaSeguridad;
-    $registro->autorizaResidente = $request->autorizaResidente;
+    $registro->autorizaFuncionario = $request->autorizaFuncionario;
     $registro->comentario = $request->comentario;
     $registro->save();
     if ($registro->save()) {
@@ -50,10 +50,10 @@ class RegistroController extends Controller
   }
 
   public function autoriza(Request $request){
-    $datos = Residente::where([['localidad', '=', $request->localidadBusqueda],['estadoResidente','<>',2],['poderAutorizar','<>',2]])
-      ->orWhere([['estadoResidente','<>',2],['poderAutorizar','=',3]])  
+    $datos = Funcionario::where([['localidad', '=', $request->localidadBusqueda],['estadoFuncionario','<>',2],['poderAutorizar','<>',2]])
+      ->orWhere([['estadoFuncionario','<>',2],['poderAutorizar','=',3]])  
       ->orderBy('poderAutorizar', 'asc')
-      ->orderBy('fechaNacimientoResidente', 'asc')
+      ->orderBy('fechaNacimientoFuncionario', 'asc')
       ->get();
     return response()->json($datos);
   }
@@ -75,18 +75,18 @@ class RegistroController extends Controller
     }
   }
 
-  public function residentes(Request $request){
-    $datos = Self::getResidentes($request);
-    return view('admin.registro.includes.tablaResidente')->with('datos', $datos);
+  public function funcionarios(Request $request){
+    $datos = Self::getFuncionarios($request);
+    return view('admin.registro.includes.tablaFuncionario')->with('datos', $datos);
   }
-  private function getResidentes($request){
-    $datos = Residente::select('residente.*', 'estados.nombreEstado')
+  private function getFuncionarios($request){
+    $datos = Funcionario::select('funcionario.*', 'estados.nombreEstado')
       ->orderBy('created_at', 'desc')
-      ->from('residente')
-      ->join('estados', 'estados.id', '=', 'residente.estadoResidente')
+      ->from('funcionario')
+      ->join('estados', 'estados.id', '=', 'funcionario.estadoFuncionario')
       ->where([
-        ["residente.localidad", '=', "$request->localidadBusqueda"],
-        ['estadoResidente','<>',2]
+        ["funcionario.localidad", '=', "$request->localidadBusqueda"],
+        ['estadoFuncionario','<>',2]
       ])
       ->paginate(6);
     return $datos;
@@ -98,12 +98,12 @@ class RegistroController extends Controller
   }
   private function getRegistros($request){
     $datos = Registro::select('registro.*', 'visitante.nombreVisitante', 'visitante.telefonoVisitante',
-      'residente.nombreResidente', 'estados.nombreEstado')
+      'funcionario.nombreFuncionario', 'estados.nombreEstado')
       ->orderBy('created_at', 'desc')
       ->from('registro')
       ->join('visitante', 'visitante.id', '=', 'registro.visitante')
       ->join('estados', 'estados.id', '=', 'visitante.estadoVisitante')
-      ->leftJoin('residente', 'residente.id', '=', 'registro.autorizaResidente')
+      ->leftJoin('funcionario', 'funcionario.id', '=', 'registro.autorizaFuncionario')
       ->where([
         ["registro.localidad", '=', "$request->localidadBusqueda"],
       ])

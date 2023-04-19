@@ -1,7 +1,7 @@
 const sectores =      new GetAsyncFunction(url.sectores,    null, rellenarSelectSectores);
 const localidades =   new GetAsyncFunction(url.localidades, null, rellenarSelectLocalidades);
 const puertas =       new GetAsyncFunction(url.puertas,     null, rellenarSelectPuerta);
-const residentes =    new GetAsyncFunction(url.residentes,  null, listarResidentes);
+const funcionarios =    new GetAsyncFunction(url.funcionarios,  null, listarFuncionarios);
 const registros =     new GetAsyncFunction(url.registros,   null, listarRegistros);
 const paginacion =    new GetAsyncFunction(null,            null, listarRegistros);
 const visitantes =    new GetAsyncFunction(url.visitantes,  null, listarVisitantes);
@@ -50,13 +50,13 @@ function buscarInfoLocalidad() {
 }
 function asignarValores() {
   let infoLocalidad = $("#formularioBusqueda").serialize();
-  residentes.datos = infoLocalidad,
+  funcionarios.datos = infoLocalidad,
   registros.datos = infoLocalidad,
   visitantes.datos = infoLocalidad,
   quienAutoriza.datos = infoLocalidad;
 }
 function ejecutarBusquedas() {
-  residentes.ObtenerDatosDe();
+  funcionarios.ObtenerDatosDe();
   registros.ObtenerDatosDe();
   visitantes.ObtenerDatosDe();
   quienAutoriza.ObtenerDatosDe();

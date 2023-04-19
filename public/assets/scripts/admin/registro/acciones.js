@@ -25,7 +25,7 @@ const rellenarSelectPuerta = function (data) {
   }); 
 }
 
-const listarResidentes = function (data) {
+const listarFuncionarios = function (data) {
   $('#datos').empty().html(data); 
 }
 const listarRegistros = function (data) {
@@ -37,10 +37,10 @@ const listarVisitantes = function (data) {
 }
 
 const rellenarSelectQuienAutoriza = function (data) {
-  $('#autorizaResidente').html('');
-  $("#autorizaResidente").prepend("<option value='' seleted>Residente</option>");  
+  $('#autorizaFuncionario').html('');
+  $("#autorizaFuncionario").prepend("<option value='' seleted>Funcionario</option>");  
   $.each(data, function (indexInArray, valueOfElement) { 
-    $("#autorizaResidente").append("<option value="+valueOfElement.id+">"+valueOfElement.nombreResidente+" "+valueOfElement.apellidoResidente+"</option>"); 
+    $("#autorizaFuncionario").append("<option value="+valueOfElement.id+">"+valueOfElement.nombreFuncionario+" "+valueOfElement.apellidoFuncionario+"</option>"); 
   });    
 }
 

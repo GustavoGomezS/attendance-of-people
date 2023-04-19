@@ -1,6 +1,6 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-  Residentes
+  Funcionarios
 @endsection
 @section('metadata')
   <script src="{{ asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.js") }}"></script>
@@ -14,20 +14,20 @@
     <div class="col-lg-12">
       <div class="card card-info card-outline">
         <div class="card-header h-25">
-          @include('admin.residente.includes.formularioBusqueda')
+          @include('admin.funcionario.includes.formularioBusqueda')
         </div>
         <div class="card-body">
           <div id="datos"></div>
           <form id="formulario" autocomplete="off" enctype="multipart/form-data">
             @include('admin.includes.modalFormulario', [
-                'titulo' => 'Nuevo Residente',
-                'formulario' => 'admin/residente/includes/formularioRegistro',
+                'titulo' => 'Nuevo funcionario',
+                'formulario' => 'admin/funcionario/includes/formularioRegistro',
                 'class' => 'modal-dialog modal-lg modal-dialog-scrollable',
             ])
           </form>
           @can('esAdmin')
           <button type="button" class="btn btn-info" id="opcionCrear" data-toggle="modal" data-target="#modal-lg">
-            Nuevo Residente
+            Nuevo Funcionario
           </button>
           @endcan
         </div>
@@ -40,12 +40,12 @@
 @section('scripts')
   <script>
     const url = {
-      "guardar": "{{ route('residente.guardar') }}",
-      "residentes": "{{ route('residente.listar') }}",
-      "sectores": "{{ route('residente.sectores') }}",
-      "localidades": "{{ route('residente.localidades') }}",
+      "guardar": "{{ route('funcionario.guardar') }}",
+      "funcionario": "{{ route('funcionario.listar') }}",
+      "sectores": "{{ route('funcionario.sectores') }}",
+      "localidades": "{{ route('funcionario.localidades') }}",
     }
   </script>
-  <script src="{{ asset('assets/scripts/admin/residente/acciones.js') }}"></script>
-  <script src="{{ asset('assets/scripts/admin/residente/listeners.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/funcionario/acciones.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/funcionario/listeners.js') }}"></script>
 @endsection

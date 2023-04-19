@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreign('localidad', 'fk_registro_localidad')->references('id')->on('localidad')->cascadeOnUpdate()->nullOnDelete();
             $table->unsignedBigInteger('autorizaSeguridad');
             $table->foreign('autorizaSeguridad', 'fk_registro_users')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
-            $table->unsignedBigInteger('autorizaResidente')->nullable();;
-            $table->foreign('autorizaResidente', 'fk_registro_residente')->references('id')->on('residente')->onDelete('restrict')->onUpdate('restrict');
+            $table->unsignedBigInteger('autorizaFuncionario')->nullable();;
+            $table->foreign('autorizaFuncionario', 'fk_registro_funcionario')->references('id')->on('funcionario')->onDelete('restrict')->onUpdate('restrict');
             $table->string('comentario', 200)->nullable();
             $table->timestamps();
         });

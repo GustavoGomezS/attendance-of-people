@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12 text-center">
     <div class="form-group">
-      <img src="{{ asset("assets/$theme/dist/img/boxed.jpg") }}" alt="foto de residente" width="200" height="170"
+      <img src="{{ asset("assets/$theme/dist/img/boxed.jpg") }}" alt="foto de Funcionario" width="200" height="170"
         class="rounded border-bottom-0 border border-info" id="blah">
       <h5><strong id="nombreVisitante" class="mt-2"></strong></h5>
       <div class="input-group mt-2">
@@ -19,8 +19,8 @@
 
 <div class="row">
   <div class="col-lg-6 form-group">
-    <label for="autorizaResidente" class="control-label ">Autoriza</label>
-    <select class="form-control " id="autorizaResidente" name="autorizaResidente">
+    <label for="autorizaFuncionario" class="control-label ">Autoriza</label>
+    <select class="form-control " id="autorizaFuncionario" name="autorizaFuncionario">
     </select>
   </div>
 

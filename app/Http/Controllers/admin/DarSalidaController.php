@@ -54,7 +54,7 @@ class DarSalidaController extends Controller
     $registro->ingresoSalida = $arrayInputs['ingresoSalida'];
     $registro->visitante = $arrayInputs['id'][$i];
     $registro->autorizaSeguridad = auth()->user()->id;
-    $registro->autorizaResidente = null;
+    $registro->autorizaFuncionario = null;
     $registro->localidad = $visitante->localidadVisita;
     $registro->comentario = $arrayInputs['comentario'];
     $registro->puerta = $arrayInputs['puerta'];

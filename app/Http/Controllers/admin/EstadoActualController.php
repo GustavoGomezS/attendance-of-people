@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sector;
-use App\Models\Residente;
+use App\Models\Funcionario;
 use App\Models\Visitante;
 use App\Models\Localidad;
 use Illuminate\Http\Request;
@@ -42,8 +42,8 @@ class EstadoActualController extends Controller
     return $matriz;
   }
   private function contarPersonasDentroPor($Unidad){
-    $cantidadResidentesDentro = Residente::where([['localidad', '=', $Unidad], ['estadoResidente', '=', 3]])->count();
+    $cantidadFuncionariosDentro = Funcionario::where([['localidad', '=', $Unidad], ['estadoFuncionario', '=', 3]])->count();
     $cantidadVisitantesDentro = Visitante::where([['localidadVisita', '=', $Unidad], ['estadoVisitante', '=', 3]])->count();
-    return $cantidadResidentesDentro + $cantidadVisitantesDentro;
+    return $cantidadFuncionariosDentro + $cantidadVisitantesDentro;
   }
 }

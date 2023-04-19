@@ -1,6 +1,6 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-  Estado de Residentes
+  Estado de Funcionarios
 @endsection
 @section('metadata')
   <script src={{ asset('assets/zoom-master/jquery.zoom.js') }}></script>
@@ -15,7 +15,7 @@
               @foreach ($localidad as $id => $nombreLocalidad)
                 <a data-toggle="modal" data-target="#modal-lg" class="mt-1 btn buscar" id="{{ $id }}"
                   style="background-color: {{ $colorSector }};color:white;"
-                  href="{{ route('estadoResidente.residentes', $id) }}">
+                  href="{{ route('estadoFuncionario.funcionarios', $id) }}">
                   {{ $nombreLocalidad }}
                 </a>
               @endforeach
@@ -25,15 +25,15 @@
       </div>
     </div>
   </div>
-  @include('admin/estadoResidente/includes/modalFormulario')
+  @include('admin/estadoFuncionario/includes/modalFormulario')
 @endsection
 
 @section('scripts')
   <script>
     const url = {
-      "update": "{{ route('estadoResidente.update') }}"
+      "update": "{{ route('estadoFuncionario.update') }}"
     }
   </script>
-  <script src="{{ asset('assets/scripts/admin/estadoResidente/acciones.js') }}"></script>
-  <script src="{{ asset('assets/scripts/admin/estadoResidente/listeners.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/estadoFuncionario/acciones.js') }}"></script>
+  <script src="{{ asset('assets/scripts/admin/estadoFuncionario/listeners.js') }}"></script>
 @endsection

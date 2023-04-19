@@ -29,7 +29,7 @@ class RegistroRequest extends FormRequest
     {
         return [
             'visitante' => 'required',
-            'autorizaResidente' => 'required',
+            'autorizaFuncionario' => 'required',
         ];
     }
 
@@ -37,7 +37,7 @@ class RegistroRequest extends FormRequest
     {
         return [
             'visitante.required' => '¿Quien ingresa?',
-            'autorizaResidente.required' => '¿Quien auoriza el ingreso?',
+            'autorizaFuncionario.required' => '¿Quien auoriza el ingreso?',
         ];
     }
 }

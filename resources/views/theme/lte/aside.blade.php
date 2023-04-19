@@ -36,9 +36,9 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('residente.residente') }}" class="nav-link" id="residentes">
+              <a href="{{ route('funcionario.funcionario') }}" class="nav-link" id="funcionarios">
                 <i class="fas fa-user-check nav-icon"></i>
-                <p>Residentes</p>
+                <p>Funcionarios</p>
               </a>
             </li>
             <li class="nav-item">

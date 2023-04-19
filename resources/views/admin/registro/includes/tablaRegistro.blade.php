@@ -31,7 +31,7 @@
                 {{ 'Salida' }}
               @endif
             </td>
-            <td>{{ $item->nombreResidente }}</td>
+            <td>{{ $item->nombreFuncionario }}</td>
             <td>{{ $item->comentario }}</td>
             <td>{{ $item->created_at }}</td>
           </tr>

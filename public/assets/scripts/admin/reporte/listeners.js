@@ -42,7 +42,7 @@ $(document).ready(function () {
       },
       { data: 'nombreVisitante' },
       { data: 'ingresoSalida' },
-      { data: 'nombreResidente' },
+      { data: 'nombreFuncionario' },
       { data: 'nombrePuerta' },
       { data: 'comentario' },
       { data: 'created_at' },
@@ -129,7 +129,7 @@ function format(d) {
       '<tr>' +
         '<th>Fotografia :</th>' +
         '<td colspan="3">' +
-          '<img src="'+d.fotoVisitante+'" alt="foto de residente" width="200" height="170" class="rounded border-bottom-0 border border-info">'+
+          '<img src="'+d.fotoVisitante+'" alt="foto de funcionario" width="200" height="170" class="rounded border-bottom-0 border border-info">'+
         '</td>' +
       '</tr>' +
     '</table>'
