@@ -9,6 +9,9 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="card card-info card-outline">
+        <div class="card-header">
+          @include('admin.estadoFuncionario.includes.formularioBusqueda')
+        </div>
         <div class="card-body">
           @foreach ($datos as $colorSector => $localidad)
             <div class="mt-1 text-center">
@@ -31,7 +34,8 @@
 @section('scripts')
   <script>
     const url = {
-      "update": "{{ route('estadoFuncionario.update') }}"
+      "update": "{{ route('estadoFuncionario.update') }}",
+      "updateManual": "{{ route('estadoFuncionario.updateManual') }}",
     }
   </script>
   <script src="{{ asset('assets/scripts/admin/estadoFuncionario/acciones.js') }}"></script>

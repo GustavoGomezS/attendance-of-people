@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Localidad;
 use App\Models\Puerta;
-use App\Models\Residente;
+use App\Models\Funcionario;
 use App\Models\User;
 use App\Models\Visitante;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,7 +27,7 @@ class RegistroFactory extends Factory
             'visitante' => Visitante::inRandomOrder()->first()->id,
             'localidad' => Localidad::inRandomOrder()->first()->id,
             'autorizaSeguridad' => User::inRandomOrder()->first()->id,
-            'autorizaResidente' => Residente::inRandomOrder()->first()->id,
+            'autorizaFuncionario' => Funcionario::inRandomOrder()->first()->id,
             'comentario' => $this->faker->text($maxNbChars = 199)
         ];
     }

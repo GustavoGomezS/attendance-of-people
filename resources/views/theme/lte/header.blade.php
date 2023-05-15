@@ -22,20 +22,28 @@
         <li class="nav-item" id="navItemMinuta">
           <a href="{{ route('minuta.index') }}" class="nav-link" id="navItemMinutaLink">Minuta</a>
         </li>
-        <li class="nav-item dropdown" id="navItemRegistros">
+        <li class="nav-item dropdown" id="navItemReporte">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            class="nav-link dropdown-toggle">Registros</a>
+            class="nav-link dropdown-toggle">Reporte</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-            <li><a href="{{ route('reporte.index',['clave' => 'conNovedad']) }}" class="dropdown-item">Con Novedad </a></li>
             <!-- Level two dropdown-->
             <li class="dropdown-submenu dropdown-hover">
               <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false" class="dropdown-item dropdown-toggle">Filtrado por</a>
+                aria-expanded="false" class="dropdown-item dropdown-toggle">Visitantes</a>
               <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                <li><a href="{{ route('reporte.index',['clave' => 'recinto']) }}" class="dropdown-item">Recinto</a></li>
-                <li><a href="{{ route('reporte.index',['clave' => 'sector']) }}" class="dropdown-item">Sector</a></li>
-                <li><a href="{{ route('reporte.index',['clave' => 'localidad']) }}" class="dropdown-item">Localidad</a></li>
-                <li><a href="{{ route('reporte.index',['clave' => 'visitante']) }}" class="dropdown-item">Visitante</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'conNovedad']) }}" class="dropdown-item">Con Novedad </a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'recinto']) }}" class="dropdown-item">Por Recinto</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'sector']) }}" class="dropdown-item">Por Sector</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'localidad']) }}" class="dropdown-item">Por Localidad</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'visitante']) }}" class="dropdown-item">Por Visitante</a></li>
+              </ul>
+            </li>
+            <li class="dropdown-submenu dropdown-hover">
+              <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" class="dropdown-item dropdown-toggle">Funcionarios</a>
+              <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                <li><a href="{{ route('reporte.index',['clave' => 'funcionario']) }}" class="dropdown-item">Ingreso y Salida</a></li>
+                <li><a href="{{ route('reporte.index',['clave' => 'funcionarioTarde']) }}" class="dropdown-item">Llegada tarde</a></li>
               </ul>
             </li>
             <!-- End Level two -->          
@@ -67,3 +75,7 @@
     </ul>
   </div>
 </nav>
+
+
+
+

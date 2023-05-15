@@ -27,7 +27,9 @@ class FuncionarioFactory extends Factory
             'estadoFuncionario' => $this->faker->randomElement($array = array (1,3,4)),
             'poderAutorizar' => $this->faker->randomElement($array = array (1,2,3)),
             'sexoFuncionario' => $this->faker->randomElement($array = array ('H','M')),
-            'fechaNacimientoFuncionario'=>$this->faker->dateTimeThisCentury($max = 'now', $timezone = null)
+            'fechaNacimientoFuncionario'=>$this->faker->dateTimeThisCentury($max = 'now', $timezone = null),
+            'horaEntrada' => $this->faker->time($format = 'H:i:s', $max = 'now'),
+            'horaSalida' => $this->faker->time($format = 'H:i:s', $max = 'now')
         ];
     }
 }

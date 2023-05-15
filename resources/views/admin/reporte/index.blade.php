@@ -25,9 +25,11 @@
       <li class="nav-item">
         <a class="nav-link active" id="tabla-tab" data-toggle="pill" href="#tabla" role="tab" aria-controls="tabla" aria-selected="true">Tabla</a>
       </li>
+      @if ($datos['where'] != "funcionario" && $datos['where'] != "funcionarioTarde")
       <li class="nav-item">
         <a class="nav-link" id="grafica-tab" data-toggle="pill" href="#grafica" role="tab" aria-controls="grafica" aria-selected="false">Grafica</a>
       </li>
+      @endif
     </ul>
   </div>
   <div class="card-body">
@@ -38,9 +40,14 @@
             <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             <div class="text-bold pt-2">Cargando...</div>
           </div>
-          @include('admin.reporte.includes.tabla')
+          @if ($datos['where'] == "funcionario" || $datos['where'] == "funcionarioTarde")
+            @include('admin.reporte.includes.tablaFuncionario')
+          @else
+            @include('admin.reporte.includes.tabla')
+          @endif       
         </div>
       </div>
+      @if ($datos['where'] != "funcionario" && $datos['where'] != "funcionarioTarde")
       <div class="tab-pane fade" id="grafica" role="tabpanel" aria-labelledby="grafica-tab">
         <div class="overlay-wrapper" >
           <div class="overlay dark" >
@@ -53,6 +60,8 @@
           </div>       
         </div>
       </div>
+      @endif
+
   </div>
   <!-- /.card -->
 </div>
@@ -72,5 +81,10 @@
   </script>
 
   <script src="{{ asset('assets/scripts/admin/reporte/acciones.js') }}"></script>
-  <script src="{{ asset('assets/scripts/admin/reporte/listeners.js') }}"></script>
+  @if ($datos['where'] == "funcionario" || $datos['where'] == "funcionarioTarde")
+    <script src="{{ asset('assets/scripts/admin/reporte/listenersFuncionarios.js') }}"></script> 
+  @else
+    <script src="{{ asset('assets/scripts/admin/reporte/listeners.js') }}"></script>  
+  @endif
+  
 @endsection

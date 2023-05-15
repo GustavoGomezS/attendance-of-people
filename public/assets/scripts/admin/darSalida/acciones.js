@@ -19,7 +19,6 @@ const accionError = (messages) => {
   toastr.error( 'La accion no se pudo realizar', 
   'Problema al Ejecutar la Acción',{
   "positionClass": "toast-top-right"});   
-
   $("#cerrarModal").trigger('click');  
 }
 

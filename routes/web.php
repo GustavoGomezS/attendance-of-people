@@ -121,6 +121,7 @@ Route::middleware('auth')->prefix('estadoFuncionario/')
   Route::get('index', 'index')->name('index');
   Route::get('funcionarios/{id}', 'funcionarios')->name('funcionarios');
   Route::get('update', 'update')->name('update');
+  Route::get('updateManual', 'updateManual')->name('updateManual');
 });
 
 /* rutas de reporte */

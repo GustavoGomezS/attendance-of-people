@@ -43,10 +43,28 @@ class EstadoFuncionarioController extends Controller
       $formulario = $request->all();
       if (isset($formulario['estadoFuncionario'])) {
         DB::table('funcionario')->where('id', $request->idFuncionario)->update(['estadoFuncionario' => 3]);
-        return response()->json(['success' => false]);
+        return response()->json(['success' => true]);
       } else {
         DB::table('funcionario')->where('id', $request->idFuncionario)->update(['estadoFuncionario' => 4]);
-        return response()->json(['success' => false]);
+        return response()->json(['success' => true]);
+      }
+    }
+
+    public function updateManual(Request $request){
+      $existeFuncionario = Funcionario::firstWhere('documentoFuncionario', $request->buscar);
+      if ($existeFuncionario) {
+        switch ($existeFuncionario->estadoFuncionario) {
+          case 3:
+            $existeFuncionario->update(['estadoFuncionario' => 4]);
+            return response()->json(['success' => true]);
+          case 2:
+            return response()->json(['success' => false, 'messages' => 'Este funcionario no se encuentra habilitado.']);
+          default:
+          $existeFuncionario->update(['estadoFuncionario' => 3]);
+          return response()->json(['success' => true]);
+        }
+      } else {
+        return response()->json(['success' => false, 'messages' => 'Funcionario no registrado.']);
       }
     }
   }

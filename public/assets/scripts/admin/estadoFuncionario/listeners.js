@@ -1,5 +1,7 @@
 const localidad = new GetAsyncFunction(null, null, mostrarFuncionariosDeEstaLocalidad);
-const nuevoEstadoDelFuncionario = new GetAsyncFunction(url.update, null, alertarSucces);
+const nuevoEstadoDelFuncionario = new GetAsyncFunction(url.update, null, respuesta);
+const filtroDeBusqueda= new GetAsyncFunction(url.updateManual, null, respuesta, );
+
 /* buscar Funcionarios de la localidad */   
 $(document).on("click",".buscar",function(e){
   e.preventDefault();
@@ -17,8 +19,23 @@ $(document).on("change",".estadoFuncionario",function(e){
   nuevoEstadoDelFuncionario.datos = $(this).closest('.formulario').serialize();
   nuevoEstadoDelFuncionario.ObtenerDatosDe();
 });
+
+/* buscar Funcionarios */   
+let $comment = document.getElementById("buscar")
+let timeout
+//El evento lo puedes reemplazar con keyup, keypress y el tiempo a tu necesidad
+$comment.addEventListener('keydown', () => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    filtroDeBusqueda.datos = $("#formularioBusqueda").serialize();
+    filtroDeBusqueda.ObtenerDatosDe();
+    clearTimeout(timeout)
+  },1000)
+})
+
 $(document).ready(function () {
   resaltarLinkEnHeader();
+  document.getElementById('buscar').focus();
 })
 function resaltarLinkEnHeader() {
   $("#navItemFuncionariosLink").html( "<strong>Funcionarios</strong>");
