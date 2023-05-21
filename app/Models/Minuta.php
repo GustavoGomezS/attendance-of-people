@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Minuta extends Model
 {
-  protected $connection = 'mysql';
-  protected $table = "minuta";
-  protected $fillable = ['id', 'usuario', 'comentario'];
+    protected $connection = 'mysql';
+    protected $table = "minuta";
+    protected $fillable = ['id', 'usuario', 'comentario'];
 }
