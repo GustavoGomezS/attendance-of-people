@@ -15,14 +15,16 @@ return new class extends Migration
     public function up()
     {
         DB::unprepared('
-        CREATE TRIGGER entrada_salida_funcionario 
-        AFTER UPDATE 
+
+        CREATE TRIGGER `entrada_salida_funcionario`     
+        BEFORE UPDATE 
         ON `funcionario` 
         FOR EACH ROW
-            BEGIN
-                INSERT INTO registro_funcionario (funcionario, nuevoEstado, fecha, hora)
-                VALUES (OLD.id, NEW.estadoFuncionario, CURDATE(), 	CURTIME()); 
-            END
+        if old.estadoFuncionario != new.estadoFuncionario
+        THEN
+            INSERT INTO registro_funcionario (funcionario, nuevoEstado, fecha, hora)
+            VALUES (OLD.id, NEW.estadoFuncionario, CURDATE(), 	CURTIME()); 
+        END if;
         ');
     }
 
