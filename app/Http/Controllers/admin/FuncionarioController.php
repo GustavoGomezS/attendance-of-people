@@ -20,10 +20,6 @@ class FuncionarioController extends Controller
     {
         return view('admin.funcionario.index');
     }
-    public function hola()
-    {
-        return "hola";
-    }
 
     public function store(FuncionarioRequest $request)
     {

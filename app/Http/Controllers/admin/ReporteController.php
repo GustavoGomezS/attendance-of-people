@@ -106,14 +106,14 @@ class ReporteController extends Controller
         $datos = Registro::select(
             DB::raw("CONCAT(nombreVisitante,' ', apellidoVisitante) AS nombreVisitanteCompleto"),
             'visitante.*',
-            'Funcionario.nombreFuncionario',
+            'funcionario.nombreFuncionario',
             'puerta.nombrePuerta',
             'registro.*'
         )
             ->from('registro')
             ->join('visitante', 'visitante.id', '=', 'registro.visitante')
             ->leftJoin('puerta', 'puerta.id', '=', 'registro.puerta')
-            ->leftJoin('Funcionario', 'Funcionario.id', '=', 'registro.autorizaFuncionario')
+            ->leftJoin('funcionario', 'funcionario.id', '=', 'registro.autorizaFuncionario')
             ->leftJoin('localidad', 'localidad.id', '=', 'registro.localidad')
             ->leftJoin('sector', 'sector.id', '=', 'localidad.sector')
             ->where($where[$request->where])
