@@ -36,7 +36,7 @@
     <div class="tab-content" id="custom-tabs-five-tabContent">
       <div class="tab-pane fade show active" id="tabla" role="tabpanel" aria-labelledby="tabla-tab">
         <div class="overlay-wrapper" >
-          <div class="overlay dark">
+          <div class="overlay">
             <i class="fas fa-3x fa-sync-alt fa-spin"></i>
             <div class="text-bold pt-2">Cargando...</div>
           </div>

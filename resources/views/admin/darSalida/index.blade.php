@@ -16,8 +16,8 @@
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Telefono</th>
                   <th>Documento</th>
+                  <th >Telefono</th>
                   <th>Sector - Unidad</th>
                 </tr>
               </thead>
@@ -29,7 +29,6 @@
         <div class="card-footer">
           <button id="button" class="btn btn-info col-lg-12" data-toggle="modal" data-target="#modal-lg">Dar Salida</button>
         </div>
-        
       </div>
     </div>
     <form id="formulario" autocomplete="off" enctype="multipart/form-data">

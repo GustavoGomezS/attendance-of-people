@@ -39,7 +39,8 @@
                 <a href="{{ route('visitante.desactivar', $item->id) }}"
                   @if ($item->estadoVisitante == 2) class="desactivar btn btn-danger" 
                     @else
-                      class="desactivar btn btn-success" @endif
+                      class="desactivar btn btn-success" 
+                  @endif
                   data-toggle="modal" data-target="#exampleModalCenter">
                   <i class="fas fa-check-circle"></i>
                 </a>

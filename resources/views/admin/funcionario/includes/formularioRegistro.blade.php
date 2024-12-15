@@ -121,7 +121,7 @@
 </div>
 {{-- tomar foto --}}
 @csrf
-{{-- <script>
+<script>
   'use strict';
 
   const video = document.getElementById('video');
@@ -171,4 +171,3 @@
     enlace.click();
   });
 </script>
- --}}

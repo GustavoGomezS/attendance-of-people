@@ -56,7 +56,7 @@ $(document).ready(function () {
       infoEmpty: 'No hay registros disponibles',
       infoFiltered: '(Filtrado de _MAX_ Registros totales)',
     },
-    scrollY: '60vh', /* porcentaje de pantalla */
+    scrollY: '65vh', /* porcentaje de pantalla */
     scrollCollapse: true,
     order: [[ 3, "desc" ]],
     dom: '<"top"<"d-flex justify-content-between"B<"#tituloTabla.h4">f>>rt<"bottom"<"d-flex justify-content-between"lip>>',
@@ -69,7 +69,7 @@ $(document).ready(function () {
         'excel',
         'pdf',
         {
-          extend: 'colvis',
+          /* extend: 'colvis', */
           text : 'Columnas',
         }, 
   ],

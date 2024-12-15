@@ -1,5 +1,5 @@
-<table id="tablaDatos" style="width:100%" class="table table-hover table-striped table-sm"
-  style="white-space: nowrap; overflow-x: auto;">
+<table id="tablaDatos"  class="table table-hover table-striped table-sm"
+  style="white-space: nowrap; overflow-x: auto; width:100%">
   <thead>
     <tr>
       @include($datos['formularioBusqueda'])

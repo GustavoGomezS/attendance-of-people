@@ -1,5 +1,5 @@
 const nuevaNovedad = new PostAsyncFunction(url.guardarNovedad, null, accionSucces, accionError);
-var table
+let table
 
 $(document).ready(function () {
   table = $('#tablaDatos').DataTable(

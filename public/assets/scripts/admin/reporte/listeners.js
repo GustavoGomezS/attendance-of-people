@@ -78,7 +78,7 @@ $(document).ready(function () {
         'excel',
         'pdf',
         {
-          extend: 'colvis',
+          /* extend: 'colvis', */
           text : 'Columnas',
         }, 
   ],
